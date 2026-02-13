@@ -5,7 +5,11 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
 <meta name="color-scheme" content="light dark"/>
-<title>Jeu des 12 Pièces — V2 Enhanced</title>
+<meta name="theme-color" content="#7c3aed"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="12 Pièces"/>
+<title>Jeu des 12 Pièces — V3.0</title>
 <style>
   * { color-scheme: dark; }
 
@@ -147,7 +151,7 @@ box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
 
 /* MODAL */
 .modal-overlay {
-position: fixed; inset: 0; background: rgba(0, 0, 0, 0.9);
+position: fixed; inset: 0;
 display: flex; justify-content: center; align-items: center; z-index: 2000;
 animation: fadeIn 0.3s ease-out;
 }
@@ -161,10 +165,10 @@ animation: slideDown 0.4s ease-out;
 }
 .modal-content h3 {
 margin: 0 0 10px; font-size: 2.2rem;
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
 -webkit-background-clip: text; background-clip: text;
 -webkit-text-fill-color: transparent;
-color: #667eea;
+color: #a78bfa;
 }
 .modal-content p { color: #f1f5f9 !important; }
 .modal-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
@@ -176,6 +180,107 @@ color: white !important; transition: all 0.3s;
 .modal-buttons button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
 .modal-buttons button:active { transform: translateY(0); }
 
+/* WELCOME SCREEN - NOUVEAU DESIGN */
+#modeSelectOverlay {
+background: linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #e9d5ff 100%) !important;
+}
+
+.welcome-container {
+max-width: 500px;
+width: 90%;
+text-align: center;
+}
+
+.welcome-title {
+font-size: 2.5rem;
+font-weight: 800;
+color: #1e293b !important;
+margin-bottom: 30px;
+text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.welcome-subtitle {
+font-size: 1.2rem;
+color: #1e293b !important;
+margin-bottom: 10px;
+font-weight: 500;
+}
+
+.welcome-highlight {
+font-size: 1.8rem;
+font-weight: 800;
+color: #7c3aed !important;
+margin: 20px 0 30px 0;
+text-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
+}
+
+.welcome-question {
+font-size: 1.1rem;
+color: #1e293b !important;
+margin-bottom: 25px;
+font-weight: 600;
+}
+
+.welcome-buttons {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin-bottom: 20px;
+}
+
+.welcome-btn {
+padding: 20px;
+font-size: 1.3rem;
+font-weight: 700;
+border-radius: 15px;
+border: none;
+cursor: pointer;
+transition: all 0.3s;
+color: white !important;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-btn:active {
+transform: translateY(0);
+}
+
+.btn-computer {
+background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+}
+
+.btn-human {
+background: linear-gradient(135deg, #10b981, #059669) !important;
+}
+
+.tutorial-link {
+text-align: right;
+margin-top: 15px;
+}
+
+.btn-tutorial-link {
+background: none !important;
+border: none;
+color: #1e293b !important;
+font-size: 1rem;
+font-weight: 600;
+text-decoration: underline;
+cursor: pointer;
+padding: 10px;
+}
+
+.welcome-note {
+font-size: 0.9rem;
+color: #475569 !important;
+margin-top: 25px;
+font-style: italic;
+line-height: 1.4;
+}
+
 /* TOOLBAR */
 .toolbar {
 background: #1e293b !important; color: #f1f5f9 !important;
@@ -184,11 +289,6 @@ display: flex; justify-content: space-between; align-items: center; z-index: 10;
 box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 .toolbar-left { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.select-group { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.select-title {
-font-size: 0.65rem; color: #3b82f6 !important;
-font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;
-}
 
 button {
 padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
@@ -201,29 +301,13 @@ button:active { transform: translateY(0); }
 
 button.primary {
 background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-border: none; min-width: 130px; justify-content: center;
-}
-button.check-green {
-background: linear-gradient(135deg, #10b981, #059669) !important;
-border: none; padding: 8px 20px;
+border: none; min-width: 90px; justify-content: center;
+padding: 8px 10px; font-size: 0.75rem;
 }
 button.tutorial {
 background: linear-gradient(135deg, #f59e0b, #d97706) !important;
-border: none; padding: 8px 14px;
+border: none; padding: 8px 10px; font-size: 0.75rem;
 }
-button.undo {
-background: linear-gradient(135deg, #8b5cf6, #7c3aed) !important;
-border: none; padding: 8px 14px;
-}
-
-select {
-padding: 6px 10px; border-radius: 8px;
-background: #0f172a !important; color: #f1f5f9 !important;
-border: 2px solid #334155; font-size: 0.85rem; font-weight: 600;
-cursor: pointer; transition: all 0.3s;
-}
-select option { background: #1e293b !important; color: #f1f5f9 !important; }
-select:focus { outline: none; border-color: #3b82f6; }
 
 /* MAIN GRID */
 main {
@@ -245,13 +329,6 @@ border-radius: 10px; border: 1px solid #334155;
 min-height: 0;
 }
 
-/* PIÈCES AVEC PARTICULES */
-.coin-container {
-position: relative;
-width: 38px;
-height: 38px;
-}
-
 .coin {
 width: 38px; height: 38px; border-radius: 50%;
 color: #000000 !important;
@@ -263,7 +340,6 @@ font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none;
 box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); touch-action: none;
 transition: all 0.3s;
 text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-position: relative;
 }
 .coin:hover {
 transform: scale(1.1);
@@ -271,7 +347,6 @@ box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
 animation: float 2s ease-in-out infinite;
 }
 .coin:active { cursor: grabbing; transform: scale(0.95); }
-.coin.dragging { opacity: 0.5; }
 
 .dropzone .coin { width: 32px; height: 32px; font-size: 13px; }
 .status-heavy_cand {
@@ -292,7 +367,7 @@ border: 2px dashed #334155 !important;
 color: transparent !important; pointer-events: none; box-shadow: none;
 }
 
-/* BALANCE AMÉLIORÉE */
+/* BALANCE */
 .dropgrid {
 display: flex; justify-content: center; gap: 12px;
 align-items: flex-start; padding-top: 12px;
@@ -310,7 +385,6 @@ display: grid; grid-template-columns: repeat(2, 1fr);
 gap: 4px; padding: 6px;
 justify-items: center; align-items: center;
 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-position: relative;
 }
 .dropzone.drag-over {
 border-color: #3b82f6 !important;
@@ -321,7 +395,6 @@ box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 
 animation: magnetPulse 0.5s ease-out;
 border-color: #60a5fa !important;
 }
-/* Effet de poids sur les plateaux */
 .dropzone.weighted {
 box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5);
 }
@@ -450,49 +523,69 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 .coins-grid { gap: 4px; padding: 6px; }
 #history { max-height: 140px; }
 .hist-line { padding: 4px 6px; }
+
+```
+.welcome-title { font-size: 2rem; }
+.welcome-subtitle { font-size: 1rem; }
+.welcome-highlight { font-size: 1.5rem; }
+.welcome-btn { font-size: 1.1rem; padding: 16px; }
+```
+
 }
 </style>
 
 </head>
 <body>
 
-<!-- MODE SELECT MODAL -->
+<!-- MODE SELECT MODAL - NOUVELLE PAGE BIENVENUE -->
 
-<div id="modeSelectOverlay" class="modal-overlay" style="background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);">
-    <div class="modal-content">
-        <div id="initialModePanel">
-            <h3>🎮 BIENVENUE</h3>
-            <p style="font-size: 1.2rem; margin: 20px 0; line-height: 1.6; color: #cbd5e1 !important;">Trouvez la fausse pièce parmi 12 en <strong style="color: #fbbf24;">3 pesées maximum</strong> !</p>
-            <p style="color: #60a5fa !important; margin-bottom: 30px; font-size: 1.1rem; font-weight: 600;">Qui choisira la fausse pièce ?</p>
-            <div class="modal-buttons">
-                <button id="btnAI" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);">🤖 ORDINATEUR</button>
-                <button id="btnGuest" style="background: linear-gradient(135deg, #10b981, #059669) !important; color: white !important; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);">👤 HUMAIN</button>
-                <button id="btnTutorial" style="background: linear-gradient(135deg, #f59e0b, #d97706) !important; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">📚 TUTORIEL</button>
-            </div>
+<div id="modeSelectOverlay" class="modal-overlay" style="background: linear-gradient(135deg, #a78bfa 0%, #c084fc 50%, #e9d5ff 100%);">
+    <div class="welcome-container" id="initialModePanel">
+        <h1 class="welcome-title">🎮 BIENVENUE</h1>
+
+```
+    <p class="welcome-subtitle">Trouvez la fausse pièce parmi 12 en</p>
+    
+    <h2 class="welcome-highlight">✨ 3 PESÉES MAXIMUM ✨</h2>
+    
+    <p class="welcome-question">Qui choisira secrètement la fausse pièce ?</p>
+    
+    <div class="welcome-buttons">
+        <button id="btnAI" class="welcome-btn btn-computer">🤖 ORDINATEUR</button>
+        <button id="btnGuest" class="welcome-btn btn-human">👤 HUMAIN</button>
+    </div>
+    
+    <div class="tutorial-link">
+        <button id="btnTutorial" class="btn-tutorial-link">📚 Tutoriel</button>
+    </div>
+    
+    <p class="welcome-note">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
+</div>
+
+<div class="modal-content" id="guestSetupPanel" style="display:none">
+    <h3>⚙️ Configuration</h3>
+    <p style="margin-bottom: 20px;">Choisissez secrètement la fausse pièce</p>
+    <div style="display:flex; gap:15px; margin-bottom:25px; justify-content:center; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">PIÈCE</label>
+            <select id="setupCoin" style="padding:10px; min-width:80px;">
+                <option value="" disabled selected>Choisir...</option>
+            </select>
         </div>
-        <div id="guestSetupPanel" style="display:none">
-            <h3>⚙️ Configuration</h3>
-            <p style="margin-bottom: 20px;">Choisissez secrètement la fausse pièce</p>
-            <div style="display:flex; gap:15px; margin-bottom:25px; justify-content:center; flex-wrap:wrap;">
-                <div style="display:flex; flex-direction:column; gap:5px;">
-                    <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">PIÈCE</label>
-                    <select id="setupCoin" style="padding:10px; min-width:80px;">
-                        <option value="" disabled selected>Choisir...</option>
-                    </select>
-                </div>
-                <div style="display:flex; flex-direction:column; gap:5px;">
-                    <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">TYPE</label>
-                    <select id="setupType" style="padding:10px;">
-                        <option value="" disabled selected>Choisir...</option>
-                        <option value="heavy">🔴 Lourde</option>
-                        <option value="light">🟢 Légère</option>
-                    </select>
-                </div>
-            </div>
-            <button id="btnStartGuest" class="primary action-button">🔒 Commencer la Partie</button>
-            <button id="btnBackFromGuest" style="margin-top:10px; background:#334155;" class="action-button">← Retour</button>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">TYPE</label>
+            <select id="setupType" style="padding:10px;">
+                <option value="" disabled selected>Choisir...</option>
+                <option value="heavy">🔴 Lourde</option>
+                <option value="light">🟢 Légère</option>
+            </select>
         </div>
     </div>
+    <button id="btnStartGuest" class="primary action-button">🔒 Commencer la Partie</button>
+    <button id="btnBackFromGuest" style="margin-top:10px; background:#334155;" class="action-button">← Retour</button>
+</div>
+```
+
 </div>
 
 <!-- RESULT MODAL -->
@@ -551,7 +644,7 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
     <div class="tutorial-step">
         <h3>🎨 Code Couleur</h3>
         <ul>
-            <li>🟡 <strong>Jaune</strong> : Pièce normale (éliminée)</li>
+            <li>🟡 <strong>Jaune pâle</strong> : Pièce normale (éliminée)</li>
             <li>🔴 <strong>Rouge</strong> : Candidate plus lourde</li>
             <li>🟢 <strong>Vert</strong> : Candidate plus légère</li>
         </ul>
@@ -568,9 +661,9 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
         <h3>✅ Vérification</h3>
         <p>Une fois que vous pensez avoir trouvé :</p>
         <ul>
+            <li>Cliquez sur le message qui pulse</li>
             <li>Sélectionnez le <strong>numéro</strong> de la pièce</li>
             <li>Choisissez si elle est <strong>Lourde</strong> ou <strong>Légère</strong></li>
-            <li>Cliquez sur <strong>✅ Vérifier</strong></li>
         </ul>
     </div>
 
@@ -584,8 +677,8 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 
 <div class="toolbar">
   <div class="toolbar-left">
-    <button id="btnNew" class="primary" style="min-width: 90px; padding: 8px 10px; font-size: 0.75rem;">✨ Nouvelle</button>
-    <button id="btnShowTutorial" class="tutorial" style="padding: 8px 10px; font-size: 0.75rem;">📚 Aide</button>
+    <button id="btnNew" class="primary">✨ Nouvelle</button>
+    <button id="btnShowTutorial" class="tutorial">📚 Aide</button>
     <div style="display:flex; align-items:center; gap:6px; padding:6px 10px; background:rgba(59,130,246,0.2); border-radius:10px; border:2px solid #3b82f6;">
       <span style="font-size:0.75rem; font-weight:bold; color:#3b82f6;">⚖️</span>
       <span id="weighCounterToolbar" style="font-size:0.95rem; font-weight:bold; color:#f1f5f9;">0/3</span>
@@ -643,9 +736,7 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 </main>
 
 <script>
-// ============================================
-// STATE & INITIALIZATION
-// ============================================
+// STATE
 let state = { 
   coins:[], fakeId:0, fakeType:'', weighCount:0, history:[], status:{}, 
   locked:true, colorLocked:false, wins:0, games:0,
@@ -658,9 +749,7 @@ let state = {
 let audioCtx = null;
 let synth = window.speechSynthesis;
 
-// ============================================
 // CONFETTIS
-// ============================================
 function createConfetti() {
   for(let i = 0; i < 100; i++) {
     setTimeout(() => {
@@ -677,9 +766,7 @@ function createConfetti() {
   }
 }
 
-// ============================================
-// PARTICULES DORÉES
-// ============================================
+// PARTICULES
 function createParticles(element) {
   const rect = element.getBoundingClientRect();
   for(let i = 0; i < 8; i++) {
@@ -689,7 +776,6 @@ function createParticles(element) {
     particle.style.top = (rect.top + rect.height/2) + 'px';
     particle.style.animationDelay = (i * 0.2) + 's';
     
-    // Position aléatoire autour de la pièce
     const angle = (i / 8) * Math.PI * 2;
     const distance = 20;
     setTimeout(() => {
@@ -701,23 +787,17 @@ function createParticles(element) {
   }
 }
 
-// ============================================
-// TRAÎNÉE LUMINEUSE
-// ============================================
-let trailTimer = null;
+// TRAÎNÉE
 function createLightTrail(x, y) {
   const trail = document.createElement('div');
   trail.className = 'light-trail';
   trail.style.left = (x - 19) + 'px';
   trail.style.top = (y - 19) + 'px';
   document.body.appendChild(trail);
-  
   setTimeout(() => trail.remove(), 500);
 }
 
-// ============================================
-// VOIX ANNONCE
-// ============================================
+// VOIX
 function speak(text) {
   if(synth.speaking) synth.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
@@ -728,9 +808,7 @@ function speak(text) {
   synth.speak(utterance);
 }
 
-// ============================================
-// AUDIO & VIBRATION
-// ============================================
+// AUDIO
 function playTone(f, d=0.5, v=0.5, t='sine') {
   try { 
     if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -741,7 +819,6 @@ function playTone(f, d=0.5, v=0.5, t='sine') {
   } catch(e){}
 }
 
-// Son métallique de balance
 function playMetallic() {
   playTone(400, 0.2, 0.15, 'square');
   setTimeout(() => playTone(380, 0.15, 0.1, 'square'), 100);
@@ -752,9 +829,7 @@ function vibrate(pattern) {
   if(navigator.vibrate) navigator.vibrate(pattern);
 }
 
-// ============================================
 // STATS
-// ============================================
 function loadStats() {
   const saved = localStorage.getItem('coinGameStats');
   if(saved) {
@@ -777,9 +852,7 @@ function updateStatsDisplay() {
   if(weighToolbarEl) weighToolbarEl.textContent = `${state.weighCount}/3`;
 }
 
-// ============================================
-// GAME LOGIC
-// ============================================
+// GAME
 function newGame(mode) {
   state = { 
     coins: Array.from({length:12},(_,i)=>({id:i+1,area:'pool'})), 
@@ -788,7 +861,8 @@ function newGame(mode) {
     lastAction: null,
     selectedCoin: null,
     selectedType: null,
-    magnetSnapped: null
+    magnetSnapped: null,
+    lastTrailTime: 0
   };
   
   for(let i=1;i<=12;i++) state.status[i]='unknown';
@@ -823,9 +897,7 @@ function newGame(mode) {
   playTone(600, 0.1, 0.2);
 }
 
-// ============================================
-// RENDER AVEC PARTICULES
-// ============================================
+// RENDER
 function render() {
   const grid = document.getElementById('coins'), ld = document.getElementById('lDrop'), rd = document.getElementById('rDrop');
   grid.innerHTML=''; ld.innerHTML=''; rd.innerHTML='';
@@ -838,14 +910,12 @@ function render() {
     div.textContent = c.id;
     div.dataset.coinId = c.id;
     
-    // Ajouter particules au hover
     div.onmouseenter = () => {
       if(!state.locked && c.area === 'pool') {
         createParticles(div);
       }
     };
     
-    // Animation de rebond pour les pièces déposées
     if(c.justDropped && (c.area === 'left' || c.area === 'right')) {
       div.style.animation = 'bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
       setTimeout(() => {
@@ -893,7 +963,6 @@ function render() {
     }
   }
   
-  // Effet poids sur les plateaux
   const leftCoins = state.coins.filter(c => c.area === 'left').length;
   const rightCoins = state.coins.filter(c => c.area === 'right').length;
   
@@ -904,11 +973,8 @@ function render() {
   else rd.classList.remove('weighted');
 }
 
-// ============================================
-// DRAG & DROP AMÉLIORÉ
-// ============================================
+// DRAG & DROP
 function handleDragStart(e, coinId, div) {
-  // Sauvegarder l'état pour annulation
   state.lastAction = {
     type: 'move',
     coinId: coinId,
@@ -933,7 +999,6 @@ function handleDragStart(e, coinId, div) {
   
   document.body.appendChild(state.ghost); 
   
-  // Particules au début du drag
   createParticles(div);
   
   vibrate(15);
@@ -949,7 +1014,6 @@ function handleDragMove(e) {
   state.ghost.style.left = (clientX - 25) + 'px'; 
   state.ghost.style.top = (clientY - 25) + 'px';
   
-  // Créer la traînée lumineuse toutes les 50ms
   const now = Date.now();
   if(!state.lastTrailTime || (now - state.lastTrailTime) > 50) {
     createLightTrail(clientX, clientY);
@@ -964,22 +1028,19 @@ function handleDragMove(e) {
   ld.classList.remove('drag-over', 'magnetic');
   rd.classList.remove('drag-over', 'magnetic');
   
-  // Calculer la distance au centre de chaque plateau
   const centerL = { x: rL.left + rL.width / 2, y: rL.top + rL.height / 2 };
   const centerR = { x: rR.left + rR.width / 2, y: rR.top + rR.height / 2 };
   
   const distL = Math.sqrt(Math.pow(clientX - centerL.x, 2) + Math.pow(clientY - centerL.y, 2));
   const distR = Math.sqrt(Math.pow(clientX - centerR.x, 2) + Math.pow(clientY - centerR.y, 2));
   
-  const MAGNET_DISTANCE = 80; // Distance de déclenchement du magnétisme
-  const SNAP_DISTANCE = 50;   // Distance pour snap complet
+  const MAGNET_DISTANCE = 80;
+  const SNAP_DISTANCE = 50;
   
-  // Zone magnétique gauche
   if(distL < MAGNET_DISTANCE) {
     ld.classList.add('magnetic');
     
     if(distL < SNAP_DISTANCE) {
-      // Succion forte - déplacer le ghost vers le centre
       const snapX = centerL.x - 25;
       const snapY = centerL.y - 25;
       state.ghost.style.left = snapX + 'px';
@@ -987,7 +1048,6 @@ function handleDragMove(e) {
       state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
       ld.classList.add('drag-over');
       
-      // Son et vibration de succion (une seule fois)
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
         vibrate(15);
@@ -1001,12 +1061,10 @@ function handleDragMove(e) {
     ld.style.transform = 'scale(1.02)';
     rd.style.transform = 'scale(1)';
   } 
-  // Zone magnétique droite
   else if(distR < MAGNET_DISTANCE) {
     rd.classList.add('magnetic');
     
     if(distR < SNAP_DISTANCE) {
-      // Succion forte - déplacer le ghost vers le centre
       const snapX = centerR.x - 25;
       const snapY = centerR.y - 25;
       state.ghost.style.left = snapX + 'px';
@@ -1014,7 +1072,6 @@ function handleDragMove(e) {
       state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
       rd.classList.add('drag-over');
       
-      // Son et vibration de succion (une seule fois)
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
         vibrate(15);
@@ -1028,7 +1085,6 @@ function handleDragMove(e) {
     rd.style.transform = 'scale(1.02)';
     ld.style.transform = 'scale(1)';
   } 
-  // Hors zone magnétique
   else {
     state.ghost.style.transition = 'none';
     state.magnetSnapped = null;
@@ -1052,14 +1108,14 @@ function handleDragEnd(e, ld, rd) {
   
   if(clientX >= rL.left && clientX <= rL.right && clientY >= rL.top && clientY <= rL.bottom) {
     area = 'left';
-    coin.justDropped = true; // Marquer pour animation de rebond
+    coin.justDropped = true;
     vibrate(30);
     playTone(900, 0.1, 0.2);
     playMetallic();
   }
   else if(clientX >= rR.left && clientX <= rR.right && clientY >= rR.top && clientY <= rR.bottom) {
     area = 'right';
-    coin.justDropped = true; // Marquer pour animation de rebond
+    coin.justDropped = true;
     vibrate(30);
     playTone(900, 0.1, 0.2);
     playMetallic();
@@ -1075,188 +1131,12 @@ function handleDragEnd(e, ld, rd) {
   ld.style.transform = 'scale(1)';
   rd.style.transform = 'scale(1)';
   
-  state.magnetSnapped = null; // Réinitialiser
+  state.magnetSnapped = null;
   
   render();
 }
 
-// ============================================
-// RESULT MODAL GRID
-// ============================================
-function openResultModal() {
-  state.selectedCoin = null;
-  state.selectedType = null;
-  
-  const grid = document.getElementById('resultCoinsGrid');
-  grid.innerHTML = '';
-  
-  // Créer les 12 pièces cliquables
-  for(let i = 1; i <= 12; i++) {
-    const coinBtn = document.createElement('div');
-    coinBtn.className = `coin status-${state.status[i]}`;
-    coinBtn.textContent = i;
-    coinBtn.style.cursor = 'pointer';
-    coinBtn.style.transition = 'all 0.3s';
-    coinBtn.dataset.coinId = i;
-    
-    coinBtn.onclick = () => selectCoin(i, coinBtn);
-    
-    grid.appendChild(coinBtn);
-  }
-  
-  document.getElementById('typeSelection').style.display = 'none';
-  document.getElementById('resultOverlay').style.display = 'flex';
-  vibrate(30);
-  playTone(700, 0.1, 0.2);
-}
-
-function selectCoin(coinId, element) {
-  state.selectedCoin = coinId;
-  
-  // Retirer la sélection de toutes les pièces
-  document.querySelectorAll('#resultCoinsGrid .coin').forEach(c => {
-    c.style.transform = 'scale(1)';
-    c.style.boxShadow = '2px 4px 8px rgba(0, 0, 0, 0.5)';
-  });
-  
-  // Mettre en surbrillance la pièce sélectionnée
-  element.style.transform = 'scale(1.2)';
-  element.style.boxShadow = '0 0 30px rgba(251, 191, 36, 1)';
-  
-  // Afficher le choix du type
-  document.getElementById('selectedCoinNumber').textContent = coinId;
-  document.getElementById('typeSelection').style.display = 'block';
-  
-  // Particules
-  createParticles(element);
-  
-  vibrate(40);
-  playTone(900, 0.1, 0.25);
-}
-
-function selectType(type) {
-  state.selectedType = type;
-  
-  // Validation automatique
-  document.getElementById('resultOverlay').style.display = 'none';
-  
-  vibrate(50);
-  playTone(1000, 0.15, 0.3);
-  
-  // Vérifier le résultat
-  checkFinalFromModal();
-}
-
-function checkFinalFromModal() {
-  if(!state.selectedCoin || !state.selectedType || state.locked) return;
-  
-  const id = state.selectedCoin;
-  const type = state.selectedType;
-  
-  state.locked = true; 
-  state.games++;
-  saveStats();
-  updateStatsDisplay();
-  
-  const label = state.fakeType === 'heavy' ? 'plus Lourde' : 'plus Légère';
-  
-  if(id === state.fakeId && type === state.fakeType) {
-    state.wins++;
-    saveStats();
-    updateStatsDisplay();
-    
-    document.getElementById('message').innerHTML = `🎉 BRAVO ! La pièce ${id} était ${label} !`;
-    document.body.style.backgroundColor = "#064e3b"; 
-    vibrate([100, 50, 100, 50, 200]);
-    
-    createConfetti();
-    speak('Bravo ! Victoire !');
-    
-    // Applaudissements
-    const applause = [];
-    for(let i = 0; i < 15; i++) {
-      applause.push({
-        f: Math.random() * 200 + 150,
-        d: 0.05,
-        v: Math.random() * 0.1 + 0.05,
-        delay: i * 100,
-        type: 'sawtooth'
-      });
-    }
-    applause.forEach(clap => {
-      setTimeout(() => playTone(clap.f, clap.d, clap.v, clap.type), clap.delay);
-    });
-    
-    // Mélodie
-    const fireworks = [
-      { f: 523, d: 0.15, v: 0.3, delay: 1500 },
-      { f: 659, d: 0.15, v: 0.3, delay: 1650 },
-      { f: 784, d: 0.15, v: 0.3, delay: 1800 },
-      { f: 1047, d: 0.3, v: 0.35, delay: 1950 },
-      { f: 1200, d: 0.1, v: 0.2, delay: 2150 },
-      { f: 1000, d: 0.1, v: 0.2, delay: 2200 },
-      { f: 1400, d: 0.1, v: 0.2, delay: 2250 },
-      { f: 1100, d: 0.1, v: 0.2, delay: 2300 },
-      { f: 1047, d: 0.5, v: 0.35, delay: 2400 }
-    ];
-    
-    fireworks.forEach(note => {
-      setTimeout(() => playTone(note.f, note.d, note.v), note.delay);
-    });
-    
-  } else {
-    document.getElementById('message').innerHTML = `❌ RATÉ ! C'était la pièce ${state.fakeId} (${label})`;
-    document.body.style.backgroundColor = "#450a0a"; 
-    vibrate([200, 100, 200]);
-    
-    document.body.style.animation = 'shake 0.5s';
-    setTimeout(() => document.body.style.animation = '', 500);
-    
-    speak('Raté ! Essayez encore');
-    
-    const sadTrombone = [
-      { f: 392, d: 0.3, v: 0.25, delay: 0 },
-      { f: 349, d: 0.3, v: 0.25, delay: 300 },
-      { f: 311, d: 0.3, v: 0.25, delay: 600 },
-      { f: 262, d: 0.6, v: 0.3, delay: 900 }
-    ];
-    
-    sadTrombone.forEach(note => {
-      setTimeout(() => playTone(note.f, note.d, note.v, 'triangle'), note.delay);
-    });
-  }
-}
-
-// ============================================
-// ANNULER (fonction conservée pour clearPlates)
-// ============================================
-function undoLastAction() {
-  if(!state.lastAction || state.locked) return;
-  
-  // Vider les plateaux
-  state.coins.forEach(c => {
-    if(c.area === 'left' || c.area === 'right') {
-      c.area = 'pool';
-    }
-  });
-  
-  state.lastAction = null;
-  render();
-  vibrate(20);
-  playTone(500, 0.1, 0.15);
-  document.getElementById('message').textContent = "🗑️ Plateaux vidés !";
-  setTimeout(() => {
-    if(state.weighCount < 3) {
-      document.getElementById('message').textContent = `⚖️ Pesée ${state.weighCount}/3. Continuez !`;
-    } else {
-      document.getElementById('message').textContent = "🎯 Cliquez ici pour choisir la fausse pièce";
-    }
-  }, 1500);
-}
-
-// ============================================
-// WEIGHING AMÉLIORÉ
-// ============================================
+// WEIGHING
 function performWeigh() {
   if(state.locked || state.weighCount >= 3) return;
   const leftCoins = state.coins.filter(c => c.area == 'left').map(c => c.id);
@@ -1273,7 +1153,6 @@ function performWeigh() {
   
   let res = 'Équilibre parfait', sym = '=', ang = 0, moveY = 0, voiceText = '';
   
-  // Animation de balancement réaliste - commence rapide puis ralentit
   const beamArm = document.getElementById('beamArm');
   beamArm.style.animation = 'swingFast 0.6s ease-in-out';
   setTimeout(() => {
@@ -1300,10 +1179,8 @@ function performWeigh() {
     setTimeout(() => playTone(600, 0.15, 0.25), 150);
   }
   
-  // Son métallique
   playMetallic();
   
-  // Voix annonce
   setTimeout(() => speak(voiceText), 500);
   
   document.getElementById('beamArm').style.transform = `rotate(${ang}deg)`;
@@ -1311,7 +1188,6 @@ function performWeigh() {
   document.getElementById('rightPlateau').style.transform = `translateY(${-moveY}px)`;
   document.getElementById('weighResult').textContent = res;
 
-  // Color logic
   if(!state.colorLocked) {
     state.coins.forEach(c => {
       if(sym === '=') { 
@@ -1359,7 +1235,6 @@ function updateHistoryUI() {
     if(line) {
       const fmt = arr => arr.map(c => `<div class="mini-coin status-${c.status}">${c.id}</div>`).join('');
       
-      // Signe = en blanc sur fond bleu, même taille que les flèches
       let icon, symbolStyle;
       if(h.sym === '=') {
         icon = '=';
@@ -1380,9 +1255,7 @@ function updateHistoryUI() {
   });
 }
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
+// UTILITY
 function clearPlates() { 
   if(state.locked) return; 
   state.coins.forEach(c => c.area = 'pool'); 
@@ -1399,9 +1272,143 @@ function resetBalanceUI() {
   document.getElementById('weighResult').textContent = '—'; 
 }
 
-// ============================================
-// KEYBOARD SUPPORT
-// ============================================
+// RESULT MODAL
+function openResultModal() {
+  state.selectedCoin = null;
+  state.selectedType = null;
+  
+  const grid = document.getElementById('resultCoinsGrid');
+  grid.innerHTML = '';
+  
+  for(let i = 1; i <= 12; i++) {
+    const coinBtn = document.createElement('div');
+    coinBtn.className = `coin status-${state.status[i]}`;
+    coinBtn.textContent = i;
+    coinBtn.style.cursor = 'pointer';
+    coinBtn.style.transition = 'all 0.3s';
+    coinBtn.dataset.coinId = i;
+    
+    coinBtn.onclick = () => selectCoin(i, coinBtn);
+    
+    grid.appendChild(coinBtn);
+  }
+  
+  document.getElementById('typeSelection').style.display = 'none';
+  document.getElementById('resultOverlay').style.display = 'flex';
+  vibrate(30);
+  playTone(700, 0.1, 0.2);
+}
+
+function selectCoin(coinId, element) {
+  state.selectedCoin = coinId;
+  
+  document.querySelectorAll('#resultCoinsGrid .coin').forEach(c => {
+    c.style.transform = 'scale(1)';
+    c.style.boxShadow = '2px 4px 8px rgba(0, 0, 0, 0.5)';
+  });
+  
+  element.style.transform = 'scale(1.2)';
+  element.style.boxShadow = '0 0 30px rgba(251, 191, 36, 1)';
+  
+  document.getElementById('selectedCoinNumber').textContent = coinId;
+  document.getElementById('typeSelection').style.display = 'block';
+  
+  createParticles(element);
+  
+  vibrate(40);
+  playTone(900, 0.1, 0.25);
+}
+
+function selectType(type) {
+  state.selectedType = type;
+  
+  document.getElementById('resultOverlay').style.display = 'none';
+  
+  vibrate(50);
+  playTone(1000, 0.15, 0.3);
+  
+  checkFinalFromModal();
+}
+
+function checkFinalFromModal() {
+  if(!state.selectedCoin || !state.selectedType || state.locked) return;
+  
+  const id = state.selectedCoin;
+  const type = state.selectedType;
+  
+  state.locked = true; 
+  state.games++;
+  saveStats();
+  updateStatsDisplay();
+  
+  const label = state.fakeType === 'heavy' ? 'plus Lourde' : 'plus Légère';
+  
+  if(id === state.fakeId && type === state.fakeType) {
+    state.wins++;
+    saveStats();
+    updateStatsDisplay();
+    
+    document.getElementById('message').innerHTML = `🎉 BRAVO ! La pièce ${id} était ${label} !`;
+    document.body.style.backgroundColor = "#064e3b"; 
+    vibrate([100, 50, 100, 50, 200]);
+    
+    createConfetti();
+    speak('Bravo ! Victoire !');
+    
+    const applause = [];
+    for(let i = 0; i < 15; i++) {
+      applause.push({
+        f: Math.random() * 200 + 150,
+        d: 0.05,
+        v: Math.random() * 0.1 + 0.05,
+        delay: i * 100,
+        type: 'sawtooth'
+      });
+    }
+    applause.forEach(clap => {
+      setTimeout(() => playTone(clap.f, clap.d, clap.v, clap.type), clap.delay);
+    });
+    
+    const fireworks = [
+      { f: 523, d: 0.15, v: 0.3, delay: 1500 },
+      { f: 659, d: 0.15, v: 0.3, delay: 1650 },
+      { f: 784, d: 0.15, v: 0.3, delay: 1800 },
+      { f: 1047, d: 0.3, v: 0.35, delay: 1950 },
+      { f: 1200, d: 0.1, v: 0.2, delay: 2150 },
+      { f: 1000, d: 0.1, v: 0.2, delay: 2200 },
+      { f: 1400, d: 0.1, v: 0.2, delay: 2250 },
+      { f: 1100, d: 0.1, v: 0.2, delay: 2300 },
+      { f: 1047, d: 0.5, v: 0.35, delay: 2400 }
+    ];
+    
+    fireworks.forEach(note => {
+      setTimeout(() => playTone(note.f, note.d, note.v), note.delay);
+    });
+    
+  } else {
+    document.getElementById('message').innerHTML = `❌ RATÉ ! C'était la pièce ${state.fakeId} (${label})`;
+    document.body.style.backgroundColor = "#450a0a"; 
+    vibrate([200, 100, 200]);
+    
+    document.body.style.animation = 'shake 0.5s';
+    setTimeout(() => document.body.style.animation = '', 500);
+    
+    speak('Raté ! Essayez encore');
+    
+    const sadTrombone = [
+      { f: 392, d: 0.3, v: 0.25, delay: 0 },
+      { f: 349, d: 0.3, v: 0.25, delay: 300 },
+      { f: 311, d: 0.3, v: 0.25, delay: 600 },
+      { f: 262, d: 0.6, v: 0.3, delay: 900 }
+    ];
+    
+    sadTrombone.forEach(note => {
+      setTimeout(() => playTone(note.f, note.d, note.v, 'triangle'), note.delay);
+    });
+  }
+}
+
+// KEYBOARD
 document.addEventListener('keydown', (e) => {
   if(state.locked) return;
   
@@ -1426,9 +1433,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// ============================================
-// EVENT LISTENERS
-// ============================================
+// EVENTS
 document.addEventListener('touchmove', function(e) { 
   if(e.target.tagName !== 'SELECT' && !e.target.closest('.tutorial-content')) e.preventDefault(); 
 }, { passive: false });
@@ -1439,7 +1444,6 @@ document.getElementById('btnWeigh').addEventListener('touchstart', (e) => { e.pr
 document.getElementById('btnClear').addEventListener('click', clearPlates);
 document.getElementById('btnClear').addEventListener('touchstart', (e) => { e.preventDefault(); clearPlates(); });
 
-// Message cliquable pour ouvrir le résultat
 const messageEl = document.getElementById('message');
 messageEl.addEventListener('click', () => {
   if(state.weighCount >= 1 && !state.locked) {
@@ -1451,6 +1455,18 @@ messageEl.addEventListener('touchstart', (e) => {
     e.preventDefault();
     openResultModal();
   }
+});
+
+document.getElementById('btnNew').addEventListener('click', () => {
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+  document.getElementById('initialModePanel').style.display = 'block';
+  document.getElementById('guestSetupPanel').style.display = 'none';
+});
+document.getElementById('btnNew').addEventListener('touchstart', (e) => { 
+  e.preventDefault(); 
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+  document.getElementById('initialModePanel').style.display = 'block';
+  document.getElementById('guestSetupPanel').style.display = 'none';
 });
 
 document.getElementById('btnHeavy').addEventListener('click', () => selectType('heavy'));
@@ -1471,32 +1487,6 @@ document.getElementById('btnCancelResult').addEventListener('touchstart', (e) =>
   playTone(500, 0.1, 0.15);
 });
 
-document.getElementById('btnNew').addEventListener('click', () => {
-  document.getElementById('modeSelectOverlay').style.display = 'flex';
-  document.getElementById('initialModePanel').style.display = 'block';
-  document.getElementById('guestSetupPanel').style.display = 'none';
-});
-document.getElementById('btnNew').addEventListener('touchstart', (e) => { 
-  e.preventDefault(); 
-  document.getElementById('modeSelectOverlay').style.display = 'flex';
-  document.getElementById('initialModePanel').style.display = 'block';
-  document.getElementById('guestSetupPanel').style.display = 'none';
-});
-
-// ============================================
-// INITIALIZATION
-// ============================================
-const sc = document.getElementById('setupCoin');
-
-sc.innerHTML = '<option value="" disabled selected>Choisir...</option>';
-for(let i = 1; i <= 12; i++) { 
-  let o = document.createElement('option'); 
-  o.value = i; 
-  o.textContent = i; 
-  sc.appendChild(o); 
-}
-
-// Event listeners pour les modales
 document.getElementById('btnAI').addEventListener('click', () => newGame('AI'));
 document.getElementById('btnAI').addEventListener('touchstart', (e) => { e.preventDefault(); newGame('AI'); });
 
@@ -1546,6 +1536,16 @@ document.getElementById('btnCloseTutorial').addEventListener('touchstart', (e) =
   e.preventDefault();
   document.getElementById('tutorialOverlay').style.display = 'none';
 });
+
+// INIT
+const sc = document.getElementById('setupCoin');
+sc.innerHTML = '<option value="" disabled selected>Choisir...</option>';
+for(let i = 1; i <= 12; i++) { 
+  let o = document.createElement('option'); 
+  o.value = i; 
+  o.textContent = i; 
+  sc.appendChild(o); 
+}
 
 loadStats();
 document.getElementById('modeSelectOverlay').style.display = 'flex';
