@@ -5,11 +5,11 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
 <meta name="color-scheme" content="light dark"/>
-<meta name="theme-color" content="#7c3aed"/>
+<meta name="theme-color" content="#fb923c"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="12 Pièces"/>
-<title>Jeu des 12 Pièces — V3.0</title>
+<meta name="apple-mobile-web-app-title" content="12 Coins"/>
+<title>12 Coins Game — Bilingual</title>
 <style>
   * { color-scheme: dark; }
 
@@ -44,7 +44,6 @@ position: relative; overflow: hidden;
 10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
 20%, 40%, 60%, 80% { transform: translateX(10px); }
 }
-@keyframes glow { 0%, 100% { box-shadow: 0 0 5px var(–accent); } 50% { box-shadow: 0 0 20px var(–accent); } }
 @keyframes swing {
 0% { transform: rotate(0deg); }
 5% { transform: rotate(1deg); }
@@ -84,11 +83,6 @@ position: relative; overflow: hidden;
 0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
 50% { opacity: 1; transform: scale(1) rotate(180deg); }
 }
-@keyframes magnetSnap {
-0% { transform: scale(1); }
-50% { transform: scale(1.1); }
-100% { transform: scale(1); }
-}
 @keyframes magnetPulse {
 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
 100% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
@@ -106,17 +100,6 @@ position: relative; overflow: hidden;
 90% { transform: scale(1.01, 0.99) translateY(0); }
 100% { transform: scale(1) translateY(0); }
 }
-
-/* CONFETTI */
-.confetti {
-position: fixed;
-width: 10px;
-height: 10px;
-background: #fcd34d;
-position: absolute;
-z-index: 9999;
-animation: confetti-fall 3s linear;
-}
 @keyframes confetti-fall {
 to {
 transform: translateY(100vh) rotate(720deg);
@@ -124,7 +107,15 @@ opacity: 0;
 }
 }
 
-/* PARTICULES DORÉES */
+.confetti {
+position: fixed;
+width: 10px;
+height: 10px;
+background: #fcd34d;
+z-index: 9999;
+animation: confetti-fall 3s linear;
+}
+
 .particle {
 position: absolute;
 width: 4px;
@@ -136,7 +127,6 @@ z-index: 100;
 animation: sparkle 1.5s ease-in-out infinite;
 }
 
-/* TRAÎNÉE LUMINEUSE */
 .light-trail {
 position: fixed;
 width: 38px;
@@ -149,7 +139,6 @@ animation: trail 0.5s ease-out forwards;
 box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
 }
 
-/* MODAL */
 .modal-overlay {
 position: fixed; inset: 0;
 display: flex; justify-content: center; align-items: center; z-index: 2000;
@@ -165,22 +154,13 @@ animation: slideDown 0.4s ease-out;
 }
 .modal-content h3 {
 margin: 0 0 10px; font-size: 2.2rem;
-background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
 -webkit-background-clip: text; background-clip: text;
 -webkit-text-fill-color: transparent;
-color: #a78bfa;
+color: #fb923c;
 }
 .modal-content p { color: #f1f5f9 !important; }
-.modal-buttons { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
-.modal-buttons button {
-width: 100%; padding: 18px; font-weight: bold; cursor: pointer;
-border-radius: 12px; border: none; font-size: 1.2rem;
-color: white !important; transition: all 0.3s;
-}
-.modal-buttons button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
-.modal-buttons button:active { transform: translateY(0); }
 
-/* WELCOME SCREEN - NOUVEAU DESIGN ORANGE */
 #modeSelectOverlay {
 background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important;
 }
@@ -257,9 +237,37 @@ background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
 background: linear-gradient(135deg, #10b981, #059669) !important;
 }
 
+.lang-switcher {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin: 20px 0 15px 0;
+}
+
+.lang-btn {
+padding: 8px 16px;
+font-size: 1rem;
+font-weight: 600;
+border-radius: 8px;
+border: 2px solid #1e293b;
+background: transparent;
+color: #1e293b !important;
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.lang-btn.active {
+background: #1e293b !important;
+color: white !important;
+}
+
+.lang-btn:hover {
+transform: scale(1.05);
+}
+
 .tutorial-link {
-text-align: right;
-margin-top: 15px;
+text-align: center;
+margin-top: 10px;
 }
 
 .btn-tutorial-link {
@@ -281,7 +289,6 @@ font-style: italic;
 line-height: 1.4;
 }
 
-/* TOOLBAR */
 .toolbar {
 background: #1e293b !important; color: #f1f5f9 !important;
 padding: 10px 16px; border-bottom: 2px solid #334155;
@@ -309,7 +316,6 @@ background: linear-gradient(135deg, #f59e0b, #d97706) !important;
 border: none; padding: 8px 10px; font-size: 0.75rem;
 }
 
-/* MAIN GRID */
 main {
 flex: 1; display: grid; grid-template-columns: 320px 1fr;
 gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden;
@@ -367,7 +373,6 @@ border: 2px dashed #334155 !important;
 color: transparent !important; pointer-events: none; box-shadow: none;
 }
 
-/* BALANCE */
 .dropgrid {
 display: flex; justify-content: center; gap: 12px;
 align-items: flex-start; padding-top: 12px;
@@ -435,27 +440,19 @@ transition: all 0.3s;
 background: linear-gradient(135deg, #ec4899, #db2777) !important;
 color: white !important;
 }
-.action-button.blue:hover { background: linear-gradient(135deg, #db2777, #be185d) !important; }
 .action-button.white { background: #f8fafc !important; color: #0f172a !important; }
-.action-button.white:hover { background: #e2e8f0 !important; }
 .action-button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* HISTORY */
 #history {
 flex: 1; overflow-y: auto; margin-top: 3px;
 min-height: 0; max-height: 150px;
 }
-#history::-webkit-scrollbar { width: 6px; }
-#history::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 4px; }
-#history::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-#history::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
 
 .hist-line {
 display: flex; align-items: center; gap: 8px;
 padding: 5px 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 animation: slideDown 0.3s ease-out; transition: all 0.3s;
 }
-.hist-line:hover { background: rgba(255, 255, 255, 0.05) !important; }
 .mini-coin {
 width: 18px; height: 18px; font-size: 11px;
 display: inline-flex; align-items: center; justify-content: center;
@@ -474,19 +471,10 @@ color: #f1f5f9 !important;
 cursor: pointer;
 transition: all 0.3s;
 }
-#message:hover {
-background: rgba(59, 130, 246, 0.2) !important;
-transform: scale(1.02);
-box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-}
-#message:active {
-transform: scale(0.98);
-}
 #message.clickable {
 animation: pulse 2s infinite;
 }
 
-/* TUTORIAL */
 .tutorial-overlay {
 position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95);
 display: flex; justify-content: center; align-items: center; z-index: 3000;
@@ -502,29 +490,17 @@ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
 .tutorial-content h2 { margin: 0 0 20px; color: #3b82f6 !important; }
 .tutorial-content h3 { color: #22c55e !important; margin-top: 25px; }
 .tutorial-content p { line-height: 1.6; margin: 10px 0; color: #f1f5f9 !important; }
-.tutorial-content ul { line-height: 1.8; color: #f1f5f9 !important; }
-.tutorial-content li { color: #f1f5f9 !important; }
 .tutorial-step {
 background: rgba(0, 0, 0, 0.3) !important;
 padding: 15px; border-radius: 12px;
 margin: 15px 0; border-left: 4px solid #3b82f6;
 }
 
-/* RESPONSIVE */
 @media (max-width: 900px) {
 main {
 grid-template-columns: 1fr; overflow-y: auto;
-padding-bottom: 100px; -webkit-overflow-scrolling: touch;
+padding-bottom: 100px;
 }
-.toolbar { flex-wrap: wrap; gap: 6px; justify-content: center; padding: 8px 12px; }
-.toolbar-left { flex-wrap: wrap; justify-content: center; }
-.dropzone { height: 110px; }
-.coin { width: 36px; height: 36px; font-size: 15px; }
-.coins-grid { gap: 4px; padding: 6px; }
-#history { max-height: 140px; }
-.hist-line { padding: 4px 6px; }
-
-```
 .welcome-title { font-size: 2.5rem; }
 .welcome-subtitle { font-size: 1.25rem; }
 .welcome-highlight { font-size: 1.875rem; }
@@ -532,60 +508,63 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 .welcome-question { font-size: 1.125rem; }
 .btn-tutorial-link { font-size: 1rem; }
 .welcome-note { font-size: 0.9rem; }
-```
-
 }
 </style>
 
 </head>
 <body>
 
-<!-- MODE SELECT MODAL - NOUVELLE PAGE BIENVENUE -->
+<!-- WELCOME -->
 
 <div id="modeSelectOverlay" class="modal-overlay" style="background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%);">
     <div class="welcome-container" id="initialModePanel">
-        <h1 class="welcome-title">🎮 BIENVENUE</h1>
+        <h1 class="welcome-title" id="welcomeTitle">🎮 BIENVENUE</h1>
 
 ```
-    <p class="welcome-subtitle">Trouvez la fausse pièce parmi 12 en</p>
+    <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
     
-    <h2 class="welcome-highlight">✨ 3 PESÉES MAXIMUM ✨</h2>
+    <h2 class="welcome-highlight" id="welcomeHighlight">✨ 3 PESÉES MAXIMUM ✨</h2>
     
-    <p class="welcome-question">Qui choisira secrètement la fausse pièce ?</p>
+    <p class="welcome-question" id="welcomeQuestion">Qui choisira secrètement la fausse pièce ?</p>
     
     <div class="welcome-buttons">
-        <button id="btnAI" class="welcome-btn btn-computer">🤖 ORDINATEUR</button>
-        <button id="btnGuest" class="welcome-btn btn-human">👤 HUMAIN</button>
+        <button id="btnAI" class="welcome-btn btn-computer">🤖 <span id="btnAIText">ORDINATEUR</span></button>
+        <button id="btnGuest" class="welcome-btn btn-human">👤 <span id="btnGuestText">HUMAIN</span></button>
+    </div>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
+        <button class="lang-btn" id="btnEN">🇬🇧 English</button>
     </div>
     
     <div class="tutorial-link">
-        <button id="btnTutorial" class="btn-tutorial-link">📚 Tutoriel</button>
+        <button id="btnTutorial" class="btn-tutorial-link"><span id="tutorialLinkText">📚 Tutoriel</span></button>
     </div>
     
-    <p class="welcome-note">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
+    <p class="welcome-note" id="welcomeNote">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
 </div>
 
 <div class="modal-content" id="guestSetupPanel" style="display:none">
-    <h3>⚙️ Configuration</h3>
-    <p style="margin-bottom: 20px;">Choisissez secrètement la fausse pièce</p>
+    <h3 id="setupTitle">⚙️ Configuration</h3>
+    <p id="setupSubtitle" style="margin-bottom: 20px;">Choisissez secrètement la fausse pièce</p>
     <div style="display:flex; gap:15px; margin-bottom:25px; justify-content:center; flex-wrap:wrap;">
         <div style="display:flex; flex-direction:column; gap:5px;">
-            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">PIÈCE</label>
+            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;" id="setupCoinLabel">PIÈCE</label>
             <select id="setupCoin" style="padding:10px; min-width:80px;">
-                <option value="" disabled selected>Choisir...</option>
+                <option value="" disabled selected id="setupCoinPlaceholder">Choisir...</option>
             </select>
         </div>
         <div style="display:flex; flex-direction:column; gap:5px;">
-            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;">TYPE</label>
+            <label style="font-size:0.8rem; color:#3b82f6; font-weight:bold;" id="setupTypeLabel">TYPE</label>
             <select id="setupType" style="padding:10px;">
-                <option value="" disabled selected>Choisir...</option>
-                <option value="heavy">🔴 Lourde</option>
-                <option value="light">🟢 Légère</option>
+                <option value="" disabled selected id="setupTypePlaceholder">Choisir...</option>
+                <option value="heavy" id="setupHeavy">🔴 Lourde</option>
+                <option value="light" id="setupLight">🟢 Légère</option>
             </select>
         </div>
     </div>
-    <button id="btnStartGuest" class="primary action-button">🔒 Commencer la Partie</button>
-    <button id="btnBackFromGuest" style="margin-top:10px; background:#334155;" class="action-button">← Retour</button>
+    <button id="btnStartGuest" class="primary action-button"><span id="startGuestText">🔒 Commencer la Partie</span></button>
+    <button id="btnBackFromGuest" style="margin-top:10px; background:#334155;" class="action-button"><span id="backText">← Retour</span></button>
 </div>
 ```
 
@@ -595,93 +574,50 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 
 <div id="resultOverlay" class="modal-overlay" style="display:none; background: rgba(0, 0, 0, 0.9);">
     <div class="modal-content" style="max-width: 500px; padding: 35px;">
-        <h3 style="margin-bottom: 25px;">🎯 CHOISIR LA PIÈCE</h3>
+        <h3 id="resultTitle" style="margin-bottom: 25px;">🎯 CHOISIR LA PIÈCE</h3>
 
 ```
-    <p style="color: #cbd5e1 !important; margin-bottom: 20px;">Cliquez sur la pièce suspecte :</p>
+    <p id="resultInstruction" style="color: #cbd5e1 !important; margin-bottom: 20px;">Cliquez sur la pièce suspecte :</p>
     
     <div id="resultCoinsGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 30px;">
     </div>
     
     <div id="typeSelection" style="display:none; margin-top: 20px;">
-        <p style="color: #cbd5e1 !important; margin-bottom: 15px; font-size: 1.1rem;">
-            Pièce <span id="selectedCoinNumber" style="color: #fbbf24; font-weight: bold; font-size: 1.3rem;"></span> est :
+        <p id="typePrompt" style="color: #cbd5e1 !important; margin-bottom: 15px; font-size: 1.1rem;">
+            <span id="typePromptPre">Pièce</span> <span id="selectedCoinNumber" style="color: #fbbf24; font-weight: bold; font-size: 1.3rem;"></span> <span id="typePromptPost">est :</span>
         </p>
         <div style="display: flex; gap: 15px; justify-content: center;">
-            <button id="btnHeavy" class="modal-buttons" style="background: linear-gradient(135deg, #ef4444, #dc2626) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">
-                🔴 LOURDE
+            <button id="btnHeavy" style="background: linear-gradient(135deg, #ef4444, #dc2626) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">
+                🔴 <span id="heavyText">LOURDE</span>
             </button>
-            <button id="btnLight" class="modal-buttons" style="background: linear-gradient(135deg, #22c55e, #16a34a) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">
-                🟢 LÉGÈRE
+            <button id="btnLight" style="background: linear-gradient(135deg, #22c55e, #16a34a) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">
+                🟢 <span id="lightText">LÉGÈRE</span>
             </button>
         </div>
     </div>
     
     <button id="btnCancelResult" style="margin-top: 25px; background: #475569 !important; width: 100%; padding: 12px;">
-        ← Annuler
+        <span id="cancelText">← Annuler</span>
     </button>
 </div>
 ```
 
 </div>
 
-<!-- TUTORIAL MODAL -->
+<!-- TUTORIAL -->
 
 <div id="tutorialOverlay" class="tutorial-overlay" style="display:none;">
-    <div class="tutorial-content">
-        <h2>📚 Comment Jouer ?</h2>
-
-```
-    <div class="tutorial-step">
-        <h3>🎯 Objectif</h3>
-        <p>Trouvez quelle pièce est fausse (plus lourde ou plus légère) parmi 12 pièces en <strong>maximum 3 pesées</strong>.</p>
+    <div class="tutorial-content" id="tutorialContent">
+        <!-- Filled by JS -->
     </div>
-
-    <div class="tutorial-step">
-        <h3>⚖️ Comment Peser</h3>
-        <p><strong>Sur mobile :</strong> Glissez les pièces sur les plateaux de la balance</p>
-        <p><strong>Sur ordinateur :</strong> Cliquez et glissez les pièces</p>
-        <p>Vous pouvez mettre jusqu'à 6 pièces par plateau</p>
-    </div>
-
-    <div class="tutorial-step">
-        <h3>🎨 Code Couleur</h3>
-        <ul>
-            <li>🟡 <strong>Jaune pâle</strong> : Pièce normale (éliminée)</li>
-            <li>🔴 <strong>Rouge</strong> : Candidate plus lourde</li>
-            <li>🟢 <strong>Vert</strong> : Candidate plus légère</li>
-        </ul>
-    </div>
-
-    <div class="tutorial-step">
-        <h3>💡 Stratégie</h3>
-        <p>1️⃣ <strong>Première pesée :</strong> Divisez en 3 groupes de 4 pièces</p>
-        <p>2️⃣ <strong>Observez :</strong> Les pièces qui ne sont pas pesées et celles sur le plateau équilibré sont normales</p>
-        <p>3️⃣ <strong>Éliminez :</strong> Concentrez-vous sur les pièces suspectes (rouges ou vertes)</p>
-    </div>
-
-    <div class="tutorial-step">
-        <h3>✅ Vérification</h3>
-        <p>Une fois que vous pensez avoir trouvé :</p>
-        <ul>
-            <li>Cliquez sur le message qui pulse</li>
-            <li>Sélectionnez le <strong>numéro</strong> de la pièce</li>
-            <li>Choisissez si elle est <strong>Lourde</strong> ou <strong>Légère</strong></li>
-        </ul>
-    </div>
-
-    <button id="btnCloseTutorial" class="primary action-button" style="margin-top:30px;">C'est Compris ! 🚀</button>
-</div>
-```
-
 </div>
 
 <!-- TOOLBAR -->
 
 <div class="toolbar">
   <div class="toolbar-left">
-    <button id="btnNew" class="primary">✨ Nouvelle</button>
-    <button id="btnShowTutorial" class="tutorial">📚 Aide</button>
+    <button id="btnNew" class="primary"><span id="newGameText">✨ Nouvelle</span></button>
+    <button id="btnShowTutorial" class="tutorial"><span id="helpText">📚 Aide</span></button>
     <div style="display:flex; align-items:center; gap:6px; padding:6px 10px; background:rgba(59,130,246,0.2); border-radius:10px; border:2px solid #3b82f6;">
       <span style="font-size:0.75rem; font-weight:bold; color:#3b82f6;">⚖️</span>
       <span id="weighCounterToolbar" style="font-size:0.95rem; font-weight:bold; color:#f1f5f9;">0/3</span>
@@ -689,7 +625,7 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
   </div>
 </div>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 
 <main>
   <section class="panel">
@@ -705,11 +641,11 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 
 ```
   <div class="beam-container">
-    <button id="btnClear" class="action-button white" style="margin-bottom: 15px;">🗑️ VIDER</button>
+    <button id="btnClear" class="action-button white" style="margin-bottom: 15px;"><span id="clearText">🗑️ VIDER</span></button>
     <div id="beamArm" class="beam-arm"></div>
     <div class="beam-pivot"></div>
     <div id="weighResult">—</div>
-    <button id="btnWeigh" class="action-button blue" style="margin-top: 15px;">⚖️ PESER</button>
+    <button id="btnWeigh" class="action-button blue" style="margin-top: 15px;"><span id="weighText">⚖️ PESER</span></button>
   </div>
   
   <div id="rightPlateau" class="plateau-container">
@@ -739,6 +675,263 @@ padding-bottom: 100px; -webkit-overflow-scrolling: touch;
 </main>
 
 <script>
+// TRANSLATIONS
+const T = {
+  fr: {
+    welcome: "🎮 BIENVENUE",
+    subtitle: "Trouvez la fausse pièce parmi 12 en",
+    highlight: "✨ 3 PESÉES MAXIMUM ✨",
+    question: "Qui choisira secrètement la fausse pièce ?",
+    computer: "ORDINATEUR",
+    human: "HUMAIN",
+    tutorial: "📚 Tutoriel",
+    note: "(La fausse pièce peut être plus lourde ou plus légère que les autres)",
+    
+    setup: "⚙️ Configuration",
+    setupSub: "Choisissez secrètement la fausse pièce",
+    coin: "PIÈCE",
+    type: "TYPE",
+    choose: "Choisir...",
+    heavy: "Lourde",
+    light: "Légère",
+    startGame: "🔒 Commencer la Partie",
+    back: "← Retour",
+    
+    resultTitle: "🎯 CHOISIR LA PIÈCE",
+    resultInst: "Cliquez sur la pièce suspecte :",
+    typePre: "Pièce",
+    typePost: "est :",
+    heavyBtn: "LOURDE",
+    lightBtn: "LÉGÈRE",
+    cancel: "← Annuler",
+    
+    newGame: "✨ Nouvelle",
+    help: "📚 Aide",
+    weigh: "⚖️ PESER",
+    clear: "🗑️ VIDER",
+    
+    ready: "Prêt à jouer !",
+    find: "🎯 Trouvez la fausse pièce !",
+    putCoins: "⚠️ Placez des pièces sur les plateaux !",
+    leftHeavier: "Gauche lourde",
+    rightHeavier: "Droite lourde",
+    balanced: "Équilibre parfait",
+    weighed: "⚖️ Pesée {n}/3 effectuée. Reste {r} pesée(s).",
+    clickChoose: "🎯 Cliquez ici pour choisir la fausse pièce",
+    cleared: "🗑️ Plateaux vidés !",
+    continue: "⚖️ Pesée {n}/3. Continuez !",
+    victory: "🎉 BRAVO ! La pièce {id} était plus {type} !",
+    failed: "❌ RATÉ ! C'était la pièce {id} (plus {type})",
+    
+    voiceLeftHeavier: "Gauche lourde",
+    voiceRightHeavier: "Droite lourde",
+    voiceBalanced: "Équilibre parfait",
+    voiceSuccess: "Bravo ! Victoire !",
+    voiceFailed: "Raté ! Essayez encore",
+    
+    tutorialTitle: "📚 Comment Jouer ?",
+    tutorialObjective: "🎯 Objectif",
+    tutorialObjText: "Trouvez quelle pièce est fausse (plus lourde ou plus légère) parmi 12 pièces en maximum 3 pesées.",
+    tutorialWeigh: "⚖️ Comment Peser",
+    tutorialWeighMobile: "Sur mobile : Glissez les pièces sur les plateaux de la balance",
+    tutorialWeighPC: "Sur ordinateur : Cliquez et glissez les pièces",
+    tutorialWeighMax: "Vous pouvez mettre jusqu'à 6 pièces par plateau",
+    tutorialColors: "🎨 Code Couleur",
+    tutorialColorNormal: "🟡 Jaune pâle : Pièce normale (éliminée)",
+    tutorialColorHeavy: "🔴 Rouge : Candidate plus lourde",
+    tutorialColorLight: "🟢 Vert : Candidate plus légère",
+    tutorialStrategy: "💡 Stratégie",
+    tutorialStrat1: "1️⃣ Première pesée : Divisez en 3 groupes de 4 pièces",
+    tutorialStrat2: "2️⃣ Observez : Les pièces qui ne sont pas pesées et celles sur le plateau équilibré sont normales",
+    tutorialStrat3: "3️⃣ Éliminez : Concentrez-vous sur les pièces suspectes (rouges ou vertes)",
+    tutorialCheck: "✅ Vérification",
+    tutorialCheckText: "Une fois que vous pensez avoir trouvé :",
+    tutorialCheck1: "Cliquez sur le message qui pulse",
+    tutorialCheck2: "Sélectionnez le numéro de la pièce",
+    tutorialCheck3: "Choisissez si elle est Lourde ou Légère",
+    tutorialClose: "C'est Compris ! 🚀"
+  },
+  en: {
+    welcome: "🎮 WELCOME",
+    subtitle: "Find the fake coin among 12 in",
+    highlight: "✨ 3 WEIGHINGS MAXIMUM ✨",
+    question: "Who will secretly choose the fake coin?",
+    computer: "COMPUTER",
+    human: "HUMAN",
+    tutorial: "📚 Tutorial",
+    note: "(The fake coin can be heavier or lighter than the others)",
+    
+    setup: "⚙️ Setup",
+    setupSub: "Secretly choose the fake coin",
+    coin: "COIN",
+    type: "TYPE",
+    choose: "Choose...",
+    heavy: "Heavy",
+    light: "Light",
+    startGame: "🔒 Start Game",
+    back: "← Back",
+    
+    resultTitle: "🎯 CHOOSE THE COIN",
+    resultInst: "Click on the suspicious coin:",
+    typePre: "Coin",
+    typePost: "is:",
+    heavyBtn: "HEAVY",
+    lightBtn: "LIGHT",
+    cancel: "← Cancel",
+    
+    newGame: "✨ New Game",
+    help: "📚 Help",
+    weigh: "⚖️ WEIGH",
+    clear: "🗑️ CLEAR",
+    
+    ready: "Ready to play!",
+    find: "🎯 Find the fake coin!",
+    putCoins: "⚠️ Put coins on the scales!",
+    leftHeavier: "Left heavier",
+    rightHeavier: "Right heavier",
+    balanced: "Perfect balance",
+    weighed: "⚖️ Weighing {n}/3 done. {r} remaining.",
+    clickChoose: "🎯 Click here to choose the fake coin",
+    cleared: "🗑️ Scales cleared!",
+    continue: "⚖️ Weighing {n}/3. Continue!",
+    victory: "🎉 SUCCESS! Coin {id} was {type}!",
+    failed: "❌ FAILED! It was coin {id} ({type})",
+    
+    voiceLeftHeavier: "Left heavier",
+    voiceRightHeavier: "Right heavier",
+    voiceBalanced: "Perfect balance",
+    voiceSuccess: "Success! Victory!",
+    voiceFailed: "Failed! Try again",
+    
+    tutorialTitle: "📚 How to Play?",
+    tutorialObjective: "🎯 Objective",
+    tutorialObjText: "Find which coin is fake (heavier or lighter) among 12 coins in maximum 3 weighings.",
+    tutorialWeigh: "⚖️ How to Weigh",
+    tutorialWeighMobile: "On mobile: Drag coins onto the scales",
+    tutorialWeighPC: "On computer: Click and drag coins",
+    tutorialWeighMax: "You can put up to 6 coins per scale",
+    tutorialColors: "🎨 Color Code",
+    tutorialColorNormal: "🟡 Pale yellow: Normal coin (eliminated)",
+    tutorialColorHeavy: "🔴 Red: Heavier candidate",
+    tutorialColorLight: "🟢 Green: Lighter candidate",
+    tutorialStrategy: "💡 Strategy",
+    tutorialStrat1: "1️⃣ First weighing: Divide into 3 groups of 4 coins",
+    tutorialStrat2: "2️⃣ Observe: Coins not weighed and those on balanced scale are normal",
+    tutorialStrat3: "3️⃣ Eliminate: Focus on suspicious coins (red or green)",
+    tutorialCheck: "✅ Verification",
+    tutorialCheckText: "Once you think you found it:",
+    tutorialCheck1: "Click on the pulsing message",
+    tutorialCheck2: "Select the coin number",
+    tutorialCheck3: "Choose if it's Heavy or Light",
+    tutorialClose: "Got it! 🚀"
+  }
+};
+
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  
+  // Welcome page
+  document.getElementById('welcomeTitle').textContent = T[lang].welcome;
+  document.getElementById('welcomeSubtitle').textContent = T[lang].subtitle;
+  document.getElementById('welcomeHighlight').textContent = T[lang].highlight;
+  document.getElementById('welcomeQuestion').textContent = T[lang].question;
+  document.getElementById('btnAIText').textContent = T[lang].computer;
+  document.getElementById('btnGuestText').textContent = T[lang].human;
+  document.getElementById('tutorialLinkText').textContent = T[lang].tutorial;
+  document.getElementById('welcomeNote').textContent = T[lang].note;
+  
+  // Setup panel
+  document.getElementById('setupTitle').textContent = T[lang].setup;
+  document.getElementById('setupSubtitle').textContent = T[lang].setupSub;
+  document.getElementById('setupCoinLabel').textContent = T[lang].coin;
+  document.getElementById('setupTypeLabel').textContent = T[lang].type;
+  document.getElementById('setupCoinPlaceholder').textContent = T[lang].choose;
+  document.getElementById('setupTypePlaceholder').textContent = T[lang].choose;
+  document.getElementById('setupHeavy').textContent = '🔴 ' + T[lang].heavy;
+  document.getElementById('setupLight').textContent = '🟢 ' + T[lang].light;
+  document.getElementById('startGuestText').textContent = T[lang].startGame;
+  document.getElementById('backText').textContent = T[lang].back;
+  
+  // Result modal
+  document.getElementById('resultTitle').textContent = T[lang].resultTitle;
+  document.getElementById('resultInstruction').textContent = T[lang].resultInst;
+  document.getElementById('typePromptPre').textContent = T[lang].typePre;
+  document.getElementById('typePromptPost').textContent = T[lang].typePost;
+  document.getElementById('heavyText').textContent = T[lang].heavyBtn;
+  document.getElementById('lightText').textContent = T[lang].lightBtn;
+  document.getElementById('cancelText').textContent = T[lang].cancel;
+  
+  // Toolbar
+  document.getElementById('newGameText').textContent = T[lang].newGame;
+  document.getElementById('helpText').textContent = T[lang].help;
+  document.getElementById('weighText').textContent = T[lang].weigh;
+  document.getElementById('clearText').textContent = T[lang].clear;
+  
+  // Message
+  document.getElementById('message').textContent = T[lang].ready;
+  
+  // Tutorial
+  renderTutorial();
+  
+  // Update lang buttons
+  document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+}
+
+function renderTutorial() {
+  const t = T[currentLang];
+  document.getElementById('tutorialContent').innerHTML = `
+    <h2>${t.tutorialTitle}</h2>
+    
+    <div class="tutorial-step">
+      <h3>${t.tutorialObjective}</h3>
+      <p>${t.tutorialObjText}</p>
+    </div>
+
+    <div class="tutorial-step">
+      <h3>${t.tutorialWeigh}</h3>
+      <p><strong>${t.tutorialWeighMobile}</strong></p>
+      <p><strong>${t.tutorialWeighPC}</strong></p>
+      <p>${t.tutorialWeighMax}</p>
+    </div>
+
+    <div class="tutorial-step">
+      <h3>${t.tutorialColors}</h3>
+      <ul>
+        <li>${t.tutorialColorNormal}</li>
+        <li>${t.tutorialColorHeavy}</li>
+        <li>${t.tutorialColorLight}</li>
+      </ul>
+    </div>
+
+    <div class="tutorial-step">
+      <h3>${t.tutorialStrategy}</h3>
+      <p>${t.tutorialStrat1}</p>
+      <p>${t.tutorialStrat2}</p>
+      <p>${t.tutorialStrat3}</p>
+    </div>
+
+    <div class="tutorial-step">
+      <h3>${t.tutorialCheck}</h3>
+      <p>${t.tutorialCheckText}</p>
+      <ul>
+        <li>${t.tutorialCheck1}</li>
+        <li>${t.tutorialCheck2}</li>
+        <li>${t.tutorialCheck3}</li>
+      </ul>
+    </div>
+
+    <button id="btnCloseTutorial" class="primary action-button" style="margin-top:30px;">${t.tutorialClose}</button>
+  `;
+  
+  document.getElementById('btnCloseTutorial').addEventListener('click', () => {
+    document.getElementById('tutorialOverlay').style.display = 'none';
+  });
+}
+
 // STATE
 let state = { 
   coins:[], fakeId:0, fakeType:'', weighCount:0, history:[], status:{}, 
@@ -752,7 +945,7 @@ let state = {
 let audioCtx = null;
 let synth = window.speechSynthesis;
 
-// CONFETTIS
+// EFFECTS
 function createConfetti() {
   for(let i = 0; i < 100; i++) {
     setTimeout(() => {
@@ -762,14 +955,12 @@ function createConfetti() {
       confetti.style.top = '-10px';
       confetti.style.background = ['#fcd34d', '#f59e0b', '#3b82f6', '#10b981', '#ec4899'][Math.floor(Math.random() * 5)];
       confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-      confetti.style.animationDelay = Math.random() * 0.5 + 's';
       document.body.appendChild(confetti);
       setTimeout(() => confetti.remove(), 3500);
     }, i * 20);
   }
 }
 
-// PARTICULES
 function createParticles(element) {
   const rect = element.getBoundingClientRect();
   for(let i = 0; i < 8; i++) {
@@ -777,20 +968,16 @@ function createParticles(element) {
     particle.className = 'particle';
     particle.style.left = (rect.left + rect.width/2) + 'px';
     particle.style.top = (rect.top + rect.height/2) + 'px';
-    particle.style.animationDelay = (i * 0.2) + 's';
-    
     const angle = (i / 8) * Math.PI * 2;
     const distance = 20;
     setTimeout(() => {
       particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
     }, 10);
-    
     document.body.appendChild(particle);
     setTimeout(() => particle.remove(), 1500);
   }
 }
 
-// TRAÎNÉE
 function createLightTrail(x, y) {
   const trail = document.createElement('div');
   trail.className = 'light-trail';
@@ -800,21 +987,25 @@ function createLightTrail(x, y) {
   setTimeout(() => trail.remove(), 500);
 }
 
-// VOIX
 function speak(text) {
   if(synth.speaking) synth.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'fr-FR';
+  utterance.lang = currentLang === 'fr' ? 'fr-FR' : 'en-US';
   utterance.rate = 1.0;
   utterance.pitch = 1.0;
   utterance.volume = 0.8;
   synth.speak(utterance);
 }
 
-// AUDIO
 function playTone(f, d=0.5, v=0.5, t='sine') {
   try { 
-    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    // Resume audio context if suspended (browser autoplay policy)
+    if(audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
     let o = audioCtx.createOscillator(), g = audioCtx.createGain();
     o.type = t; o.frequency.value = f; g.gain.setValueAtTime(v, audioCtx.currentTime);
     g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + d);
@@ -832,7 +1023,6 @@ function vibrate(pattern) {
   if(navigator.vibrate) navigator.vibrate(pattern);
 }
 
-// STATS
 function loadStats() {
   const saved = localStorage.getItem('coinGameStats');
   if(saved) {
@@ -851,11 +1041,9 @@ function saveStats() {
 }
 
 function updateStatsDisplay() {
-  const weighToolbarEl = document.getElementById('weighCounterToolbar');
-  if(weighToolbarEl) weighToolbarEl.textContent = `${state.weighCount}/3`;
+  document.getElementById('weighCounterToolbar').textContent = `${state.weighCount}/3`;
 }
 
-// GAME
 function newGame(mode) {
   state = { 
     coins: Array.from({length:12},(_,i)=>({id:i+1,area:'pool'})), 
@@ -870,6 +1058,7 @@ function newGame(mode) {
   
   for(let i=1;i<=12;i++) state.status[i]='unknown';
   
+  // Reset history display
   for(let i=1; i<=3; i++) {
     const line = document.getElementById(`weighLine${i}`);
     if(line) {
@@ -892,7 +1081,7 @@ function newGame(mode) {
   
   document.getElementById('modeSelectOverlay').style.display='none';
   document.body.style.backgroundColor = "#0f172a";
-  document.getElementById('message').textContent = "🎯 Trouvez la fausse pièce !";
+  document.getElementById('message').textContent = T[currentLang].find;
   resetBalanceUI(); 
   updateStatsDisplay();
   render();
@@ -900,7 +1089,6 @@ function newGame(mode) {
   playTone(600, 0.1, 0.2);
 }
 
-// RENDER
 function render() {
   const grid = document.getElementById('coins'), ld = document.getElementById('lDrop'), rd = document.getElementById('rDrop');
   grid.innerHTML=''; ld.innerHTML=''; rd.innerHTML='';
@@ -911,19 +1099,14 @@ function render() {
     let div = document.createElement('div'); 
     div.className = `coin status-${state.status[c.id]}`; 
     div.textContent = c.id;
-    div.dataset.coinId = c.id;
     
     div.onmouseenter = () => {
-      if(!state.locked && c.area === 'pool') {
-        createParticles(div);
-      }
+      if(!state.locked && c.area === 'pool') createParticles(div);
     };
     
     if(c.justDropped && (c.area === 'left' || c.area === 'right')) {
       div.style.animation = 'bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-      setTimeout(() => {
-        c.justDropped = false;
-      }, 600);
+      setTimeout(() => { c.justDropped = false; }, 600);
     }
     
     if(!state.locked) {
@@ -976,14 +1159,7 @@ function render() {
   else rd.classList.remove('weighted');
 }
 
-// DRAG & DROP
 function handleDragStart(e, coinId, div) {
-  state.lastAction = {
-    type: 'move',
-    coinId: coinId,
-    fromArea: state.coins.find(c => c.id === coinId).area
-  };
-  
   state.dragId = coinId;
   state.magnetSnapped = null;
   state.lastTrailTime = 0;
@@ -995,15 +1171,12 @@ function handleDragStart(e, coinId, div) {
   state.ghost.style.opacity = '0.9';
   state.ghost.style.transform = 'scale(1.15)';
   state.ghost.style.filter = 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6))';
-  state.ghost.style.transition = 'none';
   
   div.style.opacity = '0.3';
   div.style.transform = 'scale(0.9)';
   
   document.body.appendChild(state.ghost); 
-  
   createParticles(div);
-  
   vibrate(15);
   playTone(700, 0.05, 0.15);
 }
@@ -1042,7 +1215,6 @@ function handleDragMove(e) {
   
   if(distL < MAGNET_DISTANCE) {
     ld.classList.add('magnetic');
-    
     if(distL < SNAP_DISTANCE) {
       const snapX = centerL.x - 25;
       const snapY = centerL.y - 25;
@@ -1050,7 +1222,6 @@ function handleDragMove(e) {
       state.ghost.style.top = snapY + 'px';
       state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
       ld.classList.add('drag-over');
-      
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
         vibrate(15);
@@ -1060,13 +1231,11 @@ function handleDragMove(e) {
       state.ghost.style.transition = 'none';
       state.magnetSnapped = null;
     }
-    
     ld.style.transform = 'scale(1.02)';
     rd.style.transform = 'scale(1)';
   } 
   else if(distR < MAGNET_DISTANCE) {
     rd.classList.add('magnetic');
-    
     if(distR < SNAP_DISTANCE) {
       const snapX = centerR.x - 25;
       const snapY = centerR.y - 25;
@@ -1074,7 +1243,6 @@ function handleDragMove(e) {
       state.ghost.style.top = snapY + 'px';
       state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
       rd.classList.add('drag-over');
-      
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
         vibrate(15);
@@ -1084,7 +1252,6 @@ function handleDragMove(e) {
       state.ghost.style.transition = 'none';
       state.magnetSnapped = null;
     }
-    
     rd.style.transform = 'scale(1.02)';
     ld.style.transform = 'scale(1)';
   } 
@@ -1135,55 +1302,52 @@ function handleDragEnd(e, ld, rd) {
   rd.style.transform = 'scale(1)';
   
   state.magnetSnapped = null;
-  
   render();
 }
 
-// WEIGHING
 function performWeigh() {
   if(state.locked || state.weighCount >= 3) return;
   const leftCoins = state.coins.filter(c => c.area == 'left').map(c => c.id);
   const rightCoins = state.coins.filter(c => c.area == 'right').map(c => c.id);
   if(!leftCoins.length && !rightCoins.length) {
-    document.getElementById('message').textContent = "⚠️ Placez des pièces sur les plateaux !";
+    document.getElementById('message').textContent = T[currentLang].putCoins;
     vibrate([100, 50, 100]);
-    playTone(200, 0.3, 0.3, 'sawtooth');
     return;
   }
 
   const wL = leftCoins.reduce((a, id) => a + (id === state.fakeId ? (state.fakeType === 'heavy' ? 1.1 : 0.9) : 1), 0);
   const wR = rightCoins.reduce((a, id) => a + (id === state.fakeId ? (state.fakeType === 'heavy' ? 1.1 : 0.9) : 1), 0);
   
-  let res = 'Équilibre parfait', sym = '=', ang = 0, moveY = 0, voiceText = '';
+  let res, sym = '=', ang = 0, moveY = 0, voiceText;
   
   const beamArm = document.getElementById('beamArm');
   beamArm.style.animation = 'swingFast 0.6s ease-in-out';
-  setTimeout(() => {
-    beamArm.style.animation = 'swing 1.2s ease-out';
-  }, 600);
+  setTimeout(() => beamArm.style.animation = 'swing 1.2s ease-out', 600);
   setTimeout(() => beamArm.style.animation = '', 1800);
   
   if(wL > wR) { 
-    res = 'Gauche lourde'; sym = '<'; ang = -18; moveY = 25; 
-    voiceText = 'Gauche lourde';
+    res = T[currentLang].leftHeavier;
+    voiceText = T[currentLang].voiceLeftHeavier;
+    sym = '<'; ang = -18; moveY = 25; 
     vibrate(100);
     [500, 450, 400].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.25), i * 100));
   } 
   else if(wL < wR) { 
-    res = 'Droite lourde'; sym = '>'; ang = 18; moveY = -25; 
-    voiceText = 'Droite lourde';
+    res = T[currentLang].rightHeavier;
+    voiceText = T[currentLang].voiceRightHeavier;
+    sym = '>'; ang = 18; moveY = -25; 
     vibrate(100);
     [400, 450, 500].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.25), i * 100));
   } 
   else { 
-    voiceText = 'Équilibre parfait';
+    res = T[currentLang].balanced;
+    voiceText = T[currentLang].voiceBalanced;
     vibrate(50);
     playTone(600, 0.15, 0.25);
     setTimeout(() => playTone(600, 0.15, 0.25), 150);
   }
   
   playMetallic();
-  
   setTimeout(() => speak(voiceText), 500);
   
   document.getElementById('beamArm').style.transform = `rotate(${ang}deg)`;
@@ -1216,10 +1380,11 @@ function performWeigh() {
   updateStatsDisplay();
   
   if(state.weighCount < 3) {
-    document.getElementById('message').textContent = `⚖️ Pesée ${state.weighCount}/3 effectuée. Reste ${3 - state.weighCount} pesée(s).`;
+    const r = 3 - state.weighCount;
+    document.getElementById('message').textContent = T[currentLang].weighed.replace('{n}', state.weighCount).replace('{r}', r);
     document.getElementById('message').classList.add('clickable');
   } else {
-    document.getElementById('message').textContent = "🎯 Cliquez ici pour choisir la fausse pièce";
+    document.getElementById('message').textContent = T[currentLang].clickChoose;
     document.getElementById('message').classList.add('clickable');
     vibrate([100, 100, 100]);
   }
@@ -1231,13 +1396,10 @@ function performWeigh() {
 function updateHistoryUI() {
   state.history.forEach((h, idx) => {
     if(idx >= 3) return;
-    
     const lineId = `weighLine${idx + 1}`;
     const line = document.getElementById(lineId);
-    
     if(line) {
       const fmt = arr => arr.map(c => `<div class="mini-coin status-${c.status}">${c.id}</div>`).join('');
-      
       let icon, symbolStyle;
       if(h.sym === '=') {
         icon = '=';
@@ -1246,7 +1408,6 @@ function updateHistoryUI() {
         icon = h.sym === '<' ? '↙️' : '↘️';
         symbolStyle = 'font-size: 1.1rem; font-weight: bold;';
       }
-      
       line.style.opacity = '1';
       line.innerHTML = `
         <span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P${idx + 1}</span>
@@ -1258,14 +1419,20 @@ function updateHistoryUI() {
   });
 }
 
-// UTILITY
 function clearPlates() { 
   if(state.locked) return; 
   state.coins.forEach(c => c.area = 'pool'); 
   resetBalanceUI(); 
   render(); 
   vibrate(30);
-  playTone(500, 0.1, 0.15);
+  document.getElementById('message').textContent = T[currentLang].cleared;
+  setTimeout(() => {
+    if(state.weighCount < 3) {
+      document.getElementById('message').textContent = T[currentLang].continue.replace('{n}', state.weighCount);
+    } else {
+      document.getElementById('message').textContent = T[currentLang].clickChoose;
+    }
+  }, 1500);
 }
 
 function resetBalanceUI() { 
@@ -1275,7 +1442,6 @@ function resetBalanceUI() {
   document.getElementById('weighResult').textContent = '—'; 
 }
 
-// RESULT MODAL
 function openResultModal() {
   state.selectedCoin = null;
   state.selectedType = null;
@@ -1288,18 +1454,13 @@ function openResultModal() {
     coinBtn.className = `coin status-${state.status[i]}`;
     coinBtn.textContent = i;
     coinBtn.style.cursor = 'pointer';
-    coinBtn.style.transition = 'all 0.3s';
-    coinBtn.dataset.coinId = i;
-    
     coinBtn.onclick = () => selectCoin(i, coinBtn);
-    
     grid.appendChild(coinBtn);
   }
   
   document.getElementById('typeSelection').style.display = 'none';
   document.getElementById('resultOverlay').style.display = 'flex';
   vibrate(30);
-  playTone(700, 0.1, 0.2);
 }
 
 function selectCoin(coinId, element) {
@@ -1315,21 +1476,14 @@ function selectCoin(coinId, element) {
   
   document.getElementById('selectedCoinNumber').textContent = coinId;
   document.getElementById('typeSelection').style.display = 'block';
-  
   createParticles(element);
-  
   vibrate(40);
-  playTone(900, 0.1, 0.25);
 }
 
 function selectType(type) {
   state.selectedType = type;
-  
   document.getElementById('resultOverlay').style.display = 'none';
-  
   vibrate(50);
-  playTone(1000, 0.15, 0.3);
-  
   checkFinalFromModal();
 }
 
@@ -1342,101 +1496,46 @@ function checkFinalFromModal() {
   state.locked = true; 
   state.games++;
   saveStats();
-  updateStatsDisplay();
   
-  const label = state.fakeType === 'heavy' ? 'plus Lourde' : 'plus Légère';
+  const typeLabel = currentLang === 'fr' ? 
+    (state.fakeType === 'heavy' ? 'lourde' : 'légère') : 
+    (state.fakeType === 'heavy' ? 'heavier' : 'lighter');
   
   if(id === state.fakeId && type === state.fakeType) {
     state.wins++;
     saveStats();
-    updateStatsDisplay();
     
-    document.getElementById('message').innerHTML = `🎉 BRAVO ! La pièce ${id} était ${label} !`;
+    document.getElementById('message').innerHTML = T[currentLang].victory.replace('{id}', id).replace('{type}', typeLabel);
     document.body.style.backgroundColor = "#064e3b"; 
     vibrate([100, 50, 100, 50, 200]);
     
     createConfetti();
-    speak('Bravo ! Victoire !');
+    speak(T[currentLang].voiceSuccess);
     
-    const applause = [];
     for(let i = 0; i < 15; i++) {
-      applause.push({
-        f: Math.random() * 200 + 150,
-        d: 0.05,
-        v: Math.random() * 0.1 + 0.05,
-        delay: i * 100,
-        type: 'sawtooth'
-      });
+      setTimeout(() => playTone(Math.random() * 200 + 150, 0.05, Math.random() * 0.1 + 0.05, 'sawtooth'), i * 100);
     }
-    applause.forEach(clap => {
-      setTimeout(() => playTone(clap.f, clap.d, clap.v, clap.type), clap.delay);
+    
+    [523, 659, 784, 1047].forEach((f, i) => {
+      setTimeout(() => playTone(f, 0.15, 0.3), 1500 + i * 150);
     });
-    
-    const fireworks = [
-      { f: 523, d: 0.15, v: 0.3, delay: 1500 },
-      { f: 659, d: 0.15, v: 0.3, delay: 1650 },
-      { f: 784, d: 0.15, v: 0.3, delay: 1800 },
-      { f: 1047, d: 0.3, v: 0.35, delay: 1950 },
-      { f: 1200, d: 0.1, v: 0.2, delay: 2150 },
-      { f: 1000, d: 0.1, v: 0.2, delay: 2200 },
-      { f: 1400, d: 0.1, v: 0.2, delay: 2250 },
-      { f: 1100, d: 0.1, v: 0.2, delay: 2300 },
-      { f: 1047, d: 0.5, v: 0.35, delay: 2400 }
-    ];
-    
-    fireworks.forEach(note => {
-      setTimeout(() => playTone(note.f, note.d, note.v), note.delay);
-    });
-    
   } else {
-    document.getElementById('message').innerHTML = `❌ RATÉ ! C'était la pièce ${state.fakeId} (${label})`;
+    document.getElementById('message').innerHTML = T[currentLang].failed.replace('{id}', state.fakeId).replace('{type}', typeLabel);
     document.body.style.backgroundColor = "#450a0a"; 
     vibrate([200, 100, 200]);
     
     document.body.style.animation = 'shake 0.5s';
     setTimeout(() => document.body.style.animation = '', 500);
     
-    speak('Raté ! Essayez encore');
+    speak(T[currentLang].voiceFailed);
     
-    const sadTrombone = [
-      { f: 392, d: 0.3, v: 0.25, delay: 0 },
-      { f: 349, d: 0.3, v: 0.25, delay: 300 },
-      { f: 311, d: 0.3, v: 0.25, delay: 600 },
-      { f: 262, d: 0.6, v: 0.3, delay: 900 }
-    ];
-    
-    sadTrombone.forEach(note => {
-      setTimeout(() => playTone(note.f, note.d, note.v, 'triangle'), note.delay);
+    [392, 349, 311, 262].forEach((f, i) => {
+      setTimeout(() => playTone(f, 0.3, 0.25, 'triangle'), i * 300);
     });
   }
 }
 
-// KEYBOARD
-document.addEventListener('keydown', (e) => {
-  if(state.locked) return;
-  
-  if(e.key >= '1' && e.key <= '9') {
-    const coinId = parseInt(e.key);
-    const coin = state.coins.find(c => c.id === coinId);
-    if(coin && coin.area === 'pool') {
-      coin.area = e.shiftKey ? 'right' : 'left';
-      render();
-      vibrate(20);
-      playTone(700, 0.05, 0.1);
-    }
-  }
-  
-  if(e.code === 'Space') {
-    e.preventDefault();
-    performWeigh();
-  }
-  
-  if(e.key === 'c' || e.key === 'C') {
-    clearPlates();
-  }
-});
-
-// EVENTS
+// INIT
 document.addEventListener('touchmove', function(e) { 
   if(e.target.tagName !== 'SELECT' && !e.target.closest('.tutorial-content')) e.preventDefault(); 
 }, { passive: false });
@@ -1447,17 +1546,8 @@ document.getElementById('btnWeigh').addEventListener('touchstart', (e) => { e.pr
 document.getElementById('btnClear').addEventListener('click', clearPlates);
 document.getElementById('btnClear').addEventListener('touchstart', (e) => { e.preventDefault(); clearPlates(); });
 
-const messageEl = document.getElementById('message');
-messageEl.addEventListener('click', () => {
-  if(state.weighCount >= 1 && !state.locked) {
-    openResultModal();
-  }
-});
-messageEl.addEventListener('touchstart', (e) => {
-  if(state.weighCount >= 1 && !state.locked) {
-    e.preventDefault();
-    openResultModal();
-  }
+document.getElementById('message').addEventListener('click', () => {
+  if(state.weighCount >= 1 && !state.locked) openResultModal();
 });
 
 document.getElementById('btnNew').addEventListener('click', () => {
@@ -1465,53 +1555,37 @@ document.getElementById('btnNew').addEventListener('click', () => {
   document.getElementById('initialModePanel').style.display = 'block';
   document.getElementById('guestSetupPanel').style.display = 'none';
 });
-document.getElementById('btnNew').addEventListener('touchstart', (e) => { 
-  e.preventDefault(); 
-  document.getElementById('modeSelectOverlay').style.display = 'flex';
-  document.getElementById('initialModePanel').style.display = 'block';
-  document.getElementById('guestSetupPanel').style.display = 'none';
-});
 
 document.getElementById('btnHeavy').addEventListener('click', () => selectType('heavy'));
-document.getElementById('btnHeavy').addEventListener('touchstart', (e) => { e.preventDefault(); selectType('heavy'); });
-
 document.getElementById('btnLight').addEventListener('click', () => selectType('light'));
-document.getElementById('btnLight').addEventListener('touchstart', (e) => { e.preventDefault(); selectType('light'); });
-
 document.getElementById('btnCancelResult').addEventListener('click', () => {
   document.getElementById('resultOverlay').style.display = 'none';
-  vibrate(20);
-  playTone(500, 0.1, 0.15);
-});
-document.getElementById('btnCancelResult').addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  document.getElementById('resultOverlay').style.display = 'none';
-  vibrate(20);
-  playTone(500, 0.1, 0.15);
 });
 
-document.getElementById('btnAI').addEventListener('click', () => newGame('AI'));
-document.getElementById('btnAI').addEventListener('touchstart', (e) => { e.preventDefault(); newGame('AI'); });
-
+document.getElementById('btnAI').addEventListener('click', () => {
+  // Initialize audio context on first user interaction
+  if(!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  newGame('AI');
+});
 document.getElementById('btnGuest').addEventListener('click', () => {
-  document.getElementById('initialModePanel').style.display = 'none'; 
-  document.getElementById('guestSetupPanel').style.display = 'block';
-});
-document.getElementById('btnGuest').addEventListener('touchstart', (e) => { 
-  e.preventDefault(); 
+  // Initialize audio context on first user interaction
+  if(!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if(audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
   document.getElementById('initialModePanel').style.display = 'none'; 
   document.getElementById('guestSetupPanel').style.display = 'block';
 });
 
 document.getElementById('btnStartGuest').addEventListener('click', () => newGame('GUEST'));
-document.getElementById('btnStartGuest').addEventListener('touchstart', (e) => { e.preventDefault(); newGame('GUEST'); });
-
 document.getElementById('btnBackFromGuest').addEventListener('click', () => {
-  document.getElementById('initialModePanel').style.display = 'block';
-  document.getElementById('guestSetupPanel').style.display = 'none';
-});
-document.getElementById('btnBackFromGuest').addEventListener('touchstart', (e) => {
-  e.preventDefault();
   document.getElementById('initialModePanel').style.display = 'block';
   document.getElementById('guestSetupPanel').style.display = 'none';
 });
@@ -1519,30 +1593,16 @@ document.getElementById('btnBackFromGuest').addEventListener('touchstart', (e) =
 document.getElementById('btnTutorial').addEventListener('click', () => {
   document.getElementById('tutorialOverlay').style.display = 'flex';
 });
-document.getElementById('btnTutorial').addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  document.getElementById('tutorialOverlay').style.display = 'flex';
-});
 
 document.getElementById('btnShowTutorial').addEventListener('click', () => {
   document.getElementById('tutorialOverlay').style.display = 'flex';
 });
-document.getElementById('btnShowTutorial').addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  document.getElementById('tutorialOverlay').style.display = 'flex';
-});
 
-document.getElementById('btnCloseTutorial').addEventListener('click', () => {
-  document.getElementById('tutorialOverlay').style.display = 'none';
-});
-document.getElementById('btnCloseTutorial').addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  document.getElementById('tutorialOverlay').style.display = 'none';
-});
+document.getElementById('btnFR').addEventListener('click', () => setLang('fr'));
+document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
 
-// INIT
 const sc = document.getElementById('setupCoin');
-sc.innerHTML = '<option value="" disabled selected>Choisir...</option>';
+sc.innerHTML = '<option value="" disabled selected id="setupCoinPlaceholder">Choisir...</option>';
 for(let i = 1; i <= 12; i++) { 
   let o = document.createElement('option'); 
   o.value = i; 
@@ -1551,6 +1611,7 @@ for(let i = 1; i <= 12; i++) {
 }
 
 loadStats();
+setLang('fr');
 document.getElementById('modeSelectOverlay').style.display = 'flex';
 </script>
 
