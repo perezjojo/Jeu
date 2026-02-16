@@ -89,12 +89,17 @@ height: 100vh;
 
 #modeSelectOverlay { background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important; }
 
-.welcome-container { max-width: 600px; width: 90%; text-align: center; }
+.welcome-container {
+max-width: 600px;
+width: 90%;
+text-align: center;
+padding: 20px 0;
+}
 .welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); }
 .welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 10px; font-weight: 500; }
 .welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 20px 0 40px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
 
-.mode-cards { display: flex; flex-direction: column; gap: 20px; margin: 30px 0; }
+.mode-cards { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
 .mode-card { background: white; border-radius: 16px; padding: 25px; text-align: left; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: all 0.3s; border: 3px solid transparent; }
 .mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); }
 .mode-card.beginner { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6; }
@@ -220,7 +225,7 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 
 <div id="modeSelectOverlay" class="modal-overlay">
     <div class="welcome-container">
-        <h1 class="welcome-title" id="welcomeTitle">🎮 BIENVENUE V5 🔴</h1>
+        <h1 class="welcome-title" id="welcomeTitle" style="margin-top: 40px;">🎮 JOJO GAME</h1>
 
 ```
     <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
@@ -250,17 +255,17 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
             </button>
         </div>
     </div>
-
+    
     <div class="lang-switcher">
         <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
-        <button class="lang-btn" id="btnEN">🇬🇧 English</button>
+        <button class="lang-btn" id="btnEN" style="font-weight: 700; font-size: 1.1rem;">🇬🇧 English</button>
     </div>
     
     <div class="tutorial-link">
         <button id="btnTutorial" class="btn-tutorial-link"><span id="tutorialLinkText">📚 Tutoriel</span></button>
     </div>
     
-    <p class="welcome-note" id="welcomeNote">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
+    <p class="welcome-note" id="welcomeNote" style="margin-top: 15px; margin-bottom: 30px;">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
 </div>
 ```
 
@@ -396,9 +401,18 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </main>
 
 <script>
+// Global error handler
+window.addEventListener('error', function(e) {
+  console.log('Error caught:', e.message);
+  return true; // Prevent default error handling
+});
+
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+
 const T = {
   fr: {
-    welcome: "🎮 BIENVENUE",
+    welcome: "🎮 JOJO GAME",
     subtitle: "Trouvez la fausse pièce parmi 12 en",
     highlight: "✨ 3 PESÉES MAXIMUM ✨",
     
@@ -492,7 +506,7 @@ const T = {
     tutorialClose: "C'est Compris ! 🚀"
   },
   en: {
-    welcome: "🎮 WELCOME",
+    welcome: "🎮 JOJO GAME",
     subtitle: "Find the fake coin among 12 in",
     highlight: "✨ 3 WEIGHINGS MAXIMUM ✨",
     
@@ -1440,6 +1454,8 @@ document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
 
 setLang('fr');
 document.getElementById('modeSelectOverlay').style.display = 'flex';
+
+}); // End DOMContentLoaded
 </script>
 
 </body>
