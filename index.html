@@ -701,11 +701,12 @@ function renderTutorial() {
         <li>${t.tutorialCheck3}</li>
       </ul>
     </div>
-    <button id="btnCloseTutorial" class="primary action-button" style="margin-top:30px;">${t.tutorialClose}</button>
+    <button onclick="document.getElementById('tutorialOverlay').style.display='none'" 
+            class="primary action-button" 
+            style="margin-top:30px; width:100%; padding:15px; font-size:1.1rem; background: linear-gradient(135deg, #10b981, #059669) !important; border-radius: 12px; border: none; color: white; font-weight: bold; cursor: pointer;">
+      ${t.tutorialClose}
+    </button>
   `;
-  document.getElementById('btnCloseTutorial').onclick = () => {
-    document.getElementById('tutorialOverlay').style.display = 'none';
-  };
 }
 
 function createConfetti() {
@@ -1449,12 +1450,14 @@ document.getElementById('btnBackMenu2').addEventListener('click', () => {
   document.getElementById('modeSelectOverlay').style.display = 'flex';
 });
 
-document.getElementById('btnTutorial').addEventListener('click', () => {
+document.getElementById('btnTutorial').onclick = function() {
+  renderTutorial();
   document.getElementById('tutorialOverlay').style.display = 'flex';
-});
-document.getElementById('btnShowTutorial').addEventListener('click', () => {
+};
+document.getElementById('btnShowTutorial').onclick = function() {
+  renderTutorial();
   document.getElementById('tutorialOverlay').style.display = 'flex';
-});
+};
 
 document.getElementById('btnNew2').addEventListener('click', () => {
   currentMode = null;
