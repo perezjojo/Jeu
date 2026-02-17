@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#0f172a"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="12 Pièces"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<title>🔴 VERSION CORRIGÉE 5.0 - BOUTON MARCHE</title>
+<style>
+  * { color-scheme: dark; }
+
+:root {
+–bg: #0f172a; –panel: #1e293b; –border: #334155; –text: #f1f5f9;
+–accent: #3b82f6; –accent-hover: #2563eb; –success: #22c55e;
+–gold-light: #fcd34d;
+}
+
+html, body {
+height: 100vh; margin: 0; padding: 0;
+position: fixed; width: 100vw;
+overscroll-behavior: none;
+-webkit-user-select: none;
+touch-action: pan-y pinch-zoom;
+background-color: #0f172a !important;
+color: #f1f5f9 !important;
+}
+
+body {
+font-family: ‘Segoe UI’, system-ui, -apple-system, sans-serif;
+background: #0f172a !important; color: #f1f5f9 !important;
+display: flex; flex-direction: column; transition: background-color 0.5s;
+position: fixed;
+overflow: hidden;
+width: 100vw;
+height: 100vh;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes zoomIn {
+0% { opacity: 0; transform: scale(0.5); }
+100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+@keyframes swing {
+0% { transform: rotate(0deg); } 5% { transform: rotate(1deg); }
+10% { transform: rotate(-1deg); } 15% { transform: rotate(2deg); }
+20% { transform: rotate(-2deg); } 25% { transform: rotate(3deg); }
+30% { transform: rotate(-3deg); } 35% { transform: rotate(3deg); }
+40% { transform: rotate(-3deg); } 50% { transform: rotate(2deg); }
+60% { transform: rotate(-2deg); } 70% { transform: rotate(1deg); }
+80% { transform: rotate(-1deg); } 90% { transform: rotate(0.5deg); }
+95% { transform: rotate(-0.5deg); } 100% { transform: rotate(0deg); }
+}
+@keyframes swingFast {
+0% { transform: rotate(0deg); } 10% { transform: rotate(5deg); }
+20% { transform: rotate(-5deg); } 30% { transform: rotate(4deg); }
+40% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); }
+60% { transform: rotate(-3deg); } 70% { transform: rotate(2deg); }
+80% { transform: rotate(-2deg); } 90% { transform: rotate(1deg); }
+100% { transform: rotate(0deg); }
+}
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(180deg); } }
+@keyframes magnetPulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 100% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); } }
+@keyframes trail { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.3); } }
+@keyframes bounce {
+0% { transform: scale(1) translateY(0); } 30% { transform: scale(1.2, 0.8) translateY(0); }
+50% { transform: scale(0.9, 1.1) translateY(-8px); } 65% { transform: scale(1.05, 0.95) translateY(0); }
+80% { transform: scale(0.98, 1.02) translateY(-3px); } 90% { transform: scale(1.01, 0.99) translateY(0); }
+100% { transform: scale(1) translateY(0); }
+}
+@keyframes confetti-fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
+.confetti { position: fixed; width: 10px; height: 10px; background: #fcd34d; z-index: 9999; animation: confetti-fall 3s linear; }
+.particle { position: absolute; width: 4px; height: 4px; background: radial-gradient(circle, #fcd34d, #f59e0b); border-radius: 50%; pointer-events: none; z-index: 100; animation: sparkle 1.5s ease-in-out infinite; }
+.light-trail { position: fixed; width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.3)); pointer-events: none; z-index: 2999; animation: trail 0.5s ease-out forwards; box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
+
+.modal-overlay { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
+.modal-content { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important; color: #f1f5f9 !important; padding: 30px; border-radius: 20px; text-align: center; min-width: 320px; max-width: 90%; border: 3px solid #3b82f6; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); animation: slideDown 0.4s ease-out; }
+.modal-content h3 { margin: 0 0 10px; font-size: 2.2rem; background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #fb923c; }
+.modal-content p { color: #f1f5f9 !important; }
+
+#modeSelectOverlay { background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important; }
+
+.welcome-container {
+max-width: 600px;
+width: 90%;
+text-align: center;
+padding: 60px 0 40px 0;
+}
+.welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 10px; font-weight: 500; }
+.welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 20px 0 40px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
+
+.mode-cards { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
+.mode-card { background: white; border-radius: 16px; padding: 25px; text-align: left; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: all 0.3s; border: 3px solid transparent; }
+.mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); }
+.mode-card.beginner { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6; }
+.mode-card.expert { background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%); border-color: #ea580c; }
+
+.mode-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+.mode-icon { font-size: 2rem; }
+.mode-title { font-size: 1.5rem; font-weight: 700; color: #1e293b !important; margin: 0; }
+.mode-description { font-size: 1.05rem; color: #475569 !important; line-height: 1.5; margin-bottom: 20px; }
+.mode-button { width: 100%; padding: 16px; font-size: 1.3rem; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: all 0.3s; color: white !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+.mode-button:hover { transform: scale(1.02); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); }
+.mode-button:active { transform: scale(0.98); }
+.btn-beginner { background: linear-gradient(135deg, #10b981, #059669) !important; }
+.btn-expert { background: linear-gradient(135deg, #ef4444, #dc2626) !important; }
+
+.lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 25px 0 15px 0; }
+.lang-btn { padding: 8px 16px; font-size: 1rem; font-weight: 600; border-radius: 8px; border: 2px solid #1e293b; background: transparent; color: #1e293b !important; cursor: pointer; transition: all 0.3s; }
+.lang-btn.active { background: #1e293b !important; color: white !important; }
+.lang-btn:hover { transform: scale(1.05); }
+
+.tutorial-link { text-align: center; margin-top: 10px; }
+.btn-tutorial-link { background: none !important; border: none; color: #1e293b !important; font-size: 1.25rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 10px; }
+.welcome-note { font-size: 1.125rem; color: #475569 !important; margin-top: 25px; font-style: italic; line-height: 1.4; }
+
+.toolbar { background: #1e293b !important; color: #f1f5f9 !important; padding: 16px 12px 12px 12px; padding-top: max(16px, env(safe-area-inset-top)); border-bottom: 2px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 10; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); min-height: 70px; }
+.toolbar-left { display: flex; gap: 8px; align-items: center; }
+.mode-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+.mode-badge.beginner { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.mode-badge.expert { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.stars-display { font-size: 1rem; }
+
+button { padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; color: white !important; background: #1e293b !important; border: 2px solid #334155; touch-action: manipulation; }
+button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+button:active { transform: translateY(0); }
+button.primary { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; border: none; min-width: 90px; justify-content: center; padding: 8px 10px; font-size: 0.75rem; }
+button.tutorial { background: linear-gradient(135deg, #f59e0b, #d97706) !important; border: none; padding: 8px 10px; font-size: 0.75rem; }
+button.danger { background: linear-gradient(135deg, #ef4444, #dc2626) !important; border: none; }
+
+main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden; }
+.panel { background: #1e293b !important; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+
+.coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; background: rgba(0, 0, 0, 0.5) !important; border-radius: 10px; border: 1px solid #334155; min-height: 0; }
+
+.coin { width: 38px; height: 38px; border-radius: 50%; color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: radial-gradient(ellipse at 30% 30%, #fcd34d, #d97706) !important; border: 2.5px solid #b45309 !important; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none; box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); touch-action: none; transition: all 0.3s; text-shadow: 0 0 1px rgba(255, 255, 255, 0.3); }
+.coin:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); animation: float 2s ease-in-out infinite; }
+.coin:active { cursor: grabbing; transform: scale(0.95); }
+
+.dropzone .coin { width: 32px; height: 32px; font-size: 13px; }
+.status-heavy_cand { background: radial-gradient(ellipse at 30% 30%, #fca5a5, #ef4444) !important; border-color: #991b1b !important; }
+.status-light_cand { background: radial-gradient(ellipse at 30% 30%, #86efac, #22c55e) !important; border-color: #166534 !important; }
+.status-normal { background: radial-gradient(ellipse at 30% 30%, #fef3c7, #fde68a) !important; border-color: #d4a574 !important; opacity: 0.7; }
+.coin.empty { background: rgba(255,255,255,0.05) !important; border: 2px dashed #334155 !important; color: transparent !important; pointer-events: none; box-shadow: none; }
+
+.dropgrid { display: flex; justify-content: center; gap: 12px; align-items: flex-start; padding-top: 12px; }
+.plateau-container { flex: 1; max-width: 180px; display: flex; flex-direction: column; align-items: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.dropzone { width: 100%; height: 105px; background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important; border: 3px solid #64748b; border-radius: 14px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 6px; justify-items: center; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
+.dropzone.magnetic { animation: magnetPulse 0.5s ease-out; border-color: #60a5fa !important; }
+.dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
+
+.beam-container { flex: 0 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 0px; height: auto; gap: 10px; }
+.beam-arm { width: 120px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b) !important; border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+.beam-pivot { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 26px solid #475569; position: absolute; top: 50%; transform: translateY(-13px); z-index: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+#weighResult { margin-top: 10px; font-weight: bold; font-size: 0.85rem; text-align: center; height: 1.2em; color: #f1f5f9 !important; }
+
+.action-button { width: 100%; margin-top: 8px; font-size: 0.85rem; padding: 8px; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+.action-button.blue { background: linear-gradient(135deg, #ec4899, #db2777) !important; color: white !important; }
+.action-button.white { background: #f8fafc !important; color: #0f172a !important; }
+.action-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+#history {
+overflow-y: auto;
+margin-top: 8px;
+height: 90px !important;
+background: rgba(59, 130, 246, 0.2) !important;
+border: 2px solid #3b82f6;
+border-radius: 10px;
+padding: 8px;
+flex-shrink: 0;
+}
+.hist-line {
+display: flex;
+align-items: center;
+gap: 6px;
+padding: 5px;
+margin-bottom: 2px;
+border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+animation: slideDown 0.3s ease-out;
+transition: all 0.3s;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 6px;
+font-size: 0.8rem;
+}
+.mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+#message { text-align: center; font-weight: bold; font-size: 1.1rem; padding: 16px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+#message.clickable { animation: pulse 2s infinite; }
+
+.tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
+.tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
+.tutorial-content h2 { margin: 0 0 20px; color: #3b82f6 !important; }
+.tutorial-content h3 { color: #22c55e !important; margin-top: 25px; }
+.tutorial-content p { line-height: 1.6; margin: 10px 0; color: #f1f5f9 !important; }
+.tutorial-step { background: rgba(0, 0, 0, 0.3) !important; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid #3b82f6; }
+
+@media (max-width: 900px) {
+main { grid-template-columns: 1fr; overflow-y: auto; padding-bottom: 100px; }
+.welcome-title { font-size: 2.5rem; }
+.welcome-subtitle { font-size: 1.25rem; }
+.welcome-highlight { font-size: 1.875rem; }
+.mode-title { font-size: 1.3rem; }
+.mode-description { font-size: 0.95rem; }
+.mode-button { font-size: 1.1rem; padding: 14px; }
+.toolbar { padding: 12px 10px 10px 10px; padding-top: max(12px, env(safe-area-inset-top)); }
+.toolbar-left { gap: 6px; }
+.mode-badge { font-size: 0.7rem; padding: 5px 10px; gap: 4px; }
+button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- WELCOME -->
+
+<div id="modeSelectOverlay" class="modal-overlay">
+    <div class="welcome-container">
+        <h1 class="welcome-title" id="welcomeTitle" style="margin-top: 80px; padding-top: 20px;">🎮 JOJO GAME</h1>
+
+```
+    <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
+    
+    <h2 class="welcome-highlight" id="welcomeHighlight">✨ 3 PESÉES MAXIMUM ✨</h2>
+    
+    <div class="mode-cards">
+        <div class="mode-card beginner">
+            <div class="mode-header">
+                <span class="mode-icon">🎯</span>
+                <h3 class="mode-title" id="modeBegTitle">MODE DÉBUTANT</h3>
+            </div>
+            <p class="mode-description" id="modeBegDesc">Pour éliminer l'effet du hasard, vous devez gagner 3 parties consécutives</p>
+            <button id="btnBeginner" class="mode-button btn-beginner">
+                <span id="btnBegText">🎮 JOUER</span>
+            </button>
+        </div>
+        
+        <div class="mode-card expert">
+            <div class="mode-header">
+                <span class="mode-icon">🔥</span>
+                <h3 class="mode-title" id="modeExpTitle">MODE EXPERT</h3>
+            </div>
+            <p class="mode-description" id="modeExpDesc">Gagnez 3 parties consécutives sans aide. Les pièces gardent la même couleur.</p>
+            <button id="btnExpert" class="mode-button btn-expert">
+                <span id="btnExpText">💪 JOUER</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="lang-switcher">
+        <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
+        <button class="lang-btn" id="btnEN" style="font-weight: 900; font-size: 1.2rem; color: white !important; background: #1e293b !important;">🇬🇧 English</button>
+    </div>
+    
+    <div class="tutorial-link">
+        <button id="btnTutorial" class="btn-tutorial-link"><span id="tutorialLinkText">📚 Tutoriel</span></button>
+    </div>
+    
+    <p class="welcome-note" id="welcomeNote" style="margin-top: 10px; margin-bottom: 40px;">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
+</div>
+```
+
+</div>
+
+<!-- VICTORY MODAL -->
+
+<div id="victoryOverlay" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h3 id="victoryTitle">🎉 BRAVO !</h3>
+        <p id="victoryText" style="font-size: 1.3rem; margin: 20px 0;">Victoire 1/3 ✅</p>
+        <div id="victoryStars" style="font-size: 2.5rem; margin: 20px 0;">⭐○○</div>
+        <p id="victoryMsg" style="margin: 20px 0;">Encore 2 victoire(s) !</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
+            <button id="btnNextGame" class="mode-button btn-beginner" style="font-size: 1.1rem;">▶️ <span id="nextGameText">PARTIE SUIVANTE</span></button>
+            <button id="btnQuitChallenge" class="action-button" style="background: #475569 !important;"><span id="quitText">🏠 Menu Principal</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- CHAMPION MODAL -->
+
+<div id="championOverlay" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h3 id="championTitle">🏆 CHAMPION ! 🏆</h3>
+        <p id="championText" style="font-size: 1.5rem; margin: 20px 0;">3 VICTOIRES D'AFFILÉE ! 🎊</p>
+        <div style="font-size: 3rem; margin: 20px 0;">⭐⭐⭐</div>
+        <p id="championMsg" style="margin: 20px 0; font-size: 1.2rem;">Vous maîtrisez le jeu !</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
+            <button id="btnTryExpert" class="mode-button btn-expert" style="font-size: 1.1rem; display: none;">🔥 <span id="tryExpertText">Essayer Mode Expert</span></button>
+            <button id="btnRestartChallenge" class="mode-button btn-beginner" style="font-size: 1.1rem;">🔄 <span id="restartText">Recommencer</span></button>
+            <button id="btnBackMenu" class="action-button" style="background: #475569 !important;"><span id="menuText">🏠 Menu Principal</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- FAILED MODAL -->
+
+<div id="failedOverlay" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h3 id="failedTitle">❌ SÉRIE BRISÉE</h3>
+        <p id="failedCount" style="font-size: 1.3rem; margin: 20px 0;">Vous aviez : ⭐⭐ (2/3)</p>
+        <p id="failedMsg" style="margin: 20px 0;">Recommencez depuis le début !</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
+            <button id="btnRetryChallenge" class="mode-button btn-beginner" style="font-size: 1.1rem;">🔄 <span id="retryText">Recommencer</span></button>
+            <button id="btnBackMenu2" class="action-button" style="background: #475569 !important;"><span id="menuText2">🏠 Menu Principal</span></button>
+        </div>
+    </div>
+</div>
+
+<!-- RESULT MODAL -->
+
+<div id="resultOverlay" class="modal-overlay" style="display:none; background: rgba(0, 0, 0, 0.9);">
+    <div class="modal-content" style="max-width: 500px; padding: 35px;">
+        <h3 id="resultTitle" style="margin-bottom: 25px;">🎯 CHOISIR LA PIÈCE</h3>
+        <p id="resultInstruction" style="color: #cbd5e1 !important; margin-bottom: 20px;">Cliquez sur la pièce suspecte :</p>
+        <div id="resultCoinsGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 30px;"></div>
+        <div id="typeSelection" style="display:none; margin-top: 20px;">
+            <p id="typePrompt" style="color: #cbd5e1 !important; margin-bottom: 15px; font-size: 1.1rem;">
+                <span id="typePromptPre">Pièce</span> <span id="selectedCoinNumber" style="color: #fbbf24; font-weight: bold; font-size: 1.3rem;"></span> <span id="typePromptPost">est :</span>
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button id="btnHeavy" style="background: linear-gradient(135deg, #ef4444, #dc2626) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">🔴 <span id="heavyText">LOURDE</span></button>
+                <button id="btnLight" style="background: linear-gradient(135deg, #22c55e, #16a34a) !important; padding: 20px 40px; font-size: 1.2rem; border-radius: 15px; flex: 1; max-width: 200px;">🟢 <span id="lightText">LÉGÈRE</span></button>
+            </div>
+        </div>
+        <button id="btnCancelResult" style="margin-top: 25px; background: #475569 !important; width: 100%; padding: 12px;"><span id="cancelText">← Annuler</span></button>
+    </div>
+</div>
+
+<!-- TUTORIAL -->
+
+<div id="tutorialOverlay" class="tutorial-overlay" style="display:none;">
+    <div class="tutorial-content" id="tutorialContent"></div>
+</div>
+
+<!-- TOOLBAR -->
+
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="mode-badge beginner" id="modeBadge" style="display:none;">
+        <span id="badgeText">🎯 Débutant</span>
+        <span class="stars-display" id="starsDisplay">⭐○○</span>
+    </div>
+    <button id="btnShowTutorial" class="tutorial"><span id="helpText">📚 Aide</span></button>
+    <div style="display:flex; align-items:center; gap:6px; padding:6px 10px; background:rgba(59,130,246,0.2); border-radius:10px; border:2px solid #3b82f6;">
+      <span style="font-size:0.75rem; font-weight:bold; color:#3b82f6;">⚖️</span>
+      <span id="weighCounterToolbar" style="font-size:0.95rem; font-weight:bold; color:#f1f5f9;">0/3</span>
+    </div>
+  </div>
+  <button id="btnNew2" class="primary" style="font-size: 0.75rem; padding: 6px 12px;"><span id="newGameText2">✨ Nouvelle</span></button>
+</div>
+
+<!-- MAIN -->
+
+<main>
+  <section class="panel">
+    <div id="message">Prêt à jouer !</div>
+    <div id="coins" class="coins-grid"></div>
+  </section>
+
+  <section class="panel">
+    <div class="dropgrid">
+      <div id="leftPlateau" class="plateau-container">
+        <div id="lDrop" class="dropzone"></div>
+      </div>
+
+```
+  <div class="beam-container">
+    <button id="btnClear" class="action-button white" style="margin-bottom: 15px;"><span id="clearText">🗑️ VIDER</span></button>
+    <div id="beamArm" class="beam-arm"></div>
+    <div class="beam-pivot"></div>
+    <div id="weighResult">—</div>
+    <button id="btnWeigh" class="action-button blue" style="margin-top: 15px;"><span id="weighText">⚖️ PESER</span></button>
+  </div>
+  
+  <div id="rightPlateau" class="plateau-container">
+    <div id="rDrop" class="dropzone"></div>
+  </div>
+</div>
+
+<div style="margin-top:12px;">
+  <div style="font-weight: bold; color: #3b82f6; margin-bottom: 6px; font-size: 0.9rem;">📊 HISTORIQUE</div>
+  <div id="history">
+    <div id="weighLine1" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P1</span><span style="flex:1; text-align:center;">—</span></div>
+    <div id="weighLine2" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P2</span><span style="flex:1; text-align:center;">—</span></div>
+    <div id="weighLine3" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P3</span><span style="flex:1; text-align:center;">—</span></div>
+  </div>
+</div>
+```
+
+  </section>
+</main>
+
+<script>
+// Global error handler
+window.addEventListener('error', function(e) {
+  console.log('Error caught:', e.message);
+  return true; // Prevent default error handling
+});
+
+// Wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+
+const T = {
+  fr: {
+    welcome: "🎮 JOJO GAME",
+    subtitle: "Trouvez la fausse pièce parmi 12 en",
+    highlight: "✨ 3 PESÉES MAXIMUM ✨",
+    
+    modeBegTitle: "MODE DÉBUTANT",
+    modeBegDesc: "Pour éliminer l'effet du hasard, vous devez gagner 3 parties consécutives",
+    modeExpTitle: "MODE EXPERT",
+    modeExpDesc: "Gagnez 3 parties consécutives sans aide. Les pièces gardent la même couleur.",
+    btnBeg: "🎮 JOUER",
+    btnExp: "💪 JOUER",
+    
+    tutorial: "📚 Tutoriel",
+    note: "(La fausse pièce peut être plus lourde ou plus légère que les autres)",
+    
+    newGame: "✨ Nouvelle",
+    badgeExp: "🔥 EXPERT",
+    
+    victoryTitle: "🎉 BRAVO !",
+    victoryText: "Victoire {n}/3 ✅",
+    victoryMsg: "Encore {r} victoire(s) !",
+    nextGame: "▶️ PARTIE SUIVANTE",
+    quit: "🏠 Menu Principal",
+    
+    championTitle: "🏆 CHAMPION ! 🏆",
+    championText: "3 VICTOIRES D'AFFILÉE ! 🎊",
+    championMsgBeg: "BRAVO, vous maîtrisez bien le jeu. Envoyez une capture d'écran à perezjojo@yahoo.fr",
+    championMsgExp: "Vous êtes un EXPERT !",
+    tryExpert: "🔥 Essayer Mode Expert",
+    restart: "🔄 Recommencer",
+    menu: "🏠 Menu Principal",
+    
+    failedTitle: "❌ SÉRIE BRISÉE",
+    failedCount: "Vous aviez : {stars} ({n}/3)",
+    failedMsg: "Recommencez depuis le début !",
+    retry: "🔄 Recommencer",
+    
+    resultTitle: "🎯 CHOISIR LA PIÈCE",
+    resultInst: "Cliquez sur la pièce suspecte :",
+    typePre: "Pièce",
+    typePost: "est :",
+    heavyBtn: "LOURDE",
+    lightBtn: "LÉGÈRE",
+    cancel: "← Annuler",
+    
+    help: "📚 Aide",
+    weigh: "⚖️ PESER",
+    clear: "🗑️ VIDER",
+    abandon: "🏳️ Abandonner",
+    
+    ready: "Prêt à jouer !",
+    find: "🎯 Trouvez la fausse pièce !",
+    putCoins: "⚠️ Placez des pièces sur les plateaux !",
+    leftHeavier: "Gauche lourde",
+    rightHeavier: "Droite lourde",
+    balanced: "Équilibre parfait",
+    weighed: "⚖️ Pesée {n}/3 effectuée. Reste {r} pesée(s).",
+    clickChoose: "🎯 Cliquez ici pour choisir la fausse pièce",
+    cleared: "🗑️ Plateaux vidés !",
+    continue: "⚖️ Pesée {n}/3. Continuez !",
+    victory: "🎉 BRAVO ! La pièce {id} était plus {type} !",
+    failed: "❌ RATÉ ! C'était la pièce {id} (plus {type})",
+    
+    voiceLeftHeavier: "Gauche lourde",
+    voiceRightHeavier: "Droite lourde",
+    voiceBalanced: "Équilibre parfait",
+    voiceSuccess: "Bravo ! Victoire !",
+    voiceFailed: "Raté ! Essayez encore",
+    
+    tutorialTitle: "📚 Comment Jouer ?",
+    tutorialObjective: "🎯 Objectif",
+    tutorialObjText: "Trouvez quelle pièce est fausse (plus lourde ou plus légère) parmi 12 pièces en maximum 3 pesées.",
+    tutorialWeigh: "⚖️ Comment Peser",
+    tutorialWeighMobile: "Sur mobile : Glissez les pièces sur les plateaux de la balance",
+    tutorialWeighPC: "Sur ordinateur : Cliquez et glissez les pièces",
+    tutorialWeighMax: "Vous pouvez mettre jusqu'à 6 pièces par plateau",
+    tutorialModes: "🎮 Modes de Jeu",
+    tutorialBeginner: "Mode Débutant : 3 victoires consécutives avec aides visuelles",
+    tutorialExpert: "Mode Expert : 3 victoires consécutives sans code couleur",
+    tutorialColors: "🎨 Code Couleur (Mode Débutant)",
+    tutorialColorNormal: "🟡 Jaune pâle : Pièce normale (éliminée)",
+    tutorialColorHeavy: "🔴 Rouge : Candidate plus lourde",
+    tutorialColorLight: "🟢 Vert : Candidate plus légère",
+    tutorialStrategy: "💡 Stratégie",
+    tutorialStrat1: "1️⃣ Première pesée : Divisez en 3 groupes de 4 pièces",
+    tutorialStrat2: "2️⃣ Observez : Les pièces qui ne sont pas pesées et celles sur le plateau équilibré sont normales",
+    tutorialStrat3: "3️⃣ Éliminez : Concentrez-vous sur les pièces suspectes",
+    tutorialCheck: "✅ Vérification",
+    tutorialCheckText: "Une fois que vous pensez avoir trouvé :",
+    tutorialCheck1: "Cliquez sur le message qui pulse",
+    tutorialCheck2: "Sélectionnez le numéro de la pièce",
+    tutorialCheck3: "Choisissez si elle est Lourde ou Légère",
+    tutorialClose: "C'est Compris ! 🚀"
+  },
+  en: {
+    welcome: "🎮 JOJO GAME",
+    subtitle: "Find the fake coin among 12 in",
+    highlight: "✨ 3 WEIGHINGS MAXIMUM ✨",
+    
+    modeBegTitle: "BEGINNER MODE",
+    modeBegDesc: "To eliminate luck, you must win 3 consecutive games",
+    modeExpTitle: "EXPERT MODE",
+    modeExpDesc: "Win 3 consecutive games without help. Coins keep the same color.",
+    btnBeg: "🎮 PLAY",
+    btnExp: "💪 PLAY",
+    
+    tutorial: "📚 Tutorial",
+    note: "(The fake coin can be heavier or lighter than the others)",
+    
+    newGame: "✨ New Game",
+    
+    badgeBeg: "🎯 BEGINNER",
+    badgeExp: "🔥 EXPERT",
+    
+    victoryTitle: "🎉 SUCCESS!",
+    victoryText: "Victory {n}/3 ✅",
+    victoryMsg: "{r} more victory(ies)!",
+    nextGame: "▶️ NEXT GAME",
+    quit: "🏠 Main Menu",
+    
+    championTitle: "🏆 CHAMPION! 🏆",
+    championText: "3 CONSECUTIVE VICTORIES! 🎊",
+    championMsgBeg: "CONGRATULATIONS, you mastered the game! Send a screenshot to perezjojo@yahoo.fr",
+    championMsgExp: "You are an EXPERT!",
+    tryExpert: "🔥 Try Expert Mode",
+    restart: "🔄 Restart",
+    menu: "🏠 Main Menu",
+    
+    failedTitle: "❌ SERIES BROKEN",
+    failedCount: "You had: {stars} ({n}/3)",
+    failedMsg: "Start over from the beginning!",
+    retry: "🔄 Restart",
+    
+    resultTitle: "🎯 CHOOSE THE COIN",
+    resultInst: "Click on the suspicious coin:",
+    typePre: "Coin",
+    typePost: "is:",
+    heavyBtn: "HEAVY",
+    lightBtn: "LIGHT",
+    cancel: "← Cancel",
+    
+    help: "📚 Help",
+    weigh: "⚖️ WEIGH",
+    clear: "🗑️ CLEAR",
+    abandon: "🏳️ Abandon",
+    
+    ready: "Ready to play!",
+    find: "🎯 Find the fake coin!",
+    putCoins: "⚠️ Put coins on the scales!",
+    leftHeavier: "Left heavier",
+    rightHeavier: "Right heavier",
+    balanced: "Perfect balance",
+    weighed: "⚖️ Weighing {n}/3 done. {r} remaining.",
+    clickChoose: "🎯 Click here to choose the fake coin",
+    cleared: "🗑️ Scales cleared!",
+    continue: "⚖️ Weighing {n}/3. Continue!",
+    victory: "🎉 SUCCESS! Coin {id} was {type}!",
+    failed: "❌ FAILED! It was coin {id} ({type})",
+    
+    voiceLeftHeavier: "Left heavier",
+    voiceRightHeavier: "Right heavier",
+    voiceBalanced: "Perfect balance",
+    voiceSuccess: "Success! Victory!",
+    voiceFailed: "Failed! Try again",
+    
+    tutorialTitle: "📚 How to Play?",
+    tutorialObjective: "🎯 Objective",
+    tutorialObjText: "Find which coin is fake (heavier or lighter) among 12 coins in maximum 3 weighings.",
+    tutorialWeigh: "⚖️ How to Weigh",
+    tutorialWeighMobile: "On mobile: Drag coins onto the scales",
+    tutorialWeighPC: "On computer: Click and drag coins",
+    tutorialWeighMax: "You can put up to 6 coins per scale",
+    tutorialModes: "🎮 Game Modes",
+    tutorialBeginner: "Beginner Mode: 3 consecutive wins with visual aids",
+    tutorialExpert: "Expert Mode: 3 consecutive wins without color code",
+    tutorialColors: "🎨 Color Code (Beginner Mode)",
+    tutorialColorNormal: "🟡 Pale yellow: Normal coin (eliminated)",
+    tutorialColorHeavy: "🔴 Red: Heavier candidate",
+    tutorialColorLight: "🟢 Green: Lighter candidate",
+    tutorialStrategy: "💡 Strategy",
+    tutorialStrat1: "1️⃣ First weighing: Divide into 3 groups of 4 coins",
+    tutorialStrat2: "2️⃣ Observe: Coins not weighed and those on balanced scale are normal",
+    tutorialStrat3: "3️⃣ Eliminate: Focus on suspicious coins",
+    tutorialCheck: "✅ Verification",
+    tutorialCheckText: "Once you think you found it:",
+    tutorialCheck1: "Click on the pulsing message",
+    tutorialCheck2: "Select the coin number",
+    tutorialCheck3: "Choose if it's Heavy or Light",
+    tutorialClose: "Got it! 🚀"
+  }
+};
+
+let currentLang = 'fr';
+let currentMode = null;
+let challengeWins = 0;
+
+let state = { 
+  coins:[], fakeId:0, fakeType:'', weighCount:0, history:[], status:{}, 
+  locked:true, colorLocked:false,
+  lastAction: null, selectedCoin: null, selectedType: null,
+  magnetSnapped: null, lastTrailTime: 0
+};
+let audioCtx = null;
+let synth = window.speechSynthesis;
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = T[lang];
+  
+  document.getElementById('welcomeTitle').textContent = t.welcome;
+  document.getElementById('welcomeSubtitle').textContent = t.subtitle;
+  document.getElementById('welcomeHighlight').textContent = t.highlight;
+  
+  document.getElementById('modeBegTitle').textContent = t.modeBegTitle;
+  document.getElementById('modeBegDesc').textContent = t.modeBegDesc;
+  document.getElementById('modeExpTitle').textContent = t.modeExpTitle;
+  document.getElementById('modeExpDesc').textContent = t.modeExpDesc;
+  document.getElementById('btnBegText').textContent = t.btnBeg;
+  document.getElementById('btnExpText').textContent = t.btnExp;
+  
+  document.getElementById('tutorialLinkText').textContent = t.tutorial;
+  document.getElementById('welcomeNote').textContent = t.note;
+  
+  document.getElementById('helpText').textContent = t.help;
+  document.getElementById('weighText').textContent = t.weigh;
+  document.getElementById('clearText').textContent = t.clear;
+  document.getElementById('newGameText2').textContent = t.newGame;
+  document.getElementById('abandonText').textContent = t.abandon;
+  
+  document.getElementById('resultTitle').textContent = t.resultTitle;
+  document.getElementById('resultInstruction').textContent = t.resultInst;
+  document.getElementById('typePromptPre').textContent = t.typePre;
+  document.getElementById('typePromptPost').textContent = t.typePost;
+  document.getElementById('heavyText').textContent = t.heavyBtn;
+  document.getElementById('lightText').textContent = t.lightBtn;
+  document.getElementById('cancelText').textContent = t.cancel;
+  
+  renderTutorial();
+  
+  document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+}
+
+function renderTutorial() {
+  const t = T[currentLang];
+  document.getElementById('tutorialContent').innerHTML = `
+    <h2>${t.tutorialTitle}</h2>
+    <div class="tutorial-step">
+      <h3>${t.tutorialObjective}</h3>
+      <p>${t.tutorialObjText}</p>
+    </div>
+    <div class="tutorial-step">
+      <h3>${t.tutorialWeigh}</h3>
+      <p><strong>${t.tutorialWeighMobile}</strong></p>
+      <p><strong>${t.tutorialWeighPC}</strong></p>
+      <p>${t.tutorialWeighMax}</p>
+    </div>
+    <div class="tutorial-step">
+      <h3>${t.tutorialModes}</h3>
+      <p>🎯 ${t.tutorialBeginner}</p>
+      <p>🔥 ${t.tutorialExpert}</p>
+    </div>
+    <div class="tutorial-step">
+      <h3>${t.tutorialColors}</h3>
+      <ul>
+        <li>${t.tutorialColorNormal}</li>
+        <li>${t.tutorialColorHeavy}</li>
+        <li>${t.tutorialColorLight}</li>
+      </ul>
+    </div>
+    <div class="tutorial-step">
+      <h3>${t.tutorialStrategy}</h3>
+      <p>${t.tutorialStrat1}</p>
+      <p>${t.tutorialStrat2}</p>
+      <p>${t.tutorialStrat3}</p>
+    </div>
+    <div class="tutorial-step">
+      <h3>${t.tutorialCheck}</h3>
+      <p>${t.tutorialCheckText}</p>
+      <ul>
+        <li>${t.tutorialCheck1}</li>
+        <li>${t.tutorialCheck2}</li>
+        <li>${t.tutorialCheck3}</li>
+      </ul>
+    </div>
+    <button id="btnCloseTutorial" class="primary action-button" style="margin-top:30px;">${t.tutorialClose}</button>
+  `;
+  document.getElementById('btnCloseTutorial').onclick = () => {
+    document.getElementById('tutorialOverlay').style.display = 'none';
+  };
+}
+
+function createConfetti() {
+  for(let i = 0; i < 150; i++) {
+    setTimeout(() => {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.top = '-10px';
+      confetti.style.background = ['#fcd34d', '#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#ef4444', '#8b5cf6'][Math.floor(Math.random() * 7)];
+      confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      confetti.style.width = (Math.random() * 10 + 5) + 'px';
+      confetti.style.height = (Math.random() * 10 + 5) + 'px';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3500);
+    }, i * 15);
+  }
+}
+
+function createParticles(element) {
+  const rect = element.getBoundingClientRect();
+  for(let i = 0; i < 8; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = (rect.left + rect.width/2) + 'px';
+    particle.style.top = (rect.top + rect.height/2) + 'px';
+    const angle = (i / 8) * Math.PI * 2;
+    const distance = 20;
+    setTimeout(() => {
+      particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+    }, 10);
+    document.body.appendChild(particle);
+    setTimeout(() => particle.remove(), 1500);
+  }
+}
+
+function createLightTrail(x, y) {
+  const trail = document.createElement('div');
+  trail.className = 'light-trail';
+  trail.style.left = (x - 19) + 'px';
+  trail.style.top = (y - 19) + 'px';
+  document.body.appendChild(trail);
+  setTimeout(() => trail.remove(), 500);
+}
+
+function speak(text) {
+  if(synth.speaking) synth.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = currentLang === 'fr' ? 'fr-FR' : 'en-US';
+  utterance.rate = 0.85;
+  utterance.pitch = 1.0;
+  utterance.volume = 0.9;
+  synth.speak(utterance);
+}
+
+function playTone(f, d=0.5, v=0.5, t='sine') {
+  try { 
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    let o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = t; o.frequency.value = f; g.gain.setValueAtTime(v, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + d);
+    o.connect(g).connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + d); 
+  } catch(e){}
+}
+
+function playMetallic() {
+  playTone(400, 0.2, 0.15, 'square');
+  setTimeout(() => playTone(380, 0.15, 0.1, 'square'), 100);
+  setTimeout(() => playTone(360, 0.1, 0.05, 'square'), 200);
+}
+
+function vibrate(pattern) {
+  if(navigator.vibrate) navigator.vibrate(pattern);
+}
+
+function updateStatsDisplay() {
+  document.getElementById('weighCounterToolbar').textContent = `${state.weighCount}/3`;
+  
+  const badge = document.getElementById('modeBadge');
+  const badgeText = document.getElementById('badgeText');
+  const starsDisplay = document.getElementById('starsDisplay');
+  
+  if(currentMode) {
+    badge.style.display = 'flex';
+    badge.className = `mode-badge ${currentMode}`;
+    
+    if(currentMode === 'beginner') {
+      badgeText.textContent = currentLang === 'fr' ? '🎯 Débutant' : '🎯 Beginner';
+    } else {
+      badgeText.textContent = currentLang === 'fr' ? '🔥 Expert' : '🔥 Expert';
+    }
+    
+    const stars = '⭐'.repeat(challengeWins) + '○'.repeat(3 - challengeWins);
+    starsDisplay.textContent = stars;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function startChallenge(mode) {
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  
+  currentMode = mode;
+  challengeWins = 0;
+  newGame();
+}
+
+function newGame() {
+  state = { 
+    coins: Array.from({length:12},(_,i)=>({id:i+1,area:'pool'})), 
+    weighCount:0, history:[], status:{}, locked:false, colorLocked:false,
+    lastAction: null, selectedCoin: null, selectedType: null,
+    magnetSnapped: null, lastTrailTime: 0
+  };
+  
+  for(let i=1;i<=12;i++) state.status[i]='unknown';
+  
+  for(let i=1; i<=3; i++) {
+    const line = document.getElementById(`weighLine${i}`);
+    if(line) {
+      line.style.opacity = '0.3';
+      line.innerHTML = `<span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P${i}</span><span style="flex:1; text-align:center;">—</span>`;
+    }
+  }
+  
+  state.fakeId = Math.floor(Math.random()*12)+1; 
+  state.fakeType = Math.random()<0.5?'heavy':'light'; 
+  
+  document.getElementById('modeSelectOverlay').style.display='none';
+  document.getElementById('victoryOverlay').style.display='none';
+  document.getElementById('championOverlay').style.display='none';
+  document.getElementById('failedOverlay').style.display='none';
+  document.body.style.backgroundColor = "#0f172a";
+  document.getElementById('message').textContent = T[currentLang].find;
+  resetBalanceUI(); 
+  updateStatsDisplay();
+  render();
+  vibrate(50);
+  playTone(600, 0.1, 0.2);
+}
+
+function render() {
+  const grid = document.getElementById('coins'), ld = document.getElementById('lDrop'), rd = document.getElementById('rDrop');
+  grid.innerHTML=''; ld.innerHTML=''; rd.innerHTML='';
+  
+  const poolPositions = new Array(12).fill(null);
+  
+  state.coins.forEach(c => {
+    let div = document.createElement('div'); 
+    
+    if(currentMode === 'expert') {
+      div.className = 'coin';
+    } else {
+      div.className = `coin status-${state.status[c.id]}`;
+    }
+    
+    div.textContent = c.id;
+    
+    div.onmouseenter = () => {
+      if(!state.locked && c.area === 'pool') createParticles(div);
+    };
+    
+    if(c.justDropped && (c.area === 'left' || c.area === 'right')) {
+      div.style.animation = 'bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+      setTimeout(() => { c.justDropped = false; }, 600);
+    }
+    
+    if(!state.locked) {
+      div.ontouchstart = e => handleDragStart(e, c.id, div);
+      div.ontouchmove = e => handleDragMove(e);
+      div.ontouchend = e => handleDragEnd(e, ld, rd);
+      
+      div.onmousedown = e => {
+        e.preventDefault();
+        handleDragStart(e, c.id, div);
+        
+        const mouseMoveHandler = e => handleDragMove(e);
+        const mouseUpHandler = e => {
+          handleDragEnd(e, ld, rd);
+          document.removeEventListener('mousemove', mouseMoveHandler);
+          document.removeEventListener('mouseup', mouseUpHandler);
+        };
+        
+        document.addEventListener('mousemove', mouseMoveHandler);
+        document.addEventListener('mouseup', mouseUpHandler);
+      };
+    }
+    
+    if(c.area==='pool') {
+      poolPositions[c.id - 1] = div;
+    } else if(c.area==='left') {
+      ld.appendChild(div);
+    } else {
+      rd.appendChild(div);
+    }
+  });
+  
+  for(let i = 0; i < 12; i++) {
+    if(poolPositions[i]) {
+      grid.appendChild(poolPositions[i]);
+    } else {
+      let empty = document.createElement('div');
+      empty.className = 'coin empty';
+      grid.appendChild(empty);
+    }
+  }
+  
+  const leftCoins = state.coins.filter(c => c.area === 'left').length;
+  const rightCoins = state.coins.filter(c => c.area === 'right').length;
+  
+  if(leftCoins > 0) ld.classList.add('weighted');
+  else ld.classList.remove('weighted');
+  
+  if(rightCoins > 0) rd.classList.add('weighted');
+  else rd.classList.remove('weighted');
+}
+
+function handleDragStart(e, coinId, div) {
+  state.dragId = coinId;
+  state.magnetSnapped = null;
+  state.lastTrailTime = 0;
+  
+  state.ghost = div.cloneNode(true);
+  state.ghost.style.position='fixed'; 
+  state.ghost.style.zIndex='3000';
+  state.ghost.style.pointerEvents='none';
+  state.ghost.style.opacity = '0.9';
+  state.ghost.style.transform = 'scale(1.15)';
+  state.ghost.style.filter = 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6))';
+  
+  div.style.opacity = '0.3';
+  div.style.transform = 'scale(0.9)';
+  
+  document.body.appendChild(state.ghost); 
+  createParticles(div);
+  vibrate(15);
+  playTone(700, 0.05, 0.15);
+}
+
+function handleDragMove(e) {
+  if(!state.ghost) return;
+  e.preventDefault(); 
+  const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+  const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+  
+  state.ghost.style.left = (clientX - 25) + 'px'; 
+  state.ghost.style.top = (clientY - 25) + 'px';
+  
+  const now = Date.now();
+  if(!state.lastTrailTime || (now - state.lastTrailTime) > 50) {
+    createLightTrail(clientX, clientY);
+    state.lastTrailTime = now;
+  }
+  
+  const ld = document.getElementById('lDrop');
+  const rd = document.getElementById('rDrop');
+  const rL = ld.getBoundingClientRect();
+  const rR = rd.getBoundingClientRect();
+  
+  ld.classList.remove('drag-over', 'magnetic');
+  rd.classList.remove('drag-over', 'magnetic');
+  
+  const centerL = { x: rL.left + rL.width / 2, y: rL.top + rL.height / 2 };
+  const centerR = { x: rR.left + rR.width / 2, y: rR.top + rR.height / 2 };
+  
+  const distL = Math.sqrt(Math.pow(clientX - centerL.x, 2) + Math.pow(clientY - centerL.y, 2));
+  const distR = Math.sqrt(Math.pow(clientX - centerR.x, 2) + Math.pow(clientY - centerR.y, 2));
+  
+  const MAGNET_DISTANCE = 80;
+  const SNAP_DISTANCE = 50;
+  
+  if(distL < MAGNET_DISTANCE) {
+    ld.classList.add('magnetic');
+    if(distL < SNAP_DISTANCE) {
+      const snapX = centerL.x - 25;
+      const snapY = centerL.y - 25;
+      state.ghost.style.left = snapX + 'px';
+      state.ghost.style.top = snapY + 'px';
+      state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+      ld.classList.add('drag-over');
+      if(!state.magnetSnapped) {
+        playTone(1100, 0.08, 0.15);
+        vibrate(15);
+        state.magnetSnapped = 'left';
+      }
+    } else {
+      state.ghost.style.transition = 'none';
+      state.magnetSnapped = null;
+    }
+    ld.style.transform = 'scale(1.02)';
+    rd.style.transform = 'scale(1)';
+  } 
+  else if(distR < MAGNET_DISTANCE) {
+    rd.classList.add('magnetic');
+    if(distR < SNAP_DISTANCE) {
+      const snapX = centerR.x - 25;
+      const snapY = centerR.y - 25;
+      state.ghost.style.left = snapX + 'px';
+      state.ghost.style.top = snapY + 'px';
+      state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+      rd.classList.add('drag-over');
+      if(!state.magnetSnapped) {
+        playTone(1100, 0.08, 0.15);
+        vibrate(15);
+        state.magnetSnapped = 'right';
+      }
+    } else {
+      state.ghost.style.transition = 'none';
+      state.magnetSnapped = null;
+    }
+    rd.style.transform = 'scale(1.02)';
+    ld.style.transform = 'scale(1)';
+  } 
+  else {
+    state.ghost.style.transition = 'none';
+    state.magnetSnapped = null;
+    ld.style.transform = 'scale(1)';
+    rd.style.transform = 'scale(1)';
+  }
+}
+
+function handleDragEnd(e, ld, rd) {
+  if(!state.ghost) return;
+  
+  const clientX = e.clientX || (e.changedTouches && e.changedTouches[0].clientX);
+  const clientY = e.clientY || (e.changedTouches && e.changedTouches[0].clientY);
+  const rL = ld.getBoundingClientRect();
+  const rR = rd.getBoundingClientRect();
+  
+  state.ghost.remove(); 
+  let area = 'pool';
+  
+  const coin = state.coins.find(x => x.id === state.dragId);
+  
+  if(clientX >= rL.left && clientX <= rL.right && clientY >= rL.top && clientY <= rL.bottom) {
+    area = 'left';
+    coin.justDropped = true;
+    vibrate(30);
+    playTone(900, 0.1, 0.2);
+    playMetallic();
+  }
+  else if(clientX >= rR.left && clientX <= rR.right && clientY >= rR.top && clientY <= rR.bottom) {
+    area = 'right';
+    coin.justDropped = true;
+    vibrate(30);
+    playTone(900, 0.1, 0.2);
+    playMetallic();
+  } else {
+    vibrate(10);
+    playTone(600, 0.05, 0.1);
+  }
+  
+  coin.area = area; 
+  
+  ld.classList.remove('drag-over', 'magnetic');
+  rd.classList.remove('drag-over', 'magnetic');
+  ld.style.transform = 'scale(1)';
+  rd.style.transform = 'scale(1)';
+  
+  state.magnetSnapped = null;
+  render();
+}
+
+function performWeigh() {
+  if(state.locked || state.weighCount >= 3) return;
+  const leftCoins = state.coins.filter(c => c.area == 'left').map(c => c.id);
+  const rightCoins = state.coins.filter(c => c.area == 'right').map(c => c.id);
+  if(!leftCoins.length && !rightCoins.length) {
+    document.getElementById('message').textContent = T[currentLang].putCoins;
+    vibrate([100, 50, 100]);
+    return;
+  }
+
+  const wL = leftCoins.reduce((a, id) => a + (id === state.fakeId ? (state.fakeType === 'heavy' ? 1.1 : 0.9) : 1), 0);
+  const wR = rightCoins.reduce((a, id) => a + (id === state.fakeId ? (state.fakeType === 'heavy' ? 1.1 : 0.9) : 1), 0);
+  
+  let res, sym = '=', ang = 0, moveY = 0, voiceText;
+  
+  const beamArm = document.getElementById('beamArm');
+  beamArm.style.animation = 'swingFast 0.6s ease-in-out';
+  setTimeout(() => beamArm.style.animation = 'swing 1.2s ease-out', 600);
+  setTimeout(() => beamArm.style.animation = '', 1800);
+  
+  if(wL > wR) { 
+    res = T[currentLang].leftHeavier;
+    voiceText = T[currentLang].voiceLeftHeavier;
+    sym = '<'; ang = -18; moveY = 25; 
+    vibrate(100);
+    [500, 450, 400].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.25), i * 100));
+  } 
+  else if(wL < wR) { 
+    res = T[currentLang].rightHeavier;
+    voiceText = T[currentLang].voiceRightHeavier;
+    sym = '>'; ang = 18; moveY = -25; 
+    vibrate(100);
+    [400, 450, 500].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.25), i * 100));
+  } 
+  else { 
+    res = T[currentLang].balanced;
+    voiceText = T[currentLang].voiceBalanced;
+    vibrate(50);
+    playTone(600, 0.15, 0.25);
+    setTimeout(() => playTone(600, 0.15, 0.25), 150);
+  }
+  
+  playMetallic();
+  setTimeout(() => speak(voiceText), 500);
+  
+  document.getElementById('beamArm').style.transform = `rotate(${ang}deg)`;
+  document.getElementById('leftPlateau').style.transform = `translateY(${moveY}px)`;
+  document.getElementById('rightPlateau').style.transform = `translateY(${-moveY}px)`;
+  document.getElementById('weighResult').textContent = res;
+
+  if(!state.colorLocked && currentMode === 'beginner') {
+    state.coins.forEach(c => {
+      if(sym === '=') { 
+        if(leftCoins.includes(c.id) || rightCoins.includes(c.id)) state.status[c.id] = 'normal'; 
+      }
+      else { 
+        if(!leftCoins.includes(c.id) && !rightCoins.includes(c.id)) state.status[c.id] = 'normal'; 
+        else if(state.status[c.id] !== 'normal') {
+          state.status[c.id] = (sym === '<' ? (leftCoins.includes(c.id) ? 'heavy_cand' : 'light_cand') : (leftCoins.includes(c.id) ? 'light_cand' : 'heavy_cand'));
+        }
+      }
+    });
+    if(sym !== '=') state.colorLocked = true;
+  }
+
+  state.history.push({
+    L: leftCoins.map(id => ({ id, status: state.status[id] })),
+    R: rightCoins.map(id => ({ id, status: state.status[id] })),
+    sym: sym
+  });
+
+  state.weighCount++; 
+  updateStatsDisplay();
+  
+  if(state.weighCount < 3) {
+    const r = 3 - state.weighCount;
+    document.getElementById('message').textContent = T[currentLang].weighed.replace('{n}', state.weighCount).replace('{r}', r);
+    document.getElementById('message').classList.add('clickable');
+  } else {
+    document.getElementById('message').textContent = T[currentLang].clickChoose;
+    document.getElementById('message').classList.add('clickable');
+    vibrate([100, 100, 100]);
+  }
+  
+  updateHistoryUI(); 
+  render();
+}
+
+function updateHistoryUI() {
+  state.history.forEach((h, idx) => {
+    if(idx >= 3) return;
+    const lineId = `weighLine${idx + 1}`;
+    const line = document.getElementById(lineId);
+    if(line) {
+      const fmt = arr => arr.map(c => {
+        const className = currentMode === 'expert' ? 'mini-coin' : `mini-coin status-${c.status}`;
+        return `<div class="${className}">${c.id}</div>`;
+      }).join('');
+      let icon, symbolStyle;
+      if(h.sym === '=') {
+        icon = '=';
+        symbolStyle = 'background: #3b82f6; color: white; padding: 2px 6px; border-radius: 6px; font-weight: bold; font-size: 1.1rem;';
+      } else {
+        icon = h.sym === '<' ? '↙️' : '↘️';
+        symbolStyle = 'font-size: 1.1rem; font-weight: bold;';
+      }
+      line.style.opacity = '1';
+      line.innerHTML = `
+        <span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P${idx + 1}</span>
+        <span style="flex:1; display:flex; align-items:center; justify-content:center; gap:2px; flex-wrap:nowrap;">
+          ${fmt(h.L)} <span style="${symbolStyle} margin:0 4px;">${icon}</span> ${fmt(h.R)}
+        </span>
+      `;
+    }
+  });
+}
+
+function clearPlates() { 
+  if(state.locked) return; 
+  state.coins.forEach(c => c.area = 'pool'); 
+  resetBalanceUI(); 
+  render(); 
+  vibrate(30);
+  document.getElementById('message').textContent = T[currentLang].cleared;
+  setTimeout(() => {
+    if(state.weighCount < 3) {
+      document.getElementById('message').textContent = T[currentLang].continue.replace('{n}', state.weighCount);
+    } else {
+      document.getElementById('message').textContent = T[currentLang].clickChoose;
+    }
+  }, 1500);
+}
+
+function resetBalanceUI() { 
+  document.getElementById('beamArm').style.transform = 'rotate(0)';
+  document.getElementById('leftPlateau').style.transform = 'translateY(0)';
+  document.getElementById('rightPlateau').style.transform = 'translateY(0)';
+  document.getElementById('weighResult').textContent = '—'; 
+}
+
+function openResultModal() {
+  state.selectedCoin = null;
+  state.selectedType = null;
+  
+  const grid = document.getElementById('resultCoinsGrid');
+  grid.innerHTML = '';
+  
+  for(let i = 1; i <= 12; i++) {
+    const coinBtn = document.createElement('div');
+    if(currentMode === 'expert') {
+      coinBtn.className = 'coin';
+    } else {
+      coinBtn.className = `coin status-${state.status[i]}`;
+    }
+    coinBtn.textContent = i;
+    coinBtn.style.cursor = 'pointer';
+    coinBtn.onclick = () => selectCoin(i, coinBtn);
+    grid.appendChild(coinBtn);
+  }
+  
+  document.getElementById('typeSelection').style.display = 'none';
+  document.getElementById('resultOverlay').style.display = 'flex';
+  vibrate(30);
+}
+
+function selectCoin(coinId, element) {
+  state.selectedCoin = coinId;
+  
+  document.querySelectorAll('#resultCoinsGrid .coin').forEach(c => {
+    c.style.transform = 'scale(1)';
+    c.style.boxShadow = '2px 4px 8px rgba(0, 0, 0, 0.5)';
+  });
+  
+  element.style.transform = 'scale(1.2)';
+  element.style.boxShadow = '0 0 30px rgba(251, 191, 36, 1)';
+  
+  document.getElementById('selectedCoinNumber').textContent = coinId;
+  document.getElementById('typeSelection').style.display = 'block';
+  createParticles(element);
+  vibrate(40);
+}
+
+function selectType(type) {
+  state.selectedType = type;
+  document.getElementById('resultOverlay').style.display = 'none';
+  vibrate(50);
+  checkFinalFromModal();
+}
+
+function checkFinalFromModal() {
+  if(!state.selectedCoin || !state.selectedType || state.locked) return;
+  
+  const id = state.selectedCoin;
+  const type = state.selectedType;
+  
+  state.locked = true;
+  
+  const typeLabel = currentLang === 'fr' ? 
+    (state.fakeType === 'heavy' ? 'lourde' : 'légère') : 
+    (state.fakeType === 'heavy' ? 'heavier' : 'lighter');
+  
+  if(id === state.fakeId && type === state.fakeType) {
+    challengeWins++;
+    updateStatsDisplay();
+    
+    if(challengeWins >= 3) {
+      showChampionModal();
+    } else {
+      showVictoryModal();
+    }
+  } else {
+    showFailedModal();
+  }
+}
+
+function showVictoryModal() {
+  const t = T[currentLang];
+  const remaining = 3 - challengeWins;
+  
+  document.getElementById('victoryTitle').textContent = t.victoryTitle;
+  document.getElementById('victoryText').textContent = t.victoryText.replace('{n}', challengeWins);
+  document.getElementById('victoryMsg').textContent = t.victoryMsg.replace('{r}', remaining);
+  
+  const stars = '⭐'.repeat(challengeWins) + '○'.repeat(3 - challengeWins);
+  document.getElementById('victoryStars').textContent = stars;
+  
+  document.getElementById('nextGameText').textContent = t.nextGame;
+  document.getElementById('quitText').textContent = t.quit;
+  
+  document.getElementById('victoryOverlay').style.display = 'flex';
+  
+  vibrate([100, 50, 100]);
+  createConfetti();
+  speak(t.voiceSuccess);
+  
+  for(let i = 0; i < 10; i++) {
+    setTimeout(() => playTone(Math.random() * 200 + 400, 0.05, 0.1, 'sine'), i * 80);
+  }
+}
+
+function showChampionModal() {
+  const t = T[currentLang];
+  
+  document.getElementById('championTitle').textContent = t.championTitle;
+  document.getElementById('championText').textContent = t.championText;
+  document.getElementById('championMsg').textContent = currentMode === 'beginner' ? t.championMsgBeg : t.championMsgExp;
+  
+  const tryExpertBtn = document.getElementById('btnTryExpert');
+  if(currentMode === 'beginner') {
+    tryExpertBtn.style.display = 'flex';
+    document.getElementById('tryExpertText').textContent = t.tryExpert;
+  } else {
+    tryExpertBtn.style.display = 'none';
+  }
+  
+  document.getElementById('restartText').textContent = t.restart;
+  document.getElementById('menuText').textContent = t.menu;
+  
+  document.getElementById('championOverlay').style.display = 'flex';
+  
+  vibrate([100, 50, 100, 50, 200]);
+  createConfetti();
+  speak(currentMode === 'beginner' ? t.championMsgBeg : 'Champion!');
+  
+  // Son spécial de victoire - mélodie triomphale
+  const victoryMelody = [523, 587, 659, 698, 784, 880, 988, 1047];
+  victoryMelody.forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.3, 0.35, 'sine'), i * 120);
+  });
+  
+  // Explosion de sons à la fin
+  setTimeout(() => {
+    for(let i = 0; i < 5; i++) {
+      setTimeout(() => playTone(Math.random() * 400 + 800, 0.1, 0.2), i * 50);
+    }
+  }, 1000);
+}
+
+function showFailedModal() {
+  const t = T[currentLang];
+  
+  document.getElementById('failedTitle').textContent = t.failedTitle;
+  
+  const stars = '⭐'.repeat(challengeWins) + '○'.repeat(3 - challengeWins);
+  document.getElementById('failedCount').textContent = t.failedCount.replace('{stars}', stars).replace('{n}', challengeWins);
+  document.getElementById('failedMsg').textContent = t.failedMsg;
+  
+  document.getElementById('retryText').textContent = t.retry;
+  document.getElementById('menuText2').textContent = t.menu;
+  
+  document.getElementById('failedOverlay').style.display = 'flex';
+  
+  challengeWins = 0;
+  
+  vibrate([200, 100, 200]);
+  document.body.style.animation = 'shake 0.5s';
+  setTimeout(() => document.body.style.animation = '', 500);
+  
+  speak(t.voiceFailed);
+  
+  [392, 349, 311, 262].forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.3, 0.25, 'triangle'), i * 300);
+  });
+}
+
+// Prevent page bounce/scroll - STRICT MODE
+document.addEventListener('touchmove', function(e) {
+  // Allow scrolling only in tutorial and modals
+  if(e.target.closest('.tutorial-content') || 
+     e.target.closest('.modal-content') ||
+     e.target.closest('.welcome-container')) {
+    return; // Allow scroll
+  }
+  // Block everything else
+  e.preventDefault();
+}, { passive: false });
+
+// Prevent double-tap zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function(e) {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+document.getElementById('btnWeigh').addEventListener('click', performWeigh);
+document.getElementById('btnClear').addEventListener('click', clearPlates);
+document.getElementById('message').addEventListener('click', () => {
+  if(state.weighCount >= 1 && !state.locked) openResultModal();
+});
+
+document.getElementById('btnHeavy').addEventListener('click', () => selectType('heavy'));
+document.getElementById('btnLight').addEventListener('click', () => selectType('light'));
+document.getElementById('btnCancelResult').addEventListener('click', () => {
+  document.getElementById('resultOverlay').style.display = 'none';
+});
+
+document.getElementById('btnBeginner').addEventListener('click', () => startChallenge('beginner'));
+document.getElementById('btnExpert').addEventListener('click', () => startChallenge('expert'));
+
+document.getElementById('btnNextGame').addEventListener('click', () => newGame());
+document.getElementById('btnQuitChallenge').addEventListener('click', () => {
+  currentMode = null;
+  challengeWins = 0;
+  document.getElementById('victoryOverlay').style.display = 'none';
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+});
+
+document.getElementById('btnTryExpert').addEventListener('click', () => {
+  document.getElementById('championOverlay').style.display = 'none';
+  startChallenge('expert');
+});
+document.getElementById('btnRestartChallenge').addEventListener('click', () => {
+  challengeWins = 0;
+  document.getElementById('championOverlay').style.display = 'none';
+  newGame();
+});
+document.getElementById('btnBackMenu').addEventListener('click', () => {
+  currentMode = null;
+  challengeWins = 0;
+  document.getElementById('championOverlay').style.display = 'none';
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+});
+
+document.getElementById('btnRetryChallenge').addEventListener('click', () => {
+  challengeWins = 0;
+  document.getElementById('failedOverlay').style.display = 'none';
+  newGame();
+});
+document.getElementById('btnBackMenu2').addEventListener('click', () => {
+  currentMode = null;
+  challengeWins = 0;
+  document.getElementById('failedOverlay').style.display = 'none';
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+});
+
+document.getElementById('btnTutorial').addEventListener('click', () => {
+  document.getElementById('tutorialOverlay').style.display = 'flex';
+});
+document.getElementById('btnShowTutorial').addEventListener('click', () => {
+  document.getElementById('tutorialOverlay').style.display = 'flex';
+});
+
+document.getElementById('btnNew2').addEventListener('click', () => {
+  currentMode = null;
+  challengeWins = 0;
+  state.locked = true;
+  updateStatsDisplay();
+  document.getElementById('modeSelectOverlay').style.display = 'flex';
+  document.body.style.backgroundColor = '#0f172a';
+});
+
+document.getElementById('btnFR').addEventListener('click', () => setLang('fr'));
+document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
+
+setLang('fr');
+document.getElementById('modeSelectOverlay').style.display = 'flex';
+
+}); // End DOMContentLoaded
+</script>
+
+</body>
+</html>
