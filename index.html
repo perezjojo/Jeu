@@ -41,6 +41,10 @@ height: 100vh;
 }
 
 @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes zoomIn {
+0% { opacity: 0; transform: scale(0.5); }
+100% { opacity: 1; transform: scale(1); }
+}
 @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 @keyframes shake {
@@ -95,7 +99,7 @@ width: 90%;
 text-align: center;
 padding: 20px 0;
 }
-.welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); }
+.welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
 .welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 10px; font-weight: 500; }
 .welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 20px 0 40px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
 
@@ -155,7 +159,7 @@ main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padd
 
 .dropgrid { display: flex; justify-content: center; gap: 12px; align-items: flex-start; padding-top: 12px; }
 .plateau-container { flex: 1; max-width: 180px; display: flex; flex-direction: column; align-items: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.dropzone { width: 100%; height: 120px; background: rgba(0, 0, 0, 0.6) !important; border: 3px solid #475569; border-radius: 14px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 6px; justify-items: center; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.dropzone { width: 100%; height: 120px; background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important; border: 3px solid #64748b; border-radius: 14px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; padding: 6px; justify-items: center; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 .dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
 .dropzone.magnetic { animation: magnetPulse 0.5s ease-out; border-color: #60a5fa !important; }
 .dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
@@ -193,7 +197,7 @@ border-radius: 6px;
 }
 .mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
-#message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 8px; border-radius: 10px; background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6; animation: slideDown 0.5s ease-out; color: #f1f5f9 !important; cursor: pointer; transition: all 0.3s; }
+#message { text-align: center; font-weight: bold; font-size: 1.1rem; padding: 16px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
 #message.clickable { animation: pulse 2s infinite; }
 
 .tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
@@ -437,7 +441,7 @@ const T = {
     
     championTitle: "🏆 CHAMPION ! 🏆",
     championText: "3 VICTOIRES D'AFFILÉE ! 🎊",
-    championMsgBeg: "Vous maîtrisez le jeu !",
+    championMsgBeg: "BRAVO, vous maîtrisez bien le jeu. Envoyez une capture d'écran à perezjojo@yahoo.fr",
     championMsgExp: "Vous êtes un EXPERT !",
     tryExpert: "🔥 Essayer Mode Expert",
     restart: "🔄 Recommencer",
@@ -533,7 +537,7 @@ const T = {
     
     championTitle: "🏆 CHAMPION! 🏆",
     championText: "3 CONSECUTIVE VICTORIES! 🎊",
-    championMsgBeg: "You mastered the game!",
+    championMsgBeg: "CONGRATULATIONS, you mastered the game! Send a screenshot to perezjojo@yahoo.fr",
     championMsgExp: "You are an EXPERT!",
     tryExpert: "🔥 Try Expert Mode",
     restart: "🔄 Restart",
@@ -704,17 +708,19 @@ function renderTutorial() {
 }
 
 function createConfetti() {
-  for(let i = 0; i < 100; i++) {
+  for(let i = 0; i < 150; i++) {
     setTimeout(() => {
       const confetti = document.createElement('div');
       confetti.className = 'confetti';
       confetti.style.left = Math.random() * 100 + '%';
       confetti.style.top = '-10px';
-      confetti.style.background = ['#fcd34d', '#f59e0b', '#3b82f6', '#10b981', '#ec4899'][Math.floor(Math.random() * 5)];
+      confetti.style.background = ['#fcd34d', '#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#ef4444', '#8b5cf6'][Math.floor(Math.random() * 7)];
       confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      confetti.style.width = (Math.random() * 10 + 5) + 'px';
+      confetti.style.height = (Math.random() * 10 + 5) + 'px';
       document.body.appendChild(confetti);
       setTimeout(() => confetti.remove(), 3500);
-    }, i * 20);
+    }, i * 15);
   }
 }
 
@@ -748,9 +754,9 @@ function speak(text) {
   if(synth.speaking) synth.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = currentLang === 'fr' ? 'fr-FR' : 'en-US';
-  utterance.rate = 1.0;
+  utterance.rate = 0.85;
   utterance.pitch = 1.0;
-  utterance.volume = 0.8;
+  utterance.volume = 0.9;
   synth.speak(utterance);
 }
 
@@ -1326,11 +1332,20 @@ function showChampionModal() {
   
   vibrate([100, 50, 100, 50, 200]);
   createConfetti();
-  speak(currentMode === 'beginner' ? t.voiceSuccess : 'Champion!');
+  speak(currentMode === 'beginner' ? t.championMsgBeg : 'Champion!');
   
-  [523, 659, 784, 1047, 1200].forEach((f, i) => {
-    setTimeout(() => playTone(f, 0.2, 0.3), i * 150);
+  // Son spécial de victoire - mélodie triomphale
+  const victoryMelody = [523, 587, 659, 698, 784, 880, 988, 1047];
+  victoryMelody.forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.3, 0.35, 'sine'), i * 120);
   });
+  
+  // Explosion de sons à la fin
+  setTimeout(() => {
+    for(let i = 0; i < 5; i++) {
+      setTimeout(() => playTone(Math.random() * 400 + 800, 0.1, 0.2), i * 50);
+    }
+  }, 1000);
 }
 
 function showFailedModal() {
