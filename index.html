@@ -47,6 +47,10 @@ height: 100vh;
 }
 @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes fastBlink {
+0%, 100% { opacity: 1; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+50% { opacity: 0.6; box-shadow: 0 0 25px rgba(148, 163, 184, 0.8); }
+}
 @keyframes shake {
 0%, 100% { transform: translateX(0); }
 10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
@@ -203,7 +207,7 @@ font-size: 0.8rem;
 .mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
 #message { text-align: center; font-weight: bold; font-size: 1.1rem; padding: 16px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-#message.clickable { animation: pulse 2s infinite; }
+#message.clickable { animation: fastBlink 0.5s infinite ease-in-out; }
 
 .tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
 .tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
@@ -782,6 +786,25 @@ function playMetallic() {
   setTimeout(() => playTone(360, 0.1, 0.05, 'square'), 200);
 }
 
+function playBells() {
+  // Son de cloches - Do, Mi, Sol, Do aigu
+  const bellNotes = [523, 659, 784, 1047];
+  bellNotes.forEach((freq, i) => {
+    setTimeout(() => {
+      playTone(freq, 0.4, 0.25, 'sine');
+      // Harmonique pour son de cloche plus riche
+      setTimeout(() => playTone(freq * 2, 0.3, 0.15, 'sine'), 50);
+    }, i * 150);
+  });
+  
+  // Écho léger
+  setTimeout(() => {
+    bellNotes.forEach((freq, i) => {
+      setTimeout(() => playTone(freq, 0.2, 0.1, 'sine'), i * 100);
+    });
+  }, 700);
+}
+
 function vibrate(pattern) {
   if(navigator.vibrate) navigator.vibrate(pattern);
 }
@@ -1153,10 +1176,12 @@ function performWeigh() {
     const r = 3 - state.weighCount;
     document.getElementById('message').textContent = T[currentLang].weighed.replace('{n}', state.weighCount).replace('{r}', r);
     document.getElementById('message').classList.add('clickable');
+    playBells();
   } else {
     document.getElementById('message').textContent = T[currentLang].clickChoose;
     document.getElementById('message').classList.add('clickable');
     vibrate([100, 100, 100]);
+    playBells();
   }
   
   updateHistoryUI(); 
@@ -1204,6 +1229,8 @@ function clearPlates() {
       document.getElementById('message').textContent = T[currentLang].continue.replace('{n}', state.weighCount);
     } else {
       document.getElementById('message').textContent = T[currentLang].clickChoose;
+      document.getElementById('message').classList.add('clickable');
+      playBells();
     }
   }, 1500);
 }
