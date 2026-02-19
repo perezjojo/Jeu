@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
@@ -17,356 +16,348 @@
 <style>
   * { color-scheme: dark; }
 
-:root {
-–bg: #0f172a; –panel: #1e293b; –border: #334155; –text: #f1f5f9;
-–accent: #3b82f6; –accent-hover: #2563eb; –success: #22c55e;
-–gold-light: #fcd34d;
-}
+  :root {
+    --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9;
+    --accent: #3b82f6; --accent-hover: #2563eb; --success: #22c55e; 
+    --gold-light: #fcd34d;
+  }
 
-html, body {
-height: 100vh; margin: 0; padding: 0;
-position: fixed; width: 100vw;
-overscroll-behavior: none;
--webkit-user-select: none;
-touch-action: pan-y pinch-zoom;
-background-color: #0f172a !important;
-color: #f1f5f9 !important;
-}
+  html, body { 
+    height: 100vh; margin: 0; padding: 0; 
+    position: fixed; width: 100vw; 
+    overscroll-behavior: none; 
+    -webkit-user-select: none; 
+    touch-action: pan-y pinch-zoom;
+    background-color: #0f172a !important; 
+    color: #f1f5f9 !important;
+  }
 
-body {
-font-family: ‘Segoe UI’, system-ui, -apple-system, sans-serif;
-background: #0f172a !important; color: #f1f5f9 !important;
-display: flex; flex-direction: column; transition: background-color 0.5s;
-position: fixed;
-overflow: hidden;
-width: 100vw;
-height: 100vh;
-}
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0f172a !important; color: #f1f5f9 !important;
+    display: flex; flex-direction: column; transition: background-color 0.5s;
+    position: fixed; 
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
 
-@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-@keyframes zoomIn {
-0% { opacity: 0; transform: scale(0.5); }
-100% { opacity: 1; transform: scale(1); }
-}
-@keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-@keyframes shake {
-0%, 100% { transform: translateX(0); }
-10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-20%, 40%, 60%, 80% { transform: translateX(10px); }
-}
-@keyframes swing {
-0% { transform: rotate(0deg); } 5% { transform: rotate(1deg); }
-10% { transform: rotate(-1deg); } 15% { transform: rotate(2deg); }
-20% { transform: rotate(-2deg); } 25% { transform: rotate(3deg); }
-30% { transform: rotate(-3deg); } 35% { transform: rotate(3deg); }
-40% { transform: rotate(-3deg); } 50% { transform: rotate(2deg); }
-60% { transform: rotate(-2deg); } 70% { transform: rotate(1deg); }
-80% { transform: rotate(-1deg); } 90% { transform: rotate(0.5deg); }
-95% { transform: rotate(-0.5deg); } 100% { transform: rotate(0deg); }
-}
-@keyframes swingFast {
-0% { transform: rotate(0deg); } 10% { transform: rotate(5deg); }
-20% { transform: rotate(-5deg); } 30% { transform: rotate(4deg); }
-40% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); }
-60% { transform: rotate(-3deg); } 70% { transform: rotate(2deg); }
-80% { transform: rotate(-2deg); } 90% { transform: rotate(1deg); }
-100% { transform: rotate(0deg); }
-}
-@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-@keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(180deg); } }
-@keyframes magnetPulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 100% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); } }
-@keyframes trail { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.3); } }
-@keyframes bounce {
-0% { transform: scale(1) translateY(0); } 30% { transform: scale(1.2, 0.8) translateY(0); }
-50% { transform: scale(0.9, 1.1) translateY(-8px); } 65% { transform: scale(1.05, 0.95) translateY(0); }
-80% { transform: scale(0.98, 1.02) translateY(-3px); } 90% { transform: scale(1.01, 0.99) translateY(0); }
-100% { transform: scale(1) translateY(0); }
-}
-@keyframes confetti-fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  @keyframes zoomIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  @keyframes shake { 
+    0%, 100% { transform: translateX(0); } 
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+  }
+  @keyframes swing { 
+    0% { transform: rotate(0deg); } 5% { transform: rotate(1deg); }
+    10% { transform: rotate(-1deg); } 15% { transform: rotate(2deg); }
+    20% { transform: rotate(-2deg); } 25% { transform: rotate(3deg); }
+    30% { transform: rotate(-3deg); } 35% { transform: rotate(3deg); }
+    40% { transform: rotate(-3deg); } 50% { transform: rotate(2deg); }
+    60% { transform: rotate(-2deg); } 70% { transform: rotate(1deg); }
+    80% { transform: rotate(-1deg); } 90% { transform: rotate(0.5deg); }
+    95% { transform: rotate(-0.5deg); } 100% { transform: rotate(0deg); }
+  }
+  @keyframes swingFast {
+    0% { transform: rotate(0deg); } 10% { transform: rotate(5deg); }
+    20% { transform: rotate(-5deg); } 30% { transform: rotate(4deg); }
+    40% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); }
+    60% { transform: rotate(-3deg); } 70% { transform: rotate(2deg); }
+    80% { transform: rotate(-2deg); } 90% { transform: rotate(1deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+  @keyframes sparkle { 0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1) rotate(180deg); } }
+  @keyframes magnetPulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); } 100% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); } }
+  @keyframes trail { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0.3); } }
+  @keyframes bounce {
+    0% { transform: scale(1) translateY(0); } 30% { transform: scale(1.2, 0.8) translateY(0); }
+    50% { transform: scale(0.9, 1.1) translateY(-8px); } 65% { transform: scale(1.05, 0.95) translateY(0); }
+    80% { transform: scale(0.98, 1.02) translateY(-3px); } 90% { transform: scale(1.01, 0.99) translateY(0); }
+    100% { transform: scale(1) translateY(0); }
+  }
+  @keyframes confetti-fall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
 
-.confetti { position: fixed; width: 10px; height: 10px; background: #fcd34d; z-index: 9999; animation: confetti-fall 3s linear; }
-.particle { position: absolute; width: 4px; height: 4px; background: radial-gradient(circle, #fcd34d, #f59e0b); border-radius: 50%; pointer-events: none; z-index: 100; animation: sparkle 1.5s ease-in-out infinite; }
-.light-trail { position: fixed; width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.3)); pointer-events: none; z-index: 2999; animation: trail 0.5s ease-out forwards; box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
+  .confetti { position: fixed; width: 10px; height: 10px; background: #fcd34d; z-index: 9999; animation: confetti-fall 3s linear; }
+  .particle { position: absolute; width: 4px; height: 4px; background: radial-gradient(circle, #fcd34d, #f59e0b); border-radius: 50%; pointer-events: none; z-index: 100; animation: sparkle 1.5s ease-in-out infinite; }
+  .light-trail { position: fixed; width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.3)); pointer-events: none; z-index: 2999; animation: trail 0.5s ease-out forwards; box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
 
-.modal-overlay { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
-.modal-content { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important; color: #f1f5f9 !important; padding: 30px; border-radius: 20px; text-align: center; min-width: 320px; max-width: 90%; border: 3px solid #3b82f6; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); animation: slideDown 0.4s ease-out; }
-.modal-content h3 { margin: 0 0 10px; font-size: 2.2rem; background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #fb923c; }
-.modal-content p { color: #f1f5f9 !important; }
+  .modal-overlay { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
+  .modal-content { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important; color: #f1f5f9 !important; padding: 30px; border-radius: 20px; text-align: center; min-width: 320px; max-width: 90%; border: 3px solid #3b82f6; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); animation: slideDown 0.4s ease-out; }
+  .modal-content h3 { margin: 0 0 10px; font-size: 2.2rem; background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #fb923c; }
+  .modal-content p { color: #f1f5f9 !important; }
 
-#modeSelectOverlay { background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important; }
+  #modeSelectOverlay { background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important; }
+  
+  .welcome-container { 
+    max-width: 600px; 
+    width: 90%; 
+    text-align: center;
+    padding: 70px 0 10px 0;
+  }
+  .lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 10px 0 6px 0; }
+  .welcome-note { font-size: 1rem; color: #475569 !important; margin-top: 6px; margin-bottom: 10px; font-style: italic; line-height: 1.3; }
+  .tutorial-link { text-align: center; margin-top: 4px; }
+  .welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  .welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 4px; font-weight: 500; }
+  .welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 6px 0 12px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
+  
+  .mode-cards { display: flex; flex-direction: column; gap: 10px; margin: 8px 0; }
+  .mode-card { background: white; border-radius: 16px; padding: 15px; text-align: left; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: all 0.3s; border: 3px solid transparent; }
+  .mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); }
+  .mode-card.beginner { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6; }
+  .mode-card.expert { background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%); border-color: #ea580c; }
+  
+  .mode-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .mode-icon { font-size: 1.6rem; }
+  .mode-title { font-size: 1.3rem; font-weight: 700; color: #1e293b !important; margin: 0; }
+  .mode-description { font-size: 0.95rem; color: #475569 !important; line-height: 1.4; margin-bottom: 12px; }
+  .mode-button { width: 100%; padding: 12px; font-size: 1.2rem; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: all 0.3s; color: white !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+  .mode-button:hover { transform: scale(1.02); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); }
+  .mode-button:active { transform: scale(0.98); }
+  .btn-beginner { background: linear-gradient(135deg, #10b981, #059669) !important; }
+  .btn-expert { background: linear-gradient(135deg, #ef4444, #dc2626) !important; }
 
-.welcome-container {
-max-width: 600px;
-width: 90%;
-text-align: center;
-padding: 70px 0 10px 0;
-}
-.lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 10px 0 6px 0; }
-.welcome-note { font-size: 1rem; color: #475569 !important; margin-top: 6px; margin-bottom: 10px; font-style: italic; line-height: 1.3; }
-.tutorial-link { text-align: center; margin-top: 4px; }
-.welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); animation: zoomIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 4px; font-weight: 500; }
-.welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 6px 0 12px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
+  .lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 25px 0 15px 0; }
+  .lang-btn { padding: 8px 16px; font-size: 1rem; font-weight: 600; border-radius: 8px; border: 2px solid #1e293b; background: transparent; color: #1e293b !important; cursor: pointer; transition: all 0.3s; }
+  .lang-btn.active { background: #1e293b !important; color: white !important; }
+  .lang-btn:hover { transform: scale(1.05); }
+  
+  .tutorial-link { text-align: center; margin-top: 10px; }
+  .btn-tutorial-link { background: none !important; border: none; color: #1e293b !important; font-size: 1.25rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 10px; }
+  .welcome-note { font-size: 1.125rem; color: #475569 !important; margin-top: 25px; font-style: italic; line-height: 1.4; }
+  
+  .toolbar { background: #1e293b !important; color: #f1f5f9 !important; padding: 16px 12px 12px 12px; padding-top: max(16px, env(safe-area-inset-top)); border-bottom: 2px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 10; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); min-height: 70px; }
+  .toolbar-left { display: flex; gap: 8px; align-items: center; }
+  .mode-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+  .mode-badge.beginner { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .mode-badge.expert { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .stars-display { font-size: 1rem; }
 
-.mode-cards { display: flex; flex-direction: column; gap: 10px; margin: 8px 0; }
-.mode-card { background: white; border-radius: 16px; padding: 15px; text-align: left; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: all 0.3s; border: 3px solid transparent; }
-.mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); }
-.mode-card.beginner { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6; }
-.mode-card.expert { background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%); border-color: #ea580c; }
+  button { padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; color: white !important; background: #1e293b !important; border: 2px solid #334155; touch-action: manipulation; }
+  button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+  button:active { transform: translateY(0); }
+  button.primary { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; border: none; min-width: 90px; justify-content: center; padding: 8px 10px; font-size: 0.75rem; }
+  button.tutorial { background: linear-gradient(135deg, #f59e0b, #d97706) !important; border: none; padding: 8px 10px; font-size: 0.75rem; }
+  button.danger { background: linear-gradient(135deg, #ef4444, #dc2626) !important; border: none; }
 
-.mode-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.mode-icon { font-size: 1.6rem; }
-.mode-title { font-size: 1.3rem; font-weight: 700; color: #1e293b !important; margin: 0; }
-.mode-description { font-size: 0.95rem; color: #475569 !important; line-height: 1.4; margin-bottom: 12px; }
-.mode-button { width: 100%; padding: 12px; font-size: 1.2rem; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: all 0.3s; color: white !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
-.mode-button:hover { transform: scale(1.02); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); }
-.mode-button:active { transform: scale(0.98); }
-.btn-beginner { background: linear-gradient(135deg, #10b981, #059669) !important; }
-.btn-expert { background: linear-gradient(135deg, #ef4444, #dc2626) !important; }
+  main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden; }
+  .panel { background: #1e293b !important; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
 
-.lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 25px 0 15px 0; }
-.lang-btn { padding: 8px 16px; font-size: 1rem; font-weight: 600; border-radius: 8px; border: 2px solid #1e293b; background: transparent; color: #1e293b !important; cursor: pointer; transition: all 0.3s; }
-.lang-btn.active { background: #1e293b !important; color: white !important; }
-.lang-btn:hover { transform: scale(1.05); }
+  .coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; background: rgba(0, 0, 0, 0.5) !important; border-radius: 10px; border: 1px solid #334155; min-height: 0; }
+  
+  .coin { width: 38px; height: 38px; border-radius: 50%; color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: radial-gradient(ellipse at 30% 30%, #fcd34d, #d97706) !important; border: 2.5px solid #b45309 !important; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none; box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); touch-action: none; transition: all 0.3s; text-shadow: 0 0 1px rgba(255, 255, 255, 0.3); }
+  .coin:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); animation: float 2s ease-in-out infinite; }
+  .coin:active { cursor: grabbing; transform: scale(0.95); }
 
-.tutorial-link { text-align: center; margin-top: 10px; }
-.btn-tutorial-link { background: none !important; border: none; color: #1e293b !important; font-size: 1.25rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 10px; }
-.welcome-note { font-size: 1.125rem; color: #475569 !important; margin-top: 25px; font-style: italic; line-height: 1.4; }
+  .dropzone .coin { width: 32px; height: 32px; font-size: 13px; }
+  .status-heavy_cand { background: radial-gradient(ellipse at 30% 30%, #fca5a5, #ef4444) !important; border-color: #991b1b !important; }
+  .status-light_cand { background: radial-gradient(ellipse at 30% 30%, #86efac, #22c55e) !important; border-color: #166534 !important; }
+  .status-normal { background: radial-gradient(ellipse at 30% 30%, #fef3c7, #fde68a) !important; border-color: #d4a574 !important; opacity: 0.7; }
+  .coin.empty { background: rgba(255,255,255,0.05) !important; border: 2px dashed #334155 !important; color: transparent !important; pointer-events: none; box-shadow: none; }
 
-.toolbar { background: #1e293b !important; color: #f1f5f9 !important; padding: 16px 12px 12px 12px; padding-top: max(16px, env(safe-area-inset-top)); border-bottom: 2px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 10; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); min-height: 70px; }
-.toolbar-left { display: flex; gap: 8px; align-items: center; }
-.mode-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
-.mode-badge.beginner { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-.mode-badge.expert { background: linear-gradient(135deg, #ef4444, #dc2626); }
-.stars-display { font-size: 1rem; }
+  .dropgrid { display: flex; justify-content: center; gap: 12px; align-items: flex-start; padding-top: 12px; }
+  .plateau-container { flex: 1; max-width: 180px; display: flex; flex-direction: column; align-items: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+  .dropzone { 
+    width: 100%; 
+    height: 105px; 
+    background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important; 
+    border: none;
+    border-left: 6px solid #64748b;
+    border-right: 6px solid #64748b;
+    border-bottom: 6px solid #64748b;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 4px; 
+    padding: 6px; 
+    justify-items: center; 
+    align-items: center; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), inset 3px 3px 8px rgba(0, 0, 0, 0.2);
+  }
+  .dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
+  .dropzone.magnetic { animation: magnetPulse 0.5s ease-out; border-color: #60a5fa !important; }
+  .dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
+  
+  .beam-container { flex: 0 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 0px; height: auto; gap: 10px; }
+  .beam-arm { width: 130px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b) !important; border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); margin-left: auto; margin-right: auto; }
+  .beam-pivot { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 26px solid #475569; position: absolute; top: 50%; transform: translateY(-13px); z-index: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
+  #weighResult { margin-top: 10px; font-weight: bold; font-size: 0.85rem; text-align: center; height: 1.2em; color: #f1f5f9 !important; }
 
-button { padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; color: white !important; background: #1e293b !important; border: 2px solid #334155; touch-action: manipulation; }
-button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-button:active { transform: translateY(0); }
-button.primary { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; border: none; min-width: 90px; justify-content: center; padding: 8px 10px; font-size: 0.75rem; }
-button.tutorial { background: linear-gradient(135deg, #f59e0b, #d97706) !important; border: none; padding: 8px 10px; font-size: 0.75rem; }
-button.danger { background: linear-gradient(135deg, #ef4444, #dc2626) !important; border: none; }
+  .action-button { width: 100%; margin-top: 8px; font-size: 0.85rem; padding: 8px; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+  .action-button.blue { background: linear-gradient(135deg, #ec4899, #db2777) !important; color: white !important; }
+  .action-button.white { background: #f8fafc !important; color: #0f172a !important; }
+  .action-button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden; }
-.panel { background: #1e293b !important; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+  #history { 
+    overflow-y: auto; 
+    margin-top: 8px; 
+    height: 90px !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    border: 2px solid #3b82f6;
+    border-radius: 10px;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+  .hist-line { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    padding: 5px; 
+    margin-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+    animation: slideDown 0.3s ease-out; 
+    transition: all 0.3s;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 0.8rem;
+  }
+  .mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
-.coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; background: rgba(0, 0, 0, 0.5) !important; border-radius: 10px; border: 1px solid #334155; min-height: 0; }
+  #message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+  #message.clickable { animation: pulse 2s infinite; }
 
-.coin { width: 38px; height: 38px; border-radius: 50%; color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: radial-gradient(ellipse at 30% 30%, #fcd34d, #d97706) !important; border: 2.5px solid #b45309 !important; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none; box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); touch-action: none; transition: all 0.3s; text-shadow: 0 0 1px rgba(255, 255, 255, 0.3); }
-.coin:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); animation: float 2s ease-in-out infinite; }
-.coin:active { cursor: grabbing; transform: scale(0.95); }
+  .tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
+  .tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
+  .tutorial-content h2 { margin: 0 0 20px; color: #3b82f6 !important; }
+  .tutorial-content h3 { color: #22c55e !important; margin-top: 25px; }
+  .tutorial-content p { line-height: 1.6; margin: 10px 0; color: #f1f5f9 !important; }
+  .tutorial-step { background: rgba(0, 0, 0, 0.3) !important; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid #3b82f6; }
 
-.dropzone .coin { width: 32px; height: 32px; font-size: 13px; }
-.status-heavy_cand { background: radial-gradient(ellipse at 30% 30%, #fca5a5, #ef4444) !important; border-color: #991b1b !important; }
-.status-light_cand { background: radial-gradient(ellipse at 30% 30%, #86efac, #22c55e) !important; border-color: #166534 !important; }
-.status-normal { background: radial-gradient(ellipse at 30% 30%, #fef3c7, #fde68a) !important; border-color: #d4a574 !important; opacity: 0.7; }
-.coin.empty { background: rgba(255,255,255,0.05) !important; border: 2px dashed #334155 !important; color: transparent !important; pointer-events: none; box-shadow: none; }
-
-.dropgrid { display: flex; justify-content: center; gap: 12px; align-items: flex-start; padding-top: 12px; }
-.plateau-container { flex: 1; max-width: 180px; display: flex; flex-direction: column; align-items: center; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-.dropzone {
-width: 100%;
-height: 105px;
-background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important;
-border: none;
-border-top: 3px solid transparent;
-border-left: 6px solid #64748b;
-border-right: 6px solid #64748b;
-border-bottom: 6px solid #64748b;
-border-radius: 14px;
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 4px;
-padding: 6px;
-justify-items: center;
-align-items: center;
-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), inset 3px 3px 8px rgba(0, 0, 0, 0.2);
-}
-.dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
-.dropzone.magnetic { animation: magnetPulse 0.5s ease-out; border-color: #60a5fa !important; }
-.dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
-
-.beam-container { flex: 0 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 0px; height: auto; gap: 10px; }
-.beam-arm { width: 120px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b) !important; border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
-.beam-pivot { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 26px solid #475569; position: absolute; top: 50%; transform: translateY(-13px); z-index: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
-#weighResult { margin-top: 10px; font-weight: bold; font-size: 0.85rem; text-align: center; height: 1.2em; color: #f1f5f9 !important; }
-
-.action-button { width: 100%; margin-top: 8px; font-size: 0.85rem; padding: 8px; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s; }
-.action-button.blue { background: linear-gradient(135deg, #ec4899, #db2777) !important; color: white !important; }
-.action-button.white { background: #f8fafc !important; color: #0f172a !important; }
-.action-button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-#history {
-overflow-y: auto;
-margin-top: 8px;
-height: 90px !important;
-background: rgba(59, 130, 246, 0.2) !important;
-border: 2px solid #3b82f6;
-border-radius: 10px;
-padding: 8px;
-flex-shrink: 0;
-}
-.hist-line {
-display: flex;
-align-items: center;
-gap: 6px;
-padding: 5px;
-margin-bottom: 2px;
-border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-animation: slideDown 0.3s ease-out;
-transition: all 0.3s;
-background: rgba(0, 0, 0, 0.3);
-border-radius: 6px;
-font-size: 0.8rem;
-}
-.mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
-
-#message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
-#message.clickable { animation: pulse 2s infinite; }
-
-.tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
-.tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
-.tutorial-content h2 { margin: 0 0 20px; color: #3b82f6 !important; }
-.tutorial-content h3 { color: #22c55e !important; margin-top: 25px; }
-.tutorial-content p { line-height: 1.6; margin: 10px 0; color: #f1f5f9 !important; }
-.tutorial-step { background: rgba(0, 0, 0, 0.3) !important; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid #3b82f6; }
-
-@media (max-width: 900px) {
-main { grid-template-columns: 1fr; overflow-y: auto; padding-bottom: 100px; }
-.welcome-title { font-size: 2.5rem; }
-.welcome-subtitle { font-size: 1.25rem; }
-.welcome-highlight { font-size: 1.875rem; }
-.mode-title { font-size: 1.3rem; }
-.mode-description { font-size: 0.95rem; }
-.mode-button { font-size: 1.1rem; padding: 14px; }
-.toolbar { padding: 12px 10px 10px 10px; padding-top: max(12px, env(safe-area-inset-top)); }
-.toolbar-left { gap: 6px; }
-.mode-badge { font-size: 0.7rem; padding: 5px 10px; gap: 4px; }
-button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
-}
+  @media (max-width: 900px) { 
+    main { grid-template-columns: 1fr; overflow-y: auto; padding-bottom: 100px; }
+    .welcome-title { font-size: 2.5rem; }
+    .welcome-subtitle { font-size: 1.25rem; }
+    .welcome-highlight { font-size: 1.875rem; }
+    .mode-title { font-size: 1.3rem; }
+    .mode-description { font-size: 0.95rem; }
+    .mode-button { font-size: 1.1rem; padding: 14px; }
+    .toolbar { padding: 12px 10px 10px 10px; padding-top: max(12px, env(safe-area-inset-top)); }
+    .toolbar-left { gap: 6px; }
+    .mode-badge { font-size: 0.7rem; padding: 5px 10px; gap: 4px; }
+    button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
+  }
 </style>
-
 </head>
 <body>
 
 <!-- WELCOME -->
-
 <div id="modeSelectOverlay" class="modal-overlay">
     <div class="welcome-container">
         <h1 class="welcome-title" id="welcomeTitle" style="margin-top: 100px; padding-top: 30px;">🎮 PAPIA GAME</h1>
-
-```
-    <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
-    
-    <h2 class="welcome-highlight" id="welcomeHighlight">✨ 3 PESÉES MAXIMUM ✨</h2>
-    
-    <div class="mode-cards">
-        <div class="mode-card beginner">
-            <div class="mode-header">
-                <span class="mode-icon">🎯</span>
-                <h3 class="mode-title" id="modeBegTitle">MODE DÉBUTANT</h3>
+        
+        <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
+        
+        <h2 class="welcome-highlight" id="welcomeHighlight">✨ 3 PESÉES MAXIMUM ✨</h2>
+        
+        <div class="mode-cards">
+            <div class="mode-card beginner">
+                <div class="mode-header">
+                    <span class="mode-icon">🎯</span>
+                    <h3 class="mode-title" id="modeBegTitle">MODE DÉBUTANT</h3>
+                </div>
+                <p class="mode-description" id="modeBegDesc">Pour éliminer l'effet du hasard, vous devez gagner 3 parties consécutives</p>
+                <button id="btnBeginner" class="mode-button btn-beginner">
+                    <span id="btnBegText">🎮 JOUER</span>
+                </button>
             </div>
-            <p class="mode-description" id="modeBegDesc">Pour éliminer l'effet du hasard, vous devez gagner 3 parties consécutives</p>
-            <button id="btnBeginner" class="mode-button btn-beginner">
-                <span id="btnBegText">🎮 JOUER</span>
-            </button>
+            
+            <div class="mode-card expert">
+                <div class="mode-header">
+                    <span class="mode-icon">🔥</span>
+                    <h3 class="mode-title" id="modeExpTitle">MODE EXPERT</h3>
+                </div>
+                <p class="mode-description" id="modeExpDesc">Gagnez 3 parties consécutives sans aide. Les pièces gardent la même couleur.</p>
+                <button id="btnExpert" class="mode-button btn-expert">
+                    <span id="btnExpText">💪 JOUER</span>
+                </button>
+            </div>
         </div>
         
-        <div class="mode-card expert">
-            <div class="mode-header">
-                <span class="mode-icon">🔥</span>
-                <h3 class="mode-title" id="modeExpTitle">MODE EXPERT</h3>
-            </div>
-            <p class="mode-description" id="modeExpDesc">Gagnez 3 parties consécutives sans aide. Les pièces gardent la même couleur.</p>
-            <button id="btnExpert" class="mode-button btn-expert">
-                <span id="btnExpText">💪 JOUER</span>
-            </button>
+        <div class="lang-switcher">
+            <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
+            <button class="lang-btn" id="btnEN" style="font-weight: 900; font-size: 1.2rem; color: white !important; background: #1e293b !important;">🇬🇧 English</button>
+            <button class="lang-btn" id="btnThemes" style="font-weight: 900; font-size: 1.2rem;">🎨 Thèmes</button>
         </div>
+        
+        <div class="tutorial-link">
+            <button id="btnTutorial" class="btn-tutorial-link"><span id="tutorialLinkText">📚 Tutoriel</span></button>
+        </div>
+        
+        <p class="welcome-note" id="welcomeNote">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
     </div>
-    
-    <div class="lang-switcher">
-        <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
-        <button class="lang-btn" id="btnEN" style="font-weight: 900; font-size: 1.2rem; color: white !important; background: #1e293b !important;">🇬🇧 English</button>
-        <button class="lang-btn" id="btnThemes" style="font-weight: 900; font-size: 1.2rem;">🎨 Thèmes</button>
-    </div>
-    
-    <div class="tutorial-link">
-        <button id="btnTutorial" class="btn-tutorial-link"><span id="tutorialLinkText">📚 Tutoriel</span></button>
-    </div>
-    
-    <p class="welcome-note" id="welcomeNote">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
-</div>
-```
-
 </div>
 
 <!-- VICTORY MODAL -->
 
 <!-- THEMES MODAL -->
-
 <div id="themesOverlay" class="tutorial-overlay" style="display:none;">
   <div class="tutorial-content" style="max-width: 500px; padding: 30px;">
     <h2 style="color: #fb923c; margin: 0 0 20px 0; text-align: center;">🎨 Choisir un Thème</h2>
-
-```
-<div id="themesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px;">
-  <!-- Thème Orange -->
-  <div class="theme-card" data-theme="orange" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #fb923c, #f97316);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">🧡</div>
-    <div style="font-weight: bold; color: white;">Orange</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Classique</div>
-  </div>
-  
-  <!-- Thème Bleu -->
-  <div class="theme-card" data-theme="blue" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #3b82f6, #2563eb);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">💙</div>
-    <div style="font-weight: bold; color: white;">Bleu</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Océan</div>
-  </div>
-  
-  <!-- Thème Violet -->
-  <div class="theme-card" data-theme="purple" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #a855f7, #9333ea);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">💜</div>
-    <div style="font-weight: bold; color: white;">Violet</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Nuit</div>
-  </div>
-  
-  <!-- Thème Vert -->
-  <div class="theme-card" data-theme="green" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #10b981, #059669);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">💚</div>
-    <div style="font-weight: bold; color: white;">Vert</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Forêt</div>
-  </div>
-  
-  <!-- Thème Rose -->
-  <div class="theme-card" data-theme="pink" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #ec4899, #db2777);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">💗</div>
-    <div style="font-weight: bold; color: white;">Rose</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Cerise</div>
-  </div>
-  
-  <!-- Thème Noir -->
-  <div class="theme-card" data-theme="dark" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #1e293b, #0f172a);">
-    <div style="font-size: 2rem; margin-bottom: 8px;">🖤</div>
-    <div style="font-weight: bold; color: white;">Noir</div>
-    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Élégant</div>
-  </div>
-</div>
-
-<button onclick="document.getElementById('themesOverlay').style.display='none'" 
-        class="primary action-button" 
-        style="width: 100%; padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #10b981, #059669) !important;">
-  ✅ Fermer
-</button>
-```
-
+    
+    <div id="themesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px;">
+      <!-- Thème Orange -->
+      <div class="theme-card" data-theme="orange" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #fb923c, #f97316);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🧡</div>
+        <div style="font-weight: bold; color: white;">Orange</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Classique</div>
+      </div>
+      
+      <!-- Thème Bleu -->
+      <div class="theme-card" data-theme="blue" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #3b82f6, #2563eb);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💙</div>
+        <div style="font-weight: bold; color: white;">Bleu</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Océan</div>
+      </div>
+      
+      <!-- Thème Violet -->
+      <div class="theme-card" data-theme="purple" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #a855f7, #9333ea);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💜</div>
+        <div style="font-weight: bold; color: white;">Violet</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Nuit</div>
+      </div>
+      
+      <!-- Thème Vert -->
+      <div class="theme-card" data-theme="green" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #10b981, #059669);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💚</div>
+        <div style="font-weight: bold; color: white;">Vert</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Forêt</div>
+      </div>
+      
+      <!-- Thème Rose -->
+      <div class="theme-card" data-theme="pink" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #ec4899, #db2777);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💗</div>
+        <div style="font-weight: bold; color: white;">Rose</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Cerise</div>
+      </div>
+      
+      <!-- Thème Noir -->
+      <div class="theme-card" data-theme="dark" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🖤</div>
+        <div style="font-weight: bold; color: white;">Noir</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Élégant</div>
+      </div>
+    </div>
+    
+    <button onclick="document.getElementById('themesOverlay').style.display='none'" 
+            class="primary action-button" 
+            style="width: 100%; padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #10b981, #059669) !important;">
+      ✅ Fermer
+    </button>
   </div>
 </div>
 
 <!-- VICTORY MODAL -->
-
 <div id="victoryOverlay" class="modal-overlay" style="display:none;">
     <div class="modal-content">
         <h3 id="victoryTitle">🎉 BRAVO !</h3>
@@ -381,7 +372,6 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </div>
 
 <!-- CHAMPION MODAL -->
-
 <div id="championOverlay" class="modal-overlay" style="display:none;">
     <div class="modal-content">
         <h3 id="championTitle">🏆 CHAMPION ! 🏆</h3>
@@ -397,7 +387,6 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </div>
 
 <!-- FAILED MODAL -->
-
 <div id="failedOverlay" class="modal-overlay" style="display:none;">
     <div class="modal-content">
         <h3 id="failedTitle">❌ SÉRIE BRISÉE</h3>
@@ -411,7 +400,6 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </div>
 
 <!-- RESULT MODAL -->
-
 <div id="resultOverlay" class="modal-overlay" style="display:none; background: rgba(0, 0, 0, 0.9);">
     <div class="modal-content" style="max-width: 500px; padding: 35px;">
         <h3 id="resultTitle" style="margin-bottom: 25px;">🎯 CHOISIR LA PIÈCE</h3>
@@ -431,13 +419,11 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </div>
 
 <!-- TUTORIAL -->
-
 <div id="tutorialOverlay" class="tutorial-overlay" style="display:none;">
     <div class="tutorial-content" id="tutorialContent"></div>
 </div>
 
 <!-- TOOLBAR -->
-
 <div class="toolbar">
   <div class="toolbar-left">
     <div class="mode-badge beginner" id="modeBadge" style="display:none;">
@@ -454,7 +440,6 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
 </div>
 
 <!-- MAIN -->
-
 <main>
   <section class="panel">
     <div id="message">Prêt à jouer !</div>
@@ -466,30 +451,27 @@ button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
       <div id="leftPlateau" class="plateau-container">
         <div id="lDrop" class="dropzone"></div>
       </div>
-
-```
-  <div class="beam-container">
-    <button id="btnClear" class="action-button white" style="margin-bottom: 15px;"><span id="clearText">🗑️ VIDER</span></button>
-    <div id="beamArm" class="beam-arm"></div>
-    <div class="beam-pivot"></div>
-    <div id="weighResult">—</div>
-    <button id="btnWeigh" class="action-button blue" style="margin-top: 15px;"><span id="weighText">⚖️ PESER</span></button>
-  </div>
-  
-  <div id="rightPlateau" class="plateau-container">
-    <div id="rDrop" class="dropzone"></div>
-  </div>
-</div>
-
-<div style="margin-top:8px;">
-  <div id="history">
-    <div id="weighLine1" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P1</span><span style="flex:1; text-align:center;">—</span></div>
-    <div id="weighLine2" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P2</span><span style="flex:1; text-align:center;">—</span></div>
-    <div id="weighLine3" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P3</span><span style="flex:1; text-align:center;">—</span></div>
-  </div>
-</div>
-```
-
+      
+      <div class="beam-container">
+        <button id="btnClear" class="action-button white" style="margin-bottom: 15px; border-radius: 50%; width: 60px; height: 60px; padding: 0; font-size: 0.8rem; line-height: 1.2;"><span id="clearText">VIDER</span></button>
+        <div id="beamArm" class="beam-arm"></div>
+        <div class="beam-pivot"></div>
+        <div id="weighResult">—</div>
+        <button id="btnWeigh" class="action-button blue" style="margin-top: 15px;"><span id="weighText">⚖️ PESER</span></button>
+      </div>
+      
+      <div id="rightPlateau" class="plateau-container">
+        <div id="rDrop" class="dropzone"></div>
+      </div>
+    </div>
+    
+    <div style="margin-top:8px;">
+      <div id="history">
+        <div id="weighLine1" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P1</span><span style="flex:1; text-align:center;">—</span></div>
+        <div id="weighLine2" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P2</span><span style="flex:1; text-align:center;">—</span></div>
+        <div id="weighLine3" class="hist-line" style="opacity:0.3;"><span style="font-weight:bold; color:#3b82f6; white-space:nowrap; font-size:0.85rem;">P3</span><span style="flex:1; text-align:center;">—</span></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -628,17 +610,17 @@ const T = {
     
     help: "📚 Aide",
     weigh: "⚖️ PESER",
-    clear: "🗑️ VIDER",
+    clear: "VIDER",
     abandon: "🏳️ Abandonner",
     
     ready: "Prêt à jouer !",
-    find: "🎯 Trouvez la fausse pièce !",
+    find: "Déposez les pièces sur la balance",
     putCoins: "⚠️ Placez des pièces sur les plateaux !",
     leftHeavier: "Gauche lourde",
     rightHeavier: "Droite lourde",
     balanced: "Équilibre parfait",
     weighed: "⚖️ Pesée {n}/3 effectuée. Reste {r} pesée(s).",
-    clickChoose: "🎯 Choisir la fausse pièce",
+    clickChoose: "Cliquez ici et indiquez la fausse pièce",
     cleared: "🗑️ Plateaux vidés !",
     continue: "⚖️ Pesée {n}/3. Continuez !",
     victory: "🎉 BRAVO ! La pièce {id} était plus {type} !",
@@ -724,7 +706,7 @@ const T = {
     
     help: "📚 Help",
     weigh: "⚖️ WEIGH",
-    clear: "🗑️ CLEAR",
+    clear: "CLEAR",
     abandon: "🏳️ Abandon",
     
     ready: "Ready to play!",
@@ -734,7 +716,7 @@ const T = {
     rightHeavier: "Right heavier",
     balanced: "Perfect balance",
     weighed: "⚖️ Weighing {n}/3 done. {r} remaining.",
-    clickChoose: "🎯 Choose the fake coin",
+    clickChoose: "Click here and indicate the fake coin",
     cleared: "🗑️ Scales cleared!",
     continue: "⚖️ Weighing {n}/3. Continue!",
     victory: "🎉 SUCCESS! Coin {id} was {type}!",
@@ -1637,17 +1619,23 @@ document.getElementById('btnFR').addEventListener('click', () => setLang('fr'));
 document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
 
 // Bouton Thèmes
-document.getElementById('btnThemes').onclick = function() {
-  document.getElementById('themesOverlay').style.display = 'flex';
-  applyTheme(currentTheme); // Highlight le thème actuel
-};
+const btnThemes = document.getElementById('btnThemes');
+if (btnThemes) {
+  btnThemes.addEventListener('click', function() {
+    const overlay = document.getElementById('themesOverlay');
+    if (overlay) {
+      overlay.style.display = 'flex';
+      applyTheme(currentTheme);
+    }
+  });
+}
 
 // Event listeners pour chaque thème
 document.querySelectorAll('.theme-card').forEach(card => {
-  card.onclick = function() {
+  card.addEventListener('click', function() {
     const themeName = this.dataset.theme;
     applyTheme(themeName);
-  };
+  });
 });
 
 setLang('fr');
@@ -1754,6 +1742,5 @@ showIOSInstallPrompt();
 
 }); // End DOMContentLoaded
 </script>
-
 </body>
 </html>
