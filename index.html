@@ -7,12 +7,12 @@
 <meta name="theme-color" content="#0f172a"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="JOJO GAME"/>
+<meta name="apple-mobile-web-app-title" content="PAPIA GAME"/>
 <meta name="mobile-web-app-capable" content="yes"/>
 <link rel="manifest" href="manifest.json"/>
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"/>
 <link rel="apple-touch-icon" href="icon-512.png"/>
-<title>JOJO GAME - 12 Pièces Challenge</title>
+<title>PAPIA GAME - 12 Pièces Challenge</title>
 <style>
   * { color-scheme: dark; }
 
@@ -234,7 +234,7 @@
 <!-- WELCOME -->
 <div id="modeSelectOverlay" class="modal-overlay">
     <div class="welcome-container">
-        <h1 class="welcome-title" id="welcomeTitle" style="margin-top: 100px; padding-top: 30px;">🎮 JOJO GAME</h1>
+        <h1 class="welcome-title" id="welcomeTitle" style="margin-top: 100px; padding-top: 30px;">🎮 PAPIA GAME</h1>
         
         <p class="welcome-subtitle" id="welcomeSubtitle">Trouvez la fausse pièce parmi 12 en</p>
         
@@ -267,6 +267,7 @@
         <div class="lang-switcher">
             <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
             <button class="lang-btn" id="btnEN" style="font-weight: 900; font-size: 1.2rem; color: white !important; background: #1e293b !important;">🇬🇧 English</button>
+            <button class="lang-btn" id="btnThemes" style="font-weight: 900; font-size: 1.2rem;">🎨 Thèmes</button>
         </div>
         
         <div class="tutorial-link">
@@ -275,6 +276,65 @@
         
         <p class="welcome-note" id="welcomeNote">(La fausse pièce peut être plus lourde ou plus légère que les autres)</p>
     </div>
+</div>
+
+<!-- VICTORY MODAL -->
+
+<!-- THEMES MODAL -->
+<div id="themesOverlay" class="tutorial-overlay" style="display:none;">
+  <div class="tutorial-content" style="max-width: 500px; padding: 30px;">
+    <h2 style="color: #fb923c; margin: 0 0 20px 0; text-align: center;">🎨 Choisir un Thème</h2>
+    
+    <div id="themesGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 25px;">
+      <!-- Thème Orange -->
+      <div class="theme-card" data-theme="orange" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #fb923c, #f97316);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🧡</div>
+        <div style="font-weight: bold; color: white;">Orange</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Classique</div>
+      </div>
+      
+      <!-- Thème Bleu -->
+      <div class="theme-card" data-theme="blue" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #3b82f6, #2563eb);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💙</div>
+        <div style="font-weight: bold; color: white;">Bleu</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Océan</div>
+      </div>
+      
+      <!-- Thème Violet -->
+      <div class="theme-card" data-theme="purple" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #a855f7, #9333ea);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💜</div>
+        <div style="font-weight: bold; color: white;">Violet</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Nuit</div>
+      </div>
+      
+      <!-- Thème Vert -->
+      <div class="theme-card" data-theme="green" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #10b981, #059669);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💚</div>
+        <div style="font-weight: bold; color: white;">Vert</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Forêt</div>
+      </div>
+      
+      <!-- Thème Rose -->
+      <div class="theme-card" data-theme="pink" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #ec4899, #db2777);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">💗</div>
+        <div style="font-weight: bold; color: white;">Rose</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Cerise</div>
+      </div>
+      
+      <!-- Thème Noir -->
+      <div class="theme-card" data-theme="dark" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #1e293b, #0f172a);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🖤</div>
+        <div style="font-weight: bold; color: white;">Noir</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Élégant</div>
+      </div>
+    </div>
+    
+    <button onclick="document.getElementById('themesOverlay').style.display='none'" 
+            class="primary action-button" 
+            style="width: 100%; padding: 15px; font-size: 1.1rem; background: linear-gradient(135deg, #10b981, #059669) !important;">
+      ✅ Fermer
+    </button>
+  </div>
 </div>
 
 <!-- VICTORY MODAL -->
@@ -405,9 +465,86 @@ window.addEventListener('error', function(e) {
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
 
+// ========== THEME SYSTEM ==========
+const themes = {
+  orange: {
+    primary: '#fb923c',
+    secondary: '#f97316',
+    background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+    name: 'Orange'
+  },
+  blue: {
+    primary: '#3b82f6',
+    secondary: '#2563eb',
+    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
+    name: 'Bleu'
+  },
+  purple: {
+    primary: '#a855f7',
+    secondary: '#9333ea',
+    background: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
+    name: 'Violet'
+  },
+  green: {
+    primary: '#10b981',
+    secondary: '#059669',
+    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    name: 'Vert'
+  },
+  pink: {
+    primary: '#ec4899',
+    secondary: '#db2777',
+    background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
+    name: 'Rose'
+  },
+  dark: {
+    primary: '#1e293b',
+    secondary: '#0f172a',
+    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+    name: 'Noir'
+  }
+};
+
+let currentTheme = localStorage.getItem('jojoGameTheme') || 'orange';
+
+function applyTheme(themeName) {
+  const theme = themes[themeName];
+  if (!theme) return;
+  
+  currentTheme = themeName;
+  localStorage.setItem('jojoGameTheme', themeName);
+  
+  // Appliquer au mode select overlay
+  const overlay = document.getElementById('modeSelectOverlay');
+  if (overlay) {
+    overlay.style.background = theme.background;
+  }
+  
+  // Appliquer aux boutons mode
+  const beginnerBtn = document.querySelector('.mode-button.beginner');
+  const expertBtn = document.querySelector('.mode-button.expert');
+  if (beginnerBtn) {
+    beginnerBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
+  }
+  if (expertBtn) {
+    expertBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
+  }
+  
+  // Highlight du thème sélectionné
+  document.querySelectorAll('.theme-card').forEach(card => {
+    if (card.dataset.theme === themeName) {
+      card.style.border = '3px solid white';
+      card.style.transform = 'scale(1.05)';
+    } else {
+      card.style.border = '3px solid transparent';
+      card.style.transform = 'scale(1)';
+    }
+  });
+}
+
 const T = {
   fr: {
-    welcome: "🎮 JOJO GAME",
+    welcome: "🎮 PAPIA GAME",
     subtitle: "Trouvez la fausse pièce parmi 12 en",
     highlight: "✨ 3 PESÉES MAXIMUM ✨",
     
@@ -501,7 +638,7 @@ const T = {
     tutorialClose: "C'est Compris ! 🚀"
   },
   en: {
-    welcome: "🎮 JOJO GAME",
+    welcome: "🎮 PAPIA GAME",
     subtitle: "Find the fake coin among 12 in",
     highlight: "✨ 3 WEIGHINGS MAXIMUM ✨",
     
@@ -1461,7 +1598,22 @@ document.getElementById('btnNew2').addEventListener('click', () => {
 document.getElementById('btnFR').addEventListener('click', () => setLang('fr'));
 document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
 
+// Bouton Thèmes
+document.getElementById('btnThemes').onclick = function() {
+  document.getElementById('themesOverlay').style.display = 'flex';
+  applyTheme(currentTheme); // Highlight le thème actuel
+};
+
+// Event listeners pour chaque thème
+document.querySelectorAll('.theme-card').forEach(card => {
+  card.onclick = function() {
+    const themeName = this.dataset.theme;
+    applyTheme(themeName);
+  };
+});
+
 setLang('fr');
+applyTheme(currentTheme); // Appliquer le thème sauvegardé
 document.getElementById('modeSelectOverlay').style.display = 'flex';
 
 // ========== PWA: Service Worker Registration ==========
@@ -1521,7 +1673,7 @@ function showIOSInstallPrompt() {
     
     popup.innerHTML = `
       <div style="font-size: 3rem; margin-bottom: 15px;">📲</div>
-      <h2 style="color: #fb923c; margin: 0 0 15px 0; font-size: 1.5rem;">Installer JOJO GAME</h2>
+      <h2 style="color: #fb923c; margin: 0 0 15px 0; font-size: 1.5rem;">Installer PAPIA GAME</h2>
       <p style="margin: 15px 0; line-height: 1.6; color: #cbd5e1;">
         Pour jouer hors ligne et accéder plus rapidement au jeu :
       </p>

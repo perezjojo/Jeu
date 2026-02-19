@@ -1,6 +1,6 @@
 {
-  "name": "JOJO GAME - 12 Pièces Challenge",
-  "short_name": "JOJO GAME",
+  "name": "PAPIA GAME - 12 Pièces Challenge",
+  "short_name": "PAPIA GAME",
   "description": "Trouvez la fausse pièce parmi 12 en 3 pesées maximum. Défi logique et stratégie !",
   "start_url": "/Jeu/",
   "display": "standalone",
