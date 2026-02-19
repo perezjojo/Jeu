@@ -287,7 +287,7 @@
         <div class="lang-switcher">
             <button class="lang-btn active" id="btnFR">🇫🇷 Français</button>
             <button class="lang-btn" id="btnEN" style="font-weight: 900; font-size: 1.2rem; color: white !important; background: #1e293b !important;">🇬🇧 English</button>
-            <button class="lang-btn" id="btnThemes" style="font-weight: 900; font-size: 1.2rem;">🎨 Thèmes</button>
+            <button class="lang-btn" id="btnThemes" style="font-weight: 900; font-size: 1.2rem;">🎨 Thème</button>
         </div>
         
         <div class="tutorial-link">
@@ -534,15 +534,29 @@ function applyTheme(themeName) {
   currentTheme = themeName;
   localStorage.setItem('jojoGameTheme', themeName);
   
-  // Appliquer au mode select overlay
+  // Appliquer au mode select overlay (page d'accueil)
   const overlay = document.getElementById('modeSelectOverlay');
   if (overlay) {
     overlay.style.background = theme.background;
   }
   
-  // Appliquer aux boutons mode
-  const beginnerBtn = document.querySelector('.mode-button.beginner');
-  const expertBtn = document.querySelector('.mode-button.expert');
+  // Appliquer aux cartes mode (fond)
+  const beginnerCard = document.querySelector('.mode-card.beginner');
+  const expertCard = document.querySelector('.mode-card.expert');
+  
+  if (beginnerCard) {
+    beginnerCard.style.background = `linear-gradient(135deg, ${theme.primary}22 0%, ${theme.secondary}22 100%)`;
+    beginnerCard.style.borderColor = theme.primary;
+  }
+  if (expertCard) {
+    expertCard.style.background = `linear-gradient(135deg, ${theme.primary}33 0%, ${theme.secondary}33 100%)`;
+    expertCard.style.borderColor = theme.primary;
+  }
+  
+  // Appliquer aux boutons JOUER
+  const beginnerBtn = document.getElementById('btnBeginner');
+  const expertBtn = document.getElementById('btnExpert');
+  
   if (beginnerBtn) {
     beginnerBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
   }
@@ -550,7 +564,7 @@ function applyTheme(themeName) {
     expertBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
   }
   
-  // Highlight du thème sélectionné
+  // Highlight du thème sélectionné dans le modal
   document.querySelectorAll('.theme-card').forEach(card => {
     if (card.dataset.theme === themeName) {
       card.style.border = '3px solid white';
