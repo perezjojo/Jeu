@@ -34,8 +34,8 @@
 
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #0f172a !important; color: #f1f5f9 !important;
-    display: flex; flex-direction: column; transition: background-color 0.5s;
+    background: #0f172a; color: #f1f5f9 !important;
+    display: flex; flex-direction: column; transition: background 0.5s ease;
     position: fixed; 
     overflow: hidden;
     width: 100vw;
@@ -148,7 +148,7 @@
   button.danger { background: linear-gradient(135deg, #ef4444, #dc2626) !important; border: none; }
 
   main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden; }
-  .panel { background: #1e293b !important; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+  .panel { background: #1e293b; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); transition: background 0.5s ease, border-color 0.5s ease; }
 
   .coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; background: rgba(0, 0, 0, 0.5) !important; border-radius: 10px; border: 1px solid #334155; min-height: 0; }
   
@@ -167,7 +167,7 @@
   .dropzone { 
     width: 100%; 
     height: 105px; 
-    background: linear-gradient(to bottom, #cbd5e1, #94a3b8) !important; 
+    background: linear-gradient(to bottom, #cbd5e1, #94a3b8); 
     border: none;
     border-left: 6px solid #64748b;
     border-right: 6px solid #64748b;
@@ -182,7 +182,7 @@
     padding: 6px; 
     justify-items: center; 
     align-items: center; 
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s ease;
     box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), inset 3px 3px 8px rgba(0, 0, 0, 0.2);
   }
   .dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
@@ -190,7 +190,7 @@
   .dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
   
   .beam-container { flex: 0 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 0px; height: auto; gap: 10px; }
-  .beam-arm { width: 130px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b) !important; border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); margin-left: auto; margin-right: auto; }
+  .beam-arm { width: 130px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b); border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease; transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); margin-left: auto; margin-right: auto; }
   .beam-pivot { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 26px solid #475569; position: absolute; top: 50%; transform: translateY(-13px); z-index: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
   #weighResult { margin-top: 10px; font-weight: bold; font-size: 0.85rem; text-align: center; height: 1.2em; color: #f1f5f9 !important; }
 
@@ -636,10 +636,16 @@ function applyTheme(themeName) {
     plateau.style.borderBottomColor = theme.plateauBorder;
   });
   
-  // ========== BARRE DE LA BALANCE ==========
+  // ========== BARRE DE LA BALANCE (même couleur que bordures plateaux) ==========
   const beamArm = document.getElementById('beamArm');
   if (beamArm) {
-    beamArm.style.background = `linear-gradient(to bottom, ${theme.plateau.split(',')[0].split('(')[1]}, ${theme.plateauBorder})`;
+    // Extraire la couleur claire des plateaux pour le dégradé
+    const plateauLightColor = theme.plateau.includes('rgb') 
+      ? theme.plateau.split(',')[0].split('(')[2] 
+      : theme.plateau.split(',')[0].replace('linear-gradient(to bottom, ', '').trim();
+    
+    // La barre a un dégradé : clair en haut → bordure foncée en bas (même que plateaux)
+    beamArm.style.background = `linear-gradient(to bottom, ${plateauLightColor}, ${theme.plateauBorder})`;
   }
   
   // ========== MESSAGES ==========
