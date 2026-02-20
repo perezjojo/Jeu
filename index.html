@@ -588,6 +588,10 @@ function applyTheme(themeName) {
   currentTheme = themeName;
   localStorage.setItem('papiaGameTheme', themeName);
   
+  // ========== BACKGROUND GÉNÉRAL DU JEU (le plus important !) ==========
+  document.body.style.background = theme.bgGradient;
+  document.body.style.backgroundColor = theme.bgSecondary; // Fallback
+  
   // Page d'accueil
   const modeOverlay = document.getElementById('modeSelectOverlay');
   if (modeOverlay) {
@@ -598,12 +602,12 @@ function applyTheme(themeName) {
   const beginnerCard = document.querySelector('.mode-card.beginner');
   const expertCard = document.querySelector('.mode-card.expert');
   if (beginnerCard) {
-    beginnerCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}33 0%, ${theme.bgSecondary}33 100%)`;
+    beginnerCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}44 0%, ${theme.bgSecondary}44 100%)`;
     beginnerCard.style.borderColor = theme.button;
   }
   if (expertCard) {
-    expertCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}44 0%, ${theme.bgSecondary}44 100%)`;
-    expertCard.style.borderColor = theme.button;
+    expertCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}55 0%, ${theme.bgSecondary}55 100%)`;
+    beginnerCard.style.borderColor = theme.button;
   }
   
   // Boutons JOUER
@@ -611,21 +615,20 @@ function applyTheme(themeName) {
     btn.style.background = `linear-gradient(135deg, ${theme.button}, ${theme.buttonHover})`;
   });
   
-  // Toolbar
+  // ========== TOOLBAR (barre du haut) ==========
   const toolbar = document.querySelector('.toolbar');
   if (toolbar) {
     toolbar.style.background = theme.toolbar;
+    toolbar.style.borderBottomColor = theme.plateauBorder;
   }
   
-  // Background du jeu (body)
-  document.body.style.background = theme.bgGradient;
-  
-  // Panels
+  // ========== PANELS (cadres du jeu) ==========
   document.querySelectorAll('.panel').forEach(panel => {
     panel.style.background = theme.panel;
+    panel.style.borderColor = theme.plateauBorder;
   });
   
-  // Plateaux
+  // ========== PLATEAUX DE LA BALANCE ==========
   document.querySelectorAll('.dropzone').forEach(plateau => {
     plateau.style.background = theme.plateau;
     plateau.style.borderLeftColor = theme.plateauBorder;
@@ -633,32 +636,73 @@ function applyTheme(themeName) {
     plateau.style.borderBottomColor = theme.plateauBorder;
   });
   
-  // Message
+  // ========== BARRE DE LA BALANCE ==========
+  const beamArm = document.getElementById('beamArm');
+  if (beamArm) {
+    beamArm.style.background = `linear-gradient(to bottom, ${theme.plateau.split(',')[0].split('(')[1]}, ${theme.plateauBorder})`;
+  }
+  
+  // ========== MESSAGES ==========
   const message = document.getElementById('message');
   if (message) {
     message.style.background = theme.message;
+    message.style.borderColor = theme.plateauBorder;
   }
   
-  // Boutons d'action
+  // ========== HISTORIQUE ==========
+  const history = document.getElementById('history');
+  if (history) {
+    history.style.background = `${theme.button}33`;
+    history.style.borderColor = theme.button;
+  }
+  
+  // ========== BOUTONS D'ACTION ==========
   document.querySelectorAll('.action-button').forEach(btn => {
     if (btn.classList.contains('blue')) {
+      btn.style.background = `linear-gradient(135deg, ${theme.button}, ${theme.buttonHover})`;
+    } else if (btn.classList.contains('white')) {
+      btn.style.background = `linear-gradient(135deg, ${theme.plateau.split(',')[0].split('(')[1]}, ${theme.plateauBorder})`;
+      btn.style.color = theme.text;
+    }
+  });
+  
+  // ========== MODALS (Victoire, Champion, etc.) ==========
+  document.querySelectorAll('.modal-content, .tutorial-content').forEach(modal => {
+    modal.style.background = theme.modal;
+    modal.style.borderColor = theme.button;
+  });
+  
+  // Overlays de fond
+  document.querySelectorAll('.modal-overlay, .tutorial-overlay').forEach(overlay => {
+    if (overlay.style.display !== 'none') {
+      overlay.style.background = `rgba(0, 0, 0, 0.92)`;
+    }
+  });
+  
+  // ========== BOUTONS DANS LES MODALS ==========
+  document.querySelectorAll('.modal-content button, .tutorial-content button').forEach(btn => {
+    if (!btn.classList.contains('danger')) {
       btn.style.background = `linear-gradient(135deg, ${theme.button}, ${theme.buttonHover})`;
     }
   });
   
-  // Modals
-  document.querySelectorAll('.modal-content, .tutorial-content').forEach(modal => {
-    modal.style.background = theme.modal;
-  });
+  // ========== BADGE MODE (toolbar) ==========
+  const modeBadge = document.getElementById('modeBadge');
+  if (modeBadge) {
+    modeBadge.style.background = `${theme.button}33`;
+    modeBadge.style.borderColor = theme.button;
+  }
   
-  // Highlight du thème sélectionné
+  // ========== HIGHLIGHT DU THÈME SÉLECTIONNÉ ==========
   document.querySelectorAll('.theme-card').forEach(card => {
     if (card.dataset.theme === themeName) {
       card.style.border = '3px solid white';
       card.style.transform = 'scale(1.05)';
+      card.style.boxShadow = '0 8px 24px rgba(255, 255, 255, 0.3)';
     } else {
       card.style.border = '3px solid transparent';
       card.style.transform = 'scale(1)';
+      card.style.boxShadow = 'none';
     }
   });
 }
