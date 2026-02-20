@@ -313,39 +313,39 @@
         <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Classique</div>
       </div>
       
-      <!-- Thème Bleu -->
-      <div class="theme-card" data-theme="blue" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #3b82f6, #2563eb);">
-        <div style="font-size: 2rem; margin-bottom: 8px;">💙</div>
-        <div style="font-weight: bold; color: white;">Bleu</div>
-        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Océan</div>
+      <!-- Thème Océan -->
+      <div class="theme-card" data-theme="ocean" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #1e3a8a, #0c4a6e);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌊</div>
+        <div style="font-weight: bold; color: white;">Océan</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Bleu marin</div>
       </div>
       
-      <!-- Thème Violet -->
-      <div class="theme-card" data-theme="purple" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #a855f7, #9333ea);">
-        <div style="font-size: 2rem; margin-bottom: 8px;">💜</div>
-        <div style="font-weight: bold; color: white;">Violet</div>
-        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Nuit</div>
+      <!-- Thème Forêt -->
+      <div class="theme-card" data-theme="forest" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #065f46, #134e4a);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌲</div>
+        <div style="font-weight: bold; color: white;">Forêt</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Vert nature</div>
       </div>
       
-      <!-- Thème Vert -->
-      <div class="theme-card" data-theme="green" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #10b981, #059669);">
-        <div style="font-size: 2rem; margin-bottom: 8px;">💚</div>
-        <div style="font-weight: bold; color: white;">Vert</div>
-        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Forêt</div>
+      <!-- Thème Nuit -->
+      <div class="theme-card" data-theme="night" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #581c87, #3730a3);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌙</div>
+        <div style="font-weight: bold; color: white;">Nuit</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Violet foncé</div>
       </div>
       
-      <!-- Thème Rose -->
-      <div class="theme-card" data-theme="pink" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #ec4899, #db2777);">
-        <div style="font-size: 2rem; margin-bottom: 8px;">💗</div>
-        <div style="font-weight: bold; color: white;">Rose</div>
-        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Cerise</div>
+      <!-- Thème Sakura -->
+      <div class="theme-card" data-theme="sakura" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #db2777, #ec4899);">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🌸</div>
+        <div style="font-weight: bold; color: white;">Sakura</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Rose cerise</div>
       </div>
       
-      <!-- Thème Noir -->
+      <!-- Thème Élégant -->
       <div class="theme-card" data-theme="dark" style="cursor: pointer; padding: 20px; border-radius: 12px; text-align: center; border: 3px solid transparent; transition: all 0.3s; background: linear-gradient(135deg, #1e293b, #0f172a);">
         <div style="font-size: 2rem; margin-bottom: 8px;">🖤</div>
-        <div style="font-weight: bold; color: white;">Noir</div>
-        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Élégant</div>
+        <div style="font-weight: bold; color: white;">Élégant</div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.9);">Noir sobre</div>
       </div>
     </div>
     
@@ -485,86 +485,173 @@ window.addEventListener('error', function(e) {
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
 
-// ========== THEME SYSTEM ==========
+// ========== THEME SYSTEM COMPLET ==========
 const themes = {
   orange: {
-    primary: '#fb923c',
-    secondary: '#f97316',
-    background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-    name: 'Orange'
+    name: 'Orange',
+    bgPrimary: '#fb923c',
+    bgSecondary: '#f97316',
+    bgGradient: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+    toolbar: '#1e293b',
+    button: '#fb923c',
+    buttonHover: '#f97316',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #cbd5e1, #94a3b8)',
+    plateauBorder: '#64748b',
+    message: 'linear-gradient(135deg, #94a3b8, #64748b)',
+    panel: '#1e293b',
+    modal: '#1e293b'
   },
-  blue: {
-    primary: '#3b82f6',
-    secondary: '#2563eb',
-    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-    name: 'Bleu'
+  ocean: {
+    name: 'Océan',
+    bgPrimary: '#1e3a8a',
+    bgSecondary: '#0c4a6e',
+    bgGradient: 'linear-gradient(135deg, #1e3a8a 0%, #0c4a6e 100%)',
+    toolbar: '#0c4a6e',
+    button: '#3b82f6',
+    buttonHover: '#2563eb',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #93c5fd, #60a5fa)',
+    plateauBorder: '#1e40af',
+    message: 'linear-gradient(135deg, #60a5fa, #3b82f6)',
+    panel: '#0c4a6e',
+    modal: '#0c4a6e'
   },
-  purple: {
-    primary: '#a855f7',
-    secondary: '#9333ea',
-    background: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)',
-    name: 'Violet'
+  forest: {
+    name: 'Forêt',
+    bgPrimary: '#065f46',
+    bgSecondary: '#134e4a',
+    bgGradient: 'linear-gradient(135deg, #065f46 0%, #134e4a 100%)',
+    toolbar: '#134e4a',
+    button: '#10b981',
+    buttonHover: '#059669',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #86efac, #4ade80)',
+    plateauBorder: '#047857',
+    message: 'linear-gradient(135deg, #4ade80, #10b981)',
+    panel: '#134e4a',
+    modal: '#134e4a'
   },
-  green: {
-    primary: '#10b981',
-    secondary: '#059669',
-    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-    name: 'Vert'
+  night: {
+    name: 'Nuit',
+    bgPrimary: '#581c87',
+    bgSecondary: '#3730a3',
+    bgGradient: 'linear-gradient(135deg, #581c87 0%, #3730a3 100%)',
+    toolbar: '#3730a3',
+    button: '#a855f7',
+    buttonHover: '#9333ea',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #c4b5fd, #a78bfa)',
+    plateauBorder: '#6d28d9',
+    message: 'linear-gradient(135deg, #a78bfa, #a855f7)',
+    panel: '#3730a3',
+    modal: '#3730a3'
   },
-  pink: {
-    primary: '#ec4899',
-    secondary: '#db2777',
-    background: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)',
-    name: 'Rose'
+  sakura: {
+    name: 'Sakura',
+    bgPrimary: '#db2777',
+    bgSecondary: '#ec4899',
+    bgGradient: 'linear-gradient(135deg, #db2777 0%, #ec4899 100%)',
+    toolbar: '#9f1239',
+    button: '#ec4899',
+    buttonHover: '#db2777',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #fbcfe8, #f9a8d4)',
+    plateauBorder: '#be185d',
+    message: 'linear-gradient(135deg, #f9a8d4, #ec4899)',
+    panel: '#9f1239',
+    modal: '#9f1239'
   },
   dark: {
-    primary: '#1e293b',
-    secondary: '#0f172a',
-    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-    name: 'Noir'
+    name: 'Élégant',
+    bgPrimary: '#0f172a',
+    bgSecondary: '#1e293b',
+    bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+    toolbar: '#0f172a',
+    button: '#64748b',
+    buttonHover: '#475569',
+    text: '#f1f5f9',
+    plateau: 'linear-gradient(to bottom, #64748b, #475569)',
+    plateauBorder: '#334155',
+    message: 'linear-gradient(135deg, #475569, #334155)',
+    panel: '#1e293b',
+    modal: '#1e293b'
   }
 };
 
-let currentTheme = localStorage.getItem('jojoGameTheme') || 'orange';
+let currentTheme = localStorage.getItem('papiaGameTheme') || 'orange';
 
 function applyTheme(themeName) {
   const theme = themes[themeName];
   if (!theme) return;
   
   currentTheme = themeName;
-  localStorage.setItem('jojoGameTheme', themeName);
+  localStorage.setItem('papiaGameTheme', themeName);
   
-  // Appliquer au mode select overlay (page d'accueil)
-  const overlay = document.getElementById('modeSelectOverlay');
-  if (overlay) {
-    overlay.style.background = theme.background;
+  // Page d'accueil
+  const modeOverlay = document.getElementById('modeSelectOverlay');
+  if (modeOverlay) {
+    modeOverlay.style.background = theme.bgGradient;
   }
   
-  // Appliquer aux cartes mode (fond)
+  // Cartes mode
   const beginnerCard = document.querySelector('.mode-card.beginner');
   const expertCard = document.querySelector('.mode-card.expert');
-  
   if (beginnerCard) {
-    beginnerCard.style.background = `linear-gradient(135deg, ${theme.primary}22 0%, ${theme.secondary}22 100%)`;
-    beginnerCard.style.borderColor = theme.primary;
+    beginnerCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}33 0%, ${theme.bgSecondary}33 100%)`;
+    beginnerCard.style.borderColor = theme.button;
   }
   if (expertCard) {
-    expertCard.style.background = `linear-gradient(135deg, ${theme.primary}33 0%, ${theme.secondary}33 100%)`;
-    expertCard.style.borderColor = theme.primary;
+    expertCard.style.background = `linear-gradient(135deg, ${theme.bgPrimary}44 0%, ${theme.bgSecondary}44 100%)`;
+    expertCard.style.borderColor = theme.button;
   }
   
-  // Appliquer aux boutons JOUER
-  const beginnerBtn = document.getElementById('btnBeginner');
-  const expertBtn = document.getElementById('btnExpert');
+  // Boutons JOUER
+  document.querySelectorAll('#btnBeginner, #btnExpert').forEach(btn => {
+    btn.style.background = `linear-gradient(135deg, ${theme.button}, ${theme.buttonHover})`;
+  });
   
-  if (beginnerBtn) {
-    beginnerBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
-  }
-  if (expertBtn) {
-    expertBtn.style.background = `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`;
+  // Toolbar
+  const toolbar = document.querySelector('.toolbar');
+  if (toolbar) {
+    toolbar.style.background = theme.toolbar;
   }
   
-  // Highlight du thème sélectionné dans le modal
+  // Background du jeu (body)
+  document.body.style.background = theme.bgGradient;
+  
+  // Panels
+  document.querySelectorAll('.panel').forEach(panel => {
+    panel.style.background = theme.panel;
+  });
+  
+  // Plateaux
+  document.querySelectorAll('.dropzone').forEach(plateau => {
+    plateau.style.background = theme.plateau;
+    plateau.style.borderLeftColor = theme.plateauBorder;
+    plateau.style.borderRightColor = theme.plateauBorder;
+    plateau.style.borderBottomColor = theme.plateauBorder;
+  });
+  
+  // Message
+  const message = document.getElementById('message');
+  if (message) {
+    message.style.background = theme.message;
+  }
+  
+  // Boutons d'action
+  document.querySelectorAll('.action-button').forEach(btn => {
+    if (btn.classList.contains('blue')) {
+      btn.style.background = `linear-gradient(135deg, ${theme.button}, ${theme.buttonHover})`;
+    }
+  });
+  
+  // Modals
+  document.querySelectorAll('.modal-content, .tutorial-content').forEach(modal => {
+    modal.style.background = theme.modal;
+  });
+  
+  // Highlight du thème sélectionné
   document.querySelectorAll('.theme-card').forEach(card => {
     if (card.dataset.theme === themeName) {
       card.style.border = '3px solid white';
