@@ -498,6 +498,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #cbd5e1, #94a3b8)',
     plateauBorder: '#64748b',
+    beamColor: '#64748b',
     message: 'linear-gradient(135deg, #94a3b8, #64748b)',
     panel: '#1e293b',
     modal: '#1e293b'
@@ -513,6 +514,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #93c5fd, #60a5fa)',
     plateauBorder: '#1e40af',
+    beamColor: '#1e40af',
     message: 'linear-gradient(135deg, #60a5fa, #3b82f6)',
     panel: '#0c4a6e',
     modal: '#0c4a6e'
@@ -528,6 +530,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #86efac, #4ade80)',
     plateauBorder: '#047857',
+    beamColor: '#047857',
     message: 'linear-gradient(135deg, #4ade80, #10b981)',
     panel: '#134e4a',
     modal: '#134e4a'
@@ -543,6 +546,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #c4b5fd, #a78bfa)',
     plateauBorder: '#6d28d9',
+    beamColor: '#6d28d9',
     message: 'linear-gradient(135deg, #a78bfa, #a855f7)',
     panel: '#3730a3',
     modal: '#3730a3'
@@ -558,6 +562,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #fbcfe8, #f9a8d4)',
     plateauBorder: '#be185d',
+    beamColor: '#be185d',
     message: 'linear-gradient(135deg, #f9a8d4, #ec4899)',
     panel: '#9f1239',
     modal: '#9f1239'
@@ -573,6 +578,7 @@ const themes = {
     text: '#f1f5f9',
     plateau: 'linear-gradient(to bottom, #64748b, #475569)',
     plateauBorder: '#334155',
+    beamColor: '#334155',
     message: 'linear-gradient(135deg, #475569, #334155)',
     panel: '#1e293b',
     modal: '#1e293b'
@@ -639,13 +645,12 @@ function applyTheme(themeName) {
   // ========== BARRE DE LA BALANCE (même couleur que bordures plateaux) ==========
   const beamArm = document.getElementById('beamArm');
   if (beamArm) {
-    // Extraire la couleur claire des plateaux pour le dégradé
-    const plateauLightColor = theme.plateau.includes('rgb') 
-      ? theme.plateau.split(',')[0].split('(')[2] 
-      : theme.plateau.split(',')[0].replace('linear-gradient(to bottom, ', '').trim();
+    // Extraire les couleurs claires du gradient des plateaux
+    const plateauColors = theme.plateau.match(/#[0-9a-fA-F]{6}/g);
+    const lightColor = plateauColors ? plateauColors[0] : '#cbd5e1';
     
-    // La barre a un dégradé : clair en haut → bordure foncée en bas (même que plateaux)
-    beamArm.style.background = `linear-gradient(to bottom, ${plateauLightColor}, ${theme.plateauBorder})`;
+    // La barre : clair en haut → même couleur que bordures en bas
+    beamArm.style.background = `linear-gradient(to bottom, ${lightColor}, ${theme.beamColor})`;
   }
   
   // ========== MESSAGES ==========
