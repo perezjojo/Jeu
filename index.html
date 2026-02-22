@@ -461,7 +461,13 @@
       </div>
       
       <div class="beam-container">
-        <button id="btnClear" class="action-button white" style="margin-bottom: 15px; border-radius: 50%; width: 60px; height: 60px; padding: 0; font-size: 0.8rem; line-height: 1.2; display: flex; align-items: center; justify-content: center;"><span id="clearText">VIDER</span></button>
+        <span id="btnClear" style="margin-bottom: 15px; font-size: 1.2rem; font-weight: bold; color: #f1f5f9; cursor: pointer; user-select: none; transition: all 0.2s;" 
+              onmouseover="this.style.color='#fb923c'; this.style.transform='scale(1.1)'" 
+              onmouseout="this.style.color='#f1f5f9'; this.style.transform='scale(1)'"
+              ontouchstart="this.style.color='#fb923c'" 
+              ontouchend="this.style.color='#f1f5f9'">
+          <span id="clearText">VIDER</span>
+        </span>
         <div id="beamArm" class="beam-arm"></div>
         <div class="beam-pivot"></div>
         <div id="weighResult">—</div>
