@@ -1133,13 +1133,39 @@ function playBellsAndSpeak(message) {
     setTimeout(() => playTone(784 * 2, 0.4, 0.15, 'sine'), 450);
     setTimeout(() => playTone(1047 * 2, 0.4, 0.15, 'sine'), 850);
     
-    // Lire le message à haute voix après les cloches
+    // Lire le message à haute voix après les cloches - VOIX OPTIMISÉE
     setTimeout(() => {
       if('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(message);
+        // Sélectionner la meilleure voix disponible
+        const voices = window.speechSynthesis.getVoices();
+        let bestVoice = null;
+        
+        if(currentLang === 'fr') {
+          // Chercher les meilleures voix françaises
+          bestVoice = voices.find(v => v.lang === 'fr-FR' && v.name.includes('Premium')) ||
+                      voices.find(v => v.lang === 'fr-FR' && v.name.includes('Enhanced')) ||
+                      voices.find(v => v.lang === 'fr-FR' && !v.name.includes('compact')) ||
+                      voices.find(v => v.lang.startsWith('fr'));
+        } else {
+          // Chercher les meilleures voix anglaises
+          bestVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Premium')) ||
+                      voices.find(v => v.lang === 'en-US' && v.name.includes('Enhanced')) ||
+                      voices.find(v => v.lang === 'en-US' && !v.name.includes('compact')) ||
+                      voices.find(v => v.lang.startsWith('en'));
+        }
+        
+        // Ajouter des pauses naturelles dans le message
+        const naturalMessage = message.replace(/,/g, ', ').replace(/\./g, '. ');
+        
+        const utterance = new SpeechSynthesisUtterance(naturalMessage);
         utterance.lang = currentLang === 'fr' ? 'fr-FR' : 'en-US';
-        utterance.rate = 0.85;
-        utterance.volume = 0.9;
+        if(bestVoice) utterance.voice = bestVoice;
+        
+        // Paramètres optimisés pour son naturel
+        utterance.rate = 0.95;      // Légèrement plus rapide (moins monotone)
+        utterance.pitch = 1.1;      // Ton un peu plus aigu (plus vivant)
+        utterance.volume = 1.0;     // Volume maximum (plus clair)
+        
         window.speechSynthesis.speak(utterance);
       }
     }, 1200); // Après les 3 cloches
