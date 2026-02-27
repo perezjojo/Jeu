@@ -1930,6 +1930,9 @@ document.getElementById('btnNew2').addEventListener('click', () => {
   updateStatsDisplay();
   document.getElementById('modeSelectOverlay').style.display = 'flex';
   document.body.style.backgroundColor = '#0f172a';
+  
+  // Réinitialiser le timer pour un nouveau défi
+  resetTimer();
 });
 
 document.getElementById('btnFR').addEventListener('click', () => setLang('fr'));
