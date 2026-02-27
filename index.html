@@ -1258,12 +1258,21 @@ function startChallenge(mode) {
 }
 
 function newGame() {
+  // Sauvegarder l'état du timer avant de reset
+  const keepTimerState = {
+    timerStarted: state.timerStarted,
+    timerSeconds: state.timerSeconds,
+    timerInterval: state.timerInterval
+  };
+  
   state = { 
     coins: Array.from({length:12},(_,i)=>({id:i+1,area:'pool'})), 
     weighCount:0, history:[], status:{}, locked:false, colorLocked:false,
     lastAction: null, selectedCoin: null, selectedType: null,
     magnetSnapped: null, lastTrailTime: 0,
-    timerStarted: false, timerSeconds: 0, timerInterval: null
+    timerStarted: keepTimerState.timerStarted,
+    timerSeconds: keepTimerState.timerSeconds,
+    timerInterval: keepTimerState.timerInterval
   };
   
   for(let i=1;i<=12;i++) state.status[i]='unknown';
@@ -1291,8 +1300,10 @@ function newGame() {
   vibrate(50);
   playTone(600, 0.1, 0.2);
   
-  // Démarrer le timer
-  startTimer();
+  // Démarrer le timer seulement s'il n'est pas déjà démarré
+  if(!state.timerStarted) {
+    startTimer();
+  }
 }
 
 function render() {
@@ -1751,10 +1762,7 @@ function showVictoryModal() {
   
   document.getElementById('victoryOverlay').style.display = 'flex';
   
-  // Arrêter le timer si 3 victoires atteintes
-  if(challengeWins >= 3) {
-    stopTimer();
-  }
+  // NE PAS arrêter le timer ici - il continue pour la prochaine partie !
   
   vibrate([100, 50, 100]);
   createConfetti();
