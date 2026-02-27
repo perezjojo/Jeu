@@ -252,10 +252,12 @@
     .mode-title { font-size: 1.3rem; }
     .mode-description { font-size: 0.95rem; }
     .mode-button { font-size: 1.1rem; padding: 14px; }
-    .toolbar { padding: 12px 10px 10px 10px; padding-top: max(12px, env(safe-area-inset-top)); }
-    .toolbar-left { gap: 6px; }
-    .mode-badge { font-size: 0.7rem; padding: 5px 10px; gap: 4px; }
-    button.tutorial, button.danger { font-size: 0.7rem; padding: 6px 10px; }
+    .toolbar { padding: 12px 6px 10px 6px; padding-top: max(12px, env(safe-area-inset-top)); }
+    .toolbar-left { gap: 4px; }
+    .mode-badge { font-size: 0.7rem; padding: 4px 8px; gap: 3px; }
+    button.tutorial, button.danger { font-size: 0.75rem; padding: 5px 8px; }
+    button.primary { font-size: 0.75rem; padding: 5px 8px; }
+    #timerDisplay { padding: 4px 8px; font-size: 0.85rem; min-width: 50px; }
   }
 </style>
 </head>
@@ -437,16 +439,21 @@
 <div class="toolbar">
   <div class="toolbar-left">
     <div class="mode-badge beginner" id="modeBadge" style="display:none;">
-        <span id="badgeText">🎯 Débutant</span>
+        <span id="badgeText" style="font-size: 0.9rem;">Débutant</span>
         <span class="stars-display" id="starsDisplay">⭐○○</span>
     </div>
-    <button id="btnShowTutorial" class="tutorial"><span id="helpText">📚 Aide</span></button>
+    <button id="btnShowTutorial" class="tutorial" style="font-size: 0.9rem; padding: 6px 10px;"><span id="helpText">Aide</span></button>
     <div style="display:flex; align-items:center; gap:6px; padding:6px 10px; background:rgba(59,130,246,0.2); border-radius:10px; border:2px solid #3b82f6;">
-      <span style="font-size:0.75rem; font-weight:bold; color:#3b82f6;">⚖️</span>
-      <span id="weighCounterToolbar" style="font-size:0.95rem; font-weight:bold; color:#f1f5f9;">0/3</span>
+      <span id="weighCounterToolbar" style="font-size: 1.14rem; font-weight:bold; color:#f1f5f9;">0/3</span>
     </div>
   </div>
-  <button id="btnNew2" class="primary" style="font-size: 0.75rem; padding: 6px 12px;"><span id="newGameText2">✨ Nouvelle</span></button>
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <button id="btnNew2" class="primary" style="font-size: 0.9rem; padding: 6px 12px;"><span id="newGameText2">Nouvelle</span></button>
+    <div id="timerDisplay" style="display:flex; align-items:center; gap:4px; padding:6px 10px; background:rgba(34,197,94,0.2); border-radius:10px; border:2px solid #22c55e; font-size: 1rem; font-weight:bold; color:#f1f5f9; min-width: 60px; justify-content: center;">
+      <span>⏱️</span>
+      <span id="timerText">0:00</span>
+    </div>
+  </div>
 </div>
 
 <!-- MAIN -->
@@ -750,7 +757,7 @@ const T = {
     tutorial: "📚 Tutoriel",
     note: "(La fausse pièce peut être plus lourde ou plus légère que les autres)",
     
-    newGame: "✨ Nouvelle",
+    newGame: "Nouvelle",
     badgeExp: "🔥 EXPERT",
     
     victoryTitle: "🎉 BRAVO !",
@@ -780,7 +787,7 @@ const T = {
     lightBtn: "LÉGÈRE",
     cancel: "← Annuler",
     
-    help: "📚 Aide",
+    help: "Aide",
     weigh: "⚖️ PESER",
     clear: "VIDER",
     abandon: "🏳️ Abandonner",
@@ -844,7 +851,7 @@ const T = {
     tutorial: "📚 Tutorial",
     note: "(The fake coin can be heavier or lighter than the others)",
     
-    newGame: "✨ New Game",
+    newGame: "New Game",
     
     badgeBeg: "🎯 BEGINNER",
     badgeExp: "🔥 EXPERT",
@@ -876,7 +883,7 @@ const T = {
     lightBtn: "LIGHT",
     cancel: "← Cancel",
     
-    help: "📚 Help",
+    help: "Help",
     weigh: "⚖️ WEIGH",
     clear: "CLEAR",
     abandon: "🏳️ Abandon",
@@ -935,7 +942,8 @@ let state = {
   coins:[], fakeId:0, fakeType:'', weighCount:0, history:[], status:{}, 
   locked:true, colorLocked:false,
   lastAction: null, selectedCoin: null, selectedType: null,
-  magnetSnapped: null, lastTrailTime: 0
+  magnetSnapped: null, lastTrailTime: 0,
+  timerStarted: false, timerSeconds: 0, timerInterval: null
 };
 let audioCtx = null;
 let synth = window.speechSynthesis;
@@ -1182,6 +1190,41 @@ function vibrate(pattern) {
   if(navigator.vibrate) navigator.vibrate(pattern);
 }
 
+// ========== TIMER FUNCTIONS ==========
+function startTimer() {
+  if(!state.timerStarted) {
+    state.timerStarted = true;
+    state.timerSeconds = 0;
+    updateTimerDisplay();
+    state.timerInterval = setInterval(() => {
+      state.timerSeconds++;
+      updateTimerDisplay();
+    }, 1000);
+  }
+}
+
+function stopTimer() {
+  if(state.timerInterval) {
+    clearInterval(state.timerInterval);
+    state.timerInterval = null;
+  }
+}
+
+function resetTimer() {
+  stopTimer();
+  state.timerStarted = false;
+  state.timerSeconds = 0;
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(state.timerSeconds / 60);
+  const seconds = state.timerSeconds % 60;
+  const timeText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  document.getElementById('timerText').textContent = timeText;
+}
+// ========== END TIMER FUNCTIONS ==========
+
 function updateStatsDisplay() {
   document.getElementById('weighCounterToolbar').textContent = `${state.weighCount}/3`;
   
@@ -1194,9 +1237,9 @@ function updateStatsDisplay() {
     badge.className = `mode-badge ${currentMode}`;
     
     if(currentMode === 'beginner') {
-      badgeText.textContent = currentLang === 'fr' ? '🎯 Débutant' : '🎯 Beginner';
+      badgeText.textContent = currentLang === 'fr' ? 'Débutant' : 'Beginner';
     } else {
-      badgeText.textContent = currentLang === 'fr' ? '🔥 Expert' : '🔥 Expert';
+      badgeText.textContent = currentLang === 'fr' ? 'Expert' : 'Expert';
     }
     
     const stars = '⭐'.repeat(challengeWins) + '○'.repeat(3 - challengeWins);
@@ -1220,7 +1263,8 @@ function newGame() {
     coins: Array.from({length:12},(_,i)=>({id:i+1,area:'pool'})), 
     weighCount:0, history:[], status:{}, locked:false, colorLocked:false,
     lastAction: null, selectedCoin: null, selectedType: null,
-    magnetSnapped: null, lastTrailTime: 0
+    magnetSnapped: null, lastTrailTime: 0,
+    timerStarted: false, timerSeconds: 0, timerInterval: null
   };
   
   for(let i=1;i<=12;i++) state.status[i]='unknown';
@@ -1247,6 +1291,9 @@ function newGame() {
   render();
   vibrate(50);
   playTone(600, 0.1, 0.2);
+  
+  // Démarrer le timer
+  startTimer();
 }
 
 function render() {
@@ -1733,6 +1780,9 @@ function showChampionModal() {
   document.getElementById('menuText').textContent = t.menu;
   
   document.getElementById('championOverlay').style.display = 'flex';
+  
+  // Arrêter le timer (3 étoiles obtenues !)
+  stopTimer();
   
   vibrate([100, 50, 100, 50, 200]);
   createConfetti();
