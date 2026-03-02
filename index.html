@@ -1090,13 +1090,30 @@ function speak(text) {
 
 function playTone(f, d=0.5, v=0.5, t='sine') {
   try { 
-    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if(audioCtx.state === 'suspended') audioCtx.resume();
+    if(!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if(audioCtx.state === 'suspended') {
+      audioCtx.resume().then(() => {
+        playToneInternal(f, d, v, t);
+      });
+    } else {
+      playToneInternal(f, d, v, t);
+    }
+  } catch(e){
+    console.log('Audio error:', e);
+  }
+}
+
+function playToneInternal(f, d, v, t) {
+  try {
     let o = audioCtx.createOscillator(), g = audioCtx.createGain();
     o.type = t; o.frequency.value = f; g.gain.setValueAtTime(v, audioCtx.currentTime);
     g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + d);
-    o.connect(g).connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + d); 
-  } catch(e){}
+    o.connect(g).connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + d);
+  } catch(e){
+    console.log('Audio tone error:', e);
+  }
 }
 
 function playMetallic() {
@@ -1298,6 +1315,12 @@ function newGame() {
   updateStatsDisplay();
   render();
   vibrate(50);
+  
+  // Réactiver l'AudioContext si nécessaire (important sur iOS)
+  if(audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  
   playTone(600, 0.1, 0.2);
   
   // Démarrer le timer seulement s'il n'est pas déjà démarré
