@@ -404,6 +404,7 @@
         <h3 id="failedTitle">❌ SÉRIE BRISÉE</h3>
         <p id="failedCount" style="font-size: 1.3rem; margin: 20px 0;">Vous aviez : ⭐⭐ (2/3)</p>
         <p id="failedMsg" style="margin: 20px 0;">Recommencez depuis le début !</p>
+        <p id="failedReveal" style="font-size: 1.2rem; margin: 20px 0; padding: 15px; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; border-radius: 10px; font-weight: bold;"></p>
         <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 25px;">
             <button id="btnRetryChallenge" class="mode-button btn-beginner" style="font-size: 1.1rem;">🔄 <span id="retryText">Recommencer</span></button>
             <button id="btnBackMenu2" class="action-button" style="background: #475569 !important;"><span id="menuText2">🏠 Menu Principal</span></button>
@@ -776,6 +777,7 @@ const T = {
     failedTitle: "❌ SÉRIE BRISÉE",
     failedCount: "Vous aviez : {stars} ({n}/3)",
     failedMsg: "Recommencez depuis le début !",
+    failedReveal: "💡 C'était la pièce {id} (plus {type})",
     retry: "🔄 Recommencer",
     
     resultTitle: "🎯 CHOISIR LA PIÈCE",
@@ -872,6 +874,7 @@ const T = {
     failedTitle: "❌ SERIES BROKEN",
     failedCount: "You had: {stars} ({n}/3)",
     failedMsg: "Start over from the beginning!",
+    failedReveal: "💡 It was coin {id} (more {type})",
     retry: "🔄 Restart",
     
     resultTitle: "🎯 CHOOSE THE COIN",
@@ -1845,6 +1848,10 @@ function showFailedModal() {
   const stars = '⭐'.repeat(challengeWins) + '○'.repeat(3 - challengeWins);
   document.getElementById('failedCount').textContent = t.failedCount.replace('{stars}', stars).replace('{n}', challengeWins);
   document.getElementById('failedMsg').textContent = t.failedMsg;
+  
+  // Révéler quelle était la fausse pièce
+  const typeText = state.fakeType === 'heavy' ? (currentLang === 'fr' ? 'lourde' : 'heavy') : (currentLang === 'fr' ? 'légère' : 'light');
+  document.getElementById('failedReveal').textContent = t.failedReveal.replace('{id}', state.fakeId).replace('{type}', typeText);
   
   document.getElementById('retryText').textContent = t.retry;
   document.getElementById('menuText2').textContent = t.menu;
