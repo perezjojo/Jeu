@@ -1771,6 +1771,16 @@ function openResultModal() {
   state.selectedCoin = null;
   state.selectedType = null;
   
+  // Appliquer les traductions
+  const t = T[currentLang];
+  document.getElementById('resultTitle').textContent = t.resultTitle;
+  document.getElementById('resultInstruction').textContent = t.resultInst;
+  document.getElementById('typePromptPre').textContent = t.typePre;
+  document.getElementById('typePromptPost').textContent = t.typePost;
+  document.getElementById('heavyText').textContent = t.heavyBtn;
+  document.getElementById('lightText').textContent = t.lightBtn;
+  document.getElementById('cancelText').textContent = t.cancel;
+  
   const grid = document.getElementById('resultCoinsGrid');
   grid.innerHTML = '';
   
