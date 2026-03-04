@@ -508,6 +508,37 @@ window.addEventListener('error', function(e) {
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
 
+// ========== DÉBLOCAGE AUDIO UNIVERSEL (iPhone 12/14 Pro) ==========
+let audioUnlocked = false;
+
+function unlockAudio() {
+  if(!audioUnlocked) {
+    try {
+      if(!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if(audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      // Son silencieux pour débloquer
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      g.gain.value = 0.001;
+      o.connect(g).connect(audioCtx.destination);
+      o.start();
+      o.stop(audioCtx.currentTime + 0.01);
+      audioUnlocked = true;
+      console.log('Audio unlocked via touch');
+    } catch(e) {
+      console.log('Unlock failed:', e);
+    }
+  }
+}
+
+// Débloquer au premier touch/click PARTOUT
+document.body.addEventListener('touchstart', unlockAudio, { once: true });
+document.body.addEventListener('click', unlockAudio, { once: true });
+
 // ========== THEME SYSTEM COMPLET ==========
 const themes = {
   orange: {
@@ -1095,12 +1126,22 @@ function playTone(f, d=0.5, v=0.5, t='sine') {
   try { 
     if(!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      console.log('AudioContext created in playTone');
     }
+    
+    // Vérifier l'état et forcer resume si nécessaire
     if(audioCtx.state === 'suspended') {
+      console.log('AudioContext suspended, resuming...');
       audioCtx.resume().then(() => {
+        console.log('AudioContext resumed, playing tone');
         playToneInternal(f, d, v, t);
+      }).catch(e => {
+        console.log('Resume failed:', e);
       });
+    } else if(audioCtx.state === 'running') {
+      playToneInternal(f, d, v, t);
     } else {
+      console.log('AudioContext state:', audioCtx.state);
       playToneInternal(f, d, v, t);
     }
   } catch(e){
@@ -1269,8 +1310,37 @@ function updateStatsDisplay() {
 }
 
 function startChallenge(mode) {
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  if(audioCtx.state === 'suspended') audioCtx.resume();
+  // Initialiser et DÉBLOQUER l'AudioContext (crucial pour iPhone 12/14 Pro)
+  if(!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  
+  // Jouer un son silencieux pour débloquer l'audio (requis sur certains iOS)
+  if(audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => {
+      // Son silencieux pour débloquer
+      const unlockSound = audioCtx.createOscillator();
+      const unlockGain = audioCtx.createGain();
+      unlockGain.gain.value = 0.001; // Quasi silencieux
+      unlockSound.connect(unlockGain).connect(audioCtx.destination);
+      unlockSound.start();
+      unlockSound.stop(audioCtx.currentTime + 0.01);
+      console.log('AudioContext unlocked');
+    });
+  } else {
+    // Même si pas suspendu, jouer un son silencieux pour débloquer
+    try {
+      const unlockSound = audioCtx.createOscillator();
+      const unlockGain = audioCtx.createGain();
+      unlockGain.gain.value = 0.001;
+      unlockSound.connect(unlockGain).connect(audioCtx.destination);
+      unlockSound.start();
+      unlockSound.stop(audioCtx.currentTime + 0.01);
+      console.log('AudioContext initialized');
+    } catch(e) {
+      console.log('Unlock error:', e);
+    }
+  }
   
   currentMode = mode;
   challengeWins = 0;
