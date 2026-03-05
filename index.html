@@ -1161,6 +1161,23 @@ function playToneInternal(f, d, v, t) {
 }
 
 function playMetallic() {
+  // FORCER la réactivation de l'AudioContext avant CHAQUE son (crucial iPhone 12 Pro Max)
+  if(audioCtx && audioCtx.state === 'suspended') {
+    console.log('playMetallic: AudioContext suspended, forcing resume');
+    audioCtx.resume().then(() => {
+      console.log('playMetallic: AudioContext resumed successfully');
+      playMetallicInternal();
+    }).catch(e => {
+      console.log('playMetallic: Resume failed', e);
+      // Essayer quand même
+      playMetallicInternal();
+    });
+  } else {
+    playMetallicInternal();
+  }
+}
+
+function playMetallicInternal() {
   playTone(400, 0.2, 0.15, 'square');
   setTimeout(() => playTone(380, 0.15, 0.1, 'square'), 100);
   setTimeout(() => playTone(360, 0.1, 0.05, 'square'), 200);
@@ -1479,6 +1496,11 @@ function render() {
 }
 
 function handleDragStart(e, coinId, div) {
+  // RÉACTIVER AudioContext au début du drag (iPhone 12 Pro Max)
+  if(audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => console.log('AudioContext reactivated on drag'));
+  }
+  
   state.dragId = coinId;
   state.magnetSnapped = null;
   state.lastTrailTime = 0;
@@ -2086,6 +2108,25 @@ if ('serviceWorker' in navigator) {
       .catch(error => console.log('❌ SW erreur:', error));
   });
 }
+
+// ========== AUDIO CONTEXT KEEP-ALIVE (iPhone 12 Pro Max) ==========
+// Réactiver l'AudioContext toutes les 5 secondes pour éviter suspension
+setInterval(() => {
+  if(audioCtx && audioCtx.state === 'suspended') {
+    console.log('Keep-alive: AudioContext suspended, reactivating...');
+    audioCtx.resume().then(() => {
+      console.log('Keep-alive: AudioContext reactivated');
+    });
+  }
+}, 5000); // Toutes les 5 secondes
+
+// Réactiver aussi sur visibilitychange (retour à l'app)
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden && audioCtx && audioCtx.state === 'suspended') {
+    console.log('Visibility change: Reactivating AudioContext');
+    audioCtx.resume();
+  }
+});
 
 // ========== PWA: iOS Installation Prompt ==========
 function isIOS() {
