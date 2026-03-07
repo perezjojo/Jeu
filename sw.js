@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jojo-game-v1';
+const CACHE_NAME = 'jojo-game-v5';
 const urlsToCache = [
   '/Jeu/',
   '/Jeu/index.html',
