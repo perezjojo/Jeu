@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, minimal-ui"/>
 <meta name="color-scheme" content="light dark"/>
-<meta name="theme-color" content="#111827"/>
+<meta name="theme-color" content="#0f172a"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="PAPIA GAME"/>
@@ -17,19 +17,9 @@
   * { color-scheme: dark; }
 
   :root {
-    --bg: #08111f;
-    --bg-2: #0b1729;
-    --panel: rgba(15, 23, 42, 0.74);
-    --panel-strong: rgba(15, 23, 42, 0.9);
-    --border: rgba(148, 163, 184, 0.22);
-    --text: #f8fafc;
-    --muted: #cbd5e1;
-    --accent: #60a5fa;
-    --accent-hover: #3b82f6;
-    --success: #22c55e;
+    --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f1f5f9;
+    --accent: #3b82f6; --accent-hover: #2563eb; --success: #22c55e; 
     --gold-light: #fcd34d;
-    --shadow: 0 20px 50px rgba(0,0,0,0.35);
-    --glass: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   }
 
   html, body { 
@@ -38,13 +28,13 @@
     overscroll-behavior: none; 
     -webkit-user-select: none; 
     touch-action: pan-y pinch-zoom;
-    background: radial-gradient(circle at top, #12233d 0%, #08111f 55%, #050a14 100%) fixed !important; 
+    background-color: #0f172a !important; 
     color: #f1f5f9 !important;
   }
 
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: radial-gradient(circle at top, #12233d 0%, #08111f 55%, #050a14 100%) fixed; color: #f1f5f9 !important;
+    background: #0f172a; color: #f1f5f9 !important;
     display: flex; flex-direction: column; transition: background 0.5s ease;
     position: fixed; 
     overflow: hidden;
@@ -108,11 +98,11 @@
   .light-trail { position: fixed; width: 38px; height: 38px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.3)); pointer-events: none; z-index: 2999; animation: trail 0.5s ease-out forwards; box-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
 
   .modal-overlay { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 2000; animation: fadeIn 0.3s ease-out; }
-  .modal-content { background: linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(8,17,31,0.98) 100%) !important; color: #f1f5f9 !important; padding: 30px; border-radius: 24px; text-align: center; min-width: 320px; max-width: 90%; border: 1px solid rgba(96,165,250,0.4); box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); animation: slideDown 0.4s ease-out; }
+  .modal-content { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important; color: #f1f5f9 !important; padding: 30px; border-radius: 20px; text-align: center; min-width: 320px; max-width: 90%; border: 3px solid #3b82f6; box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8); animation: slideDown 0.4s ease-out; }
   .modal-content h3 { margin: 0 0 10px; font-size: 2.2rem; background: linear-gradient(135deg, #fb923c 0%, #f97316 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: #fb923c; }
   .modal-content p { color: #f1f5f9 !important; }
 
-  #modeSelectOverlay { background: radial-gradient(circle at top, #ffe9c9 0%, #ffb870 36%, #f08a37 64%, #d86918 100%) !important; }
+  #modeSelectOverlay { background: linear-gradient(135deg, #fed7aa 0%, #fb923c 50%, #fef3c7 100%) !important; }
   
   .welcome-container { 
     max-width: 600px; 
@@ -123,12 +113,12 @@
   .lang-switcher { display: flex; justify-content: center; gap: 10px; margin: 10px 0 6px 0; }
   .welcome-note { font-size: 1rem; color: #475569 !important; margin-top: 6px; margin-bottom: 10px; font-style: italic; line-height: 1.3; }
   .tutorial-link { text-align: center; margin-top: 4px; }
-  .welcome-title { font-size: 3.2rem; font-weight: 900; letter-spacing: 0.02em; color: #0f172a !important; margin-bottom: 10px; text-shadow: 0 10px 24px rgba(255,255,255,0.25); animation: bounce 4s ease-in-out; }
+  .welcome-title { font-size: 3.125rem; font-weight: 800; color: #1e293b !important; margin-bottom: 8px; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3); animation: bounce 4s ease-in-out; }
   .welcome-subtitle { font-size: 1.5rem; color: #1e293b !important; margin-bottom: 4px; font-weight: 500; }
-  .welcome-highlight { font-size: 2.2rem; font-weight: 900; color: #7c2d12 !important; margin: 8px auto 14px auto; text-shadow: 0 8px 20px rgba(255,255,255,0.25); background: rgba(255,255,255,0.55); padding: 10px 18px; border-radius: 999px; width: fit-content; }
+  .welcome-highlight { font-size: 2.25rem; font-weight: 800; color: #ea580c !important; margin: 6px 0 12px 0; text-shadow: 0 0 10px rgba(234, 88, 12, 0.3); }
   
   .mode-cards { display: flex; flex-direction: column; gap: 10px; margin: 8px 0; }
-  .mode-card { background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 22px; padding: 18px; text-align: left; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16); transition: all 0.3s; border: 1px solid rgba(255,255,255,0.45); }
+  .mode-card { background: white; border-radius: 16px; padding: 15px; text-align: left; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); transition: all 0.3s; border: 3px solid transparent; }
   .mode-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2); }
   .mode-card.beginner { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-color: #3b82f6; }
   .mode-card.expert { background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%); border-color: #ea580c; }
@@ -152,14 +142,14 @@
   .btn-tutorial-link { background: none !important; border: none; color: #1e293b !important; font-size: 1.25rem; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 10px; }
   .welcome-note { font-size: 1.125rem; color: #475569 !important; margin-top: 25px; font-style: italic; line-height: 1.4; }
   
-  .toolbar { background: linear-gradient(180deg, rgba(8,17,31,0.94), rgba(8,17,31,0.82)) !important; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); color: #f1f5f9 !important; padding: 16px 12px 12px 12px; padding-top: max(16px, env(safe-area-inset-top)); border-bottom: 1px solid rgba(148, 163, 184, 0.18); display: flex; justify-content: space-between; align-items: center; z-index: 10; flex-shrink: 0; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28); min-height: 70px; }
+  .toolbar { background: #1e293b !important; color: #f1f5f9 !important; padding: 16px 12px 12px 12px; padding-top: max(16px, env(safe-area-inset-top)); border-bottom: 2px solid #334155; display: flex; justify-content: space-between; align-items: center; z-index: 10; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); min-height: 70px; }
   .toolbar-left { display: flex; gap: 8px; align-items: center; }
   .mode-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
   .mode-badge.beginner { background: linear-gradient(135deg, #3b82f6, #2563eb); }
   .mode-badge.expert { background: linear-gradient(135deg, #ef4444, #dc2626); }
   .stars-display { font-size: 1rem; }
 
-  button { padding: 8px 14px; border-radius: 14px; cursor: pointer; font-weight: 700; font-size: 0.85rem; transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; display: inline-flex; align-items: center; gap: 6px; color: white !important; background: linear-gradient(180deg, rgba(30,41,59,0.96), rgba(15,23,42,0.96)) !important; border: 1px solid rgba(148,163,184,0.18); touch-action: manipulation; box-shadow: 0 8px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.05); }
+  button { padding: 8px 14px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; color: white !important; background: #1e293b !important; border: 2px solid #334155; touch-action: manipulation; }
   button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
   button:active { transform: translateY(0); }
   button.primary { background: linear-gradient(135deg, #3b82f6, #2563eb) !important; border: none; min-width: 90px; justify-content: center; padding: 8px 10px; font-size: 0.75rem; }
@@ -167,12 +157,12 @@
   button.danger { background: linear-gradient(135deg, #ef4444, #dc2626) !important; border: none; }
 
   main { flex: 1; display: grid; grid-template-columns: 320px 1fr; gap: 12px; padding: 12px; padding-bottom: 80px; overflow: hidden; }
-  .panel { background: linear-gradient(180deg, rgba(15,23,42,0.82), rgba(15,23,42,0.68)); color: #f1f5f9 !important; border: 1px solid rgba(148,163,184,0.18); border-radius: 22px; padding: 14px; padding-bottom: 14px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; box-shadow: var(--shadow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); transition: background 0.5s ease, border-color 0.5s ease, transform 0.25s ease; }
+  .panel { background: #1e293b; color: #f1f5f9 !important; border: 2px solid #334155; border-radius: 14px; padding: 10px; padding-bottom: 12px; display: flex; flex-direction: column; gap: 6px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); transition: background 0.5s ease, border-color 0.5s ease; }
 
-  .coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px; background: linear-gradient(180deg, rgba(2,6,23,0.35), rgba(15,23,42,0.55)) !important; border-radius: 18px; border: 1px solid rgba(148,163,184,0.14); min-height: 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+  .coins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 8px; background: rgba(0, 0, 0, 0.5) !important; border-radius: 10px; border: 1px solid #334155; min-height: 0; }
   
-  .coin { width: 40px; height: 40px; border-radius: 50%; color: #1f1300 !important; -webkit-text-fill-color: #1f1300 !important; background: radial-gradient(circle at 30% 28%, #fff4b8 0%, #fcd34d 28%, #f59e0b 62%, #b45309 100%) !important; border: 2.5px solid rgba(120,53,15,0.95) !important; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none; box-shadow: inset 0 1px 1px rgba(255,255,255,0.55), inset 0 -3px 6px rgba(120,53,15,0.28), 0 10px 18px rgba(0,0,0,0.35); touch-action: none; transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease; text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35); }
-  .coin:hover { transform: translateY(-2px) scale(1.08); box-shadow: inset 0 1px 1px rgba(255,255,255,0.55), inset 0 -3px 6px rgba(120,53,15,0.28), 0 16px 24px rgba(0,0,0,0.42), 0 0 0 4px rgba(251,191,36,0.08); filter: saturate(1.02); animation: float 2s ease-in-out infinite; }
+  .coin { width: 38px; height: 38px; border-radius: 50%; color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: radial-gradient(ellipse at 30% 30%, #fcd34d, #d97706) !important; border: 2.5px solid #b45309 !important; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900 !important; cursor: grab; user-select: none; box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5); touch-action: none; transition: all 0.3s; text-shadow: 0 0 1px rgba(255, 255, 255, 0.3); }
+  .coin:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); animation: float 2s ease-in-out infinite; }
   .coin:active { cursor: grabbing; transform: scale(0.95); }
 
   .dropzone .coin { width: 32px; height: 32px; font-size: 13px; }
@@ -186,11 +176,11 @@
   .dropzone { 
     width: 100%; 
     height: 105px; 
-    background: linear-gradient(180deg, rgba(226,232,240,0.96), rgba(148,163,184,0.92)); 
+    background: linear-gradient(to bottom, #cbd5e1, #94a3b8); 
     border: none;
-    border-left: 6px solid rgba(71,85,105,0.92);
-    border-right: 6px solid rgba(71,85,105,0.92);
-    border-bottom: 8px solid rgba(71,85,105,0.92);
+    border-left: 6px solid #64748b;
+    border-right: 6px solid #64748b;
+    border-bottom: 6px solid #64748b;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 14px;
@@ -202,18 +192,18 @@
     justify-items: center; 
     align-items: center; 
     transition: all 0.5s ease;
-    box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.16), inset 3px 3px 8px rgba(255, 255, 255, 0.2), 0 10px 18px rgba(0,0,0,0.18);
+    box-shadow: inset -3px 3px 8px rgba(0, 0, 0, 0.2), inset 3px 3px 8px rgba(0, 0, 0, 0.2);
   }
-  .dropzone.drag-over { border-color: #3b82f6 !important; background: linear-gradient(180deg, rgba(37,99,235,0.16), rgba(15,23,42,0.35)) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
+  .dropzone.drag-over { border-color: #3b82f6 !important; background: rgba(59, 130, 246, 0.2) !important; box-shadow: 0 0 25px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); }
   .dropzone.magnetic { animation: magnetPulse 0.5s ease-out; border-color: #60a5fa !important; }
   .dropzone.weighted { box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.5); }
   
   .beam-container { flex: 0 0 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; padding-top: 0px; height: auto; gap: 10px; }
-  .beam-arm { width: 132px; height: 10px; background: linear-gradient(180deg, #e2e8f0, #64748b); border-radius: 999px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease; transform-origin: center center; z-index: 2; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 8px 14px rgba(0, 0, 0, 0.28); margin-left: auto; margin-right: auto; }
+  .beam-arm { width: 130px; height: 8px; background: linear-gradient(to bottom, #cbd5e1, #64748b); border-radius: 5px; position: relative; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease; transform-origin: center center; z-index: 2; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); margin-left: auto; margin-right: auto; }
   .beam-pivot { width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-bottom: 26px solid #475569; position: absolute; top: 50%; transform: translateY(-13px); z-index: 1; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)); }
   #weighResult { margin-top: 25px; font-weight: bold; font-size: 0.85rem; text-align: center; height: 1.2em; color: #f1f5f9 !important; }
 
-  .action-button { width: 100%; margin-top: 8px; font-size: 0.9rem; padding: 10px; border-radius: 14px; border: none; cursor: pointer; font-weight: 800; letter-spacing: 0.01em; transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease; }
+  .action-button { width: 100%; margin-top: 8px; font-size: 0.85rem; padding: 8px; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: all 0.3s; }
   .action-button.blue { background: linear-gradient(135deg, #ec4899, #db2777) !important; color: white !important; }
   .action-button.white { background: #f8fafc !important; color: #0f172a !important; }
   .action-button:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -222,8 +212,8 @@
     overflow-y: auto; 
     margin-top: 8px; 
     height: 90px !important;
-    background: linear-gradient(180deg, rgba(37,99,235,0.16), rgba(15,23,42,0.35)) !important;
-    border: 1px solid rgba(96,165,250,0.35);
+    background: rgba(59, 130, 246, 0.2) !important;
+    border: 2px solid #3b82f6;
     border-radius: 10px;
     padding: 8px;
     flex-shrink: 0;
@@ -237,36 +227,22 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
     animation: slideDown 0.3s ease-out; 
     transition: all 0.3s;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
     font-size: 0.8rem;
   }
   .mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
-  #message { text-align: center; font-weight: 800; font-size: 0.98rem; letter-spacing: 0.01em; padding: 14px; border-radius: 16px; background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(30,41,59,0.92)) !important; border: 1px solid rgba(125,211,252,0.28); animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255,255,255,0.05); }
+  #message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
   #message.clickable { animation: pulse 2s infinite; }
   .blink-icon { display: inline-block; animation: blink 1s infinite; font-size: 1.2em; margin: 0 3px; color: #ef4444; text-shadow: 0 0 8px #ef4444, 0 0 12px #dc2626; }
 
   .tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
-  .tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(96,165,250,0.35); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
+  .tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
   .tutorial-content h2 { margin: 0 0 20px; color: #3b82f6 !important; }
   .tutorial-content h3 { color: #22c55e !important; margin-top: 25px; }
   .tutorial-content p { line-height: 1.6; margin: 10px 0; color: #f1f5f9 !important; }
   .tutorial-step { background: rgba(0, 0, 0, 0.3) !important; padding: 15px; border-radius: 12px; margin: 15px 0; border-left: 4px solid #3b82f6; }
-
-  .panel::before { content:""; position:absolute; inset:0; pointer-events:none; border-radius:22px; background: linear-gradient(180deg, rgba(255,255,255,0.04), transparent 26%); }
-  .panel { position: relative; }
-  .toolbar button.primary, .mode-button, .action-button.blue { box-shadow: 0 12px 22px rgba(37,99,235,0.22), inset 0 1px 0 rgba(255,255,255,0.15); }
-  .toolbar button.primary:hover, .mode-button:hover, .action-button:hover, button.tutorial:hover { filter: brightness(1.04); }
-  .dropzone .coin { width: 33px; height: 33px; font-size: 13px; }
-  .status-heavy_cand { background: radial-gradient(circle at 30% 28%, #fecaca 0%, #f87171 38%, #ef4444 70%, #991b1b 100%) !important; border-color: #7f1d1d !important; color: #2a0303 !important; -webkit-text-fill-color: #2a0303 !important; }
-  .status-light_cand { background: radial-gradient(circle at 30% 28%, #dcfce7 0%, #86efac 38%, #22c55e 70%, #166534 100%) !important; border-color: #14532d !important; color: #052e16 !important; -webkit-text-fill-color: #052e16 !important; }
-  .status-normal { background: radial-gradient(circle at 30% 28%, #fff7d6 0%, #fde68a 40%, #f5d06f 72%, #d4a574 100%) !important; border-color: #b08968 !important; opacity: 0.74; }
-  .mode-badge, #timerDisplay, .toolbar-left > div:last-child { box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 18px rgba(0,0,0,0.18); }
-  #btnClear { text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-  }
 
   @media (max-width: 900px) { 
     main { grid-template-columns: 1fr; overflow-y: auto; padding-bottom: 100px; }
@@ -283,24 +259,6 @@
     button.primary { font-size: 0.75rem; padding: 5px 8px; }
     #timerDisplay { padding: 4px 8px; font-size: 0.85rem; min-width: 50px; }
   }
-
-  /* V5 visible refresh + cache busting */
-  body::before { content:""; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(circle at 20% 10%, rgba(96,165,250,0.16), transparent 28%), radial-gradient(circle at 80% 12%, rgba(34,197,94,0.10), transparent 24%), radial-gradient(circle at 50% 100%, rgba(168,85,247,0.12), transparent 30%); z-index: 0; }
-  .toolbar, main, .modal-overlay, .tutorial-overlay { position: relative; z-index: 1; }
-  .welcome-container { max-width: 640px; background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(255,255,255,0.4); border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.18); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding: 46px 18px 18px 18px; }
-  .mode-card.beginner { background: linear-gradient(135deg, rgba(219,234,254,0.96) 0%, rgba(191,219,254,0.92) 100%); }
-  .mode-card.expert { background: linear-gradient(135deg, rgba(254,215,170,0.96) 0%, rgba(253,186,116,0.92) 100%); }
-  .lang-btn { background: rgba(255,255,255,0.5); border-color: rgba(15,23,42,0.16); }
-  .lang-btn.active { background: #0f172a !important; }
-  .panel { border-radius: 26px; }
-  .coins-grid { border-radius: 20px; }
-  .coin { width: 42px; height: 42px; }
-  .dropzone { border-bottom-left-radius: 18px; border-bottom-right-radius: 18px; }
-  #message { background: linear-gradient(135deg, rgba(59,130,246,0.26), rgba(15,23,42,0.94)) !important; }
-  #history { border-radius: 16px; }
-  .hist-line { padding: 7px; border-radius: 10px; }
-  .modal-content, .tutorial-content { border-radius: 28px !important; }
-
 </style>
 </head>
 <body>
@@ -1203,6 +1161,23 @@ function playToneInternal(f, d, v, t) {
 }
 
 function playMetallic() {
+  // FORCER la réactivation de l'AudioContext avant CHAQUE son (crucial iPhone 12 Pro Max)
+  if(audioCtx && audioCtx.state === 'suspended') {
+    console.log('playMetallic: AudioContext suspended, forcing resume');
+    audioCtx.resume().then(() => {
+      console.log('playMetallic: AudioContext resumed successfully');
+      playMetallicInternal();
+    }).catch(e => {
+      console.log('playMetallic: Resume failed', e);
+      // Essayer quand même
+      playMetallicInternal();
+    });
+  } else {
+    playMetallicInternal();
+  }
+}
+
+function playMetallicInternal() {
   playTone(400, 0.2, 0.15, 'square');
   setTimeout(() => playTone(380, 0.15, 0.1, 'square'), 100);
   setTimeout(() => playTone(360, 0.1, 0.05, 'square'), 200);
@@ -1521,6 +1496,11 @@ function render() {
 }
 
 function handleDragStart(e, coinId, div) {
+  // RÉACTIVER AudioContext au début du drag (iPhone 12 Pro Max)
+  if(audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => console.log('AudioContext reactivated on drag'));
+  }
+  
   state.dragId = coinId;
   state.magnetSnapped = null;
   state.lastTrailTime = 0;
@@ -1529,9 +1509,9 @@ function handleDragStart(e, coinId, div) {
   state.ghost.style.position='fixed'; 
   state.ghost.style.zIndex='3000';
   state.ghost.style.pointerEvents='none';
-  state.ghost.style.opacity = '0.9';
-  state.ghost.style.transform = 'scale(1.15)';
-  state.ghost.style.filter = 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6))';
+  state.ghost.style.opacity = '1.0';  // Augmenté de 0.9 à 1.0 (plus visible)
+  state.ghost.style.transform = 'scale(1.2)';  // Augmenté de 1.15 à 1.2 (plus grand)
+  state.ghost.style.filter = 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7))';  // Ombre plus forte
   
   div.style.opacity = '0.3';
   div.style.transform = 'scale(0.9)';
@@ -1571,8 +1551,8 @@ function handleDragMove(e) {
   const distL = Math.sqrt(Math.pow(clientX - centerL.x, 2) + Math.pow(clientY - centerL.y, 2));
   const distR = Math.sqrt(Math.pow(clientX - centerR.x, 2) + Math.pow(clientY - centerR.y, 2));
   
-  const MAGNET_DISTANCE = 80;
-  const SNAP_DISTANCE = 50;
+  const MAGNET_DISTANCE = 140;  // Augmenté de 80 à 140 (+75% plus facile)
+  const SNAP_DISTANCE = 80;     // Augmenté de 50 à 80 (+60% plus tolérant)
   
   if(distL < MAGNET_DISTANCE) {
     ld.classList.add('magnetic');
@@ -1581,7 +1561,7 @@ function handleDragMove(e) {
       const snapY = centerL.y - 25;
       state.ghost.style.left = snapX + 'px';
       state.ghost.style.top = snapY + 'px';
-      state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+      state.ghost.style.transition = 'all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';  // Transition plus douce
       ld.classList.add('drag-over');
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
@@ -1602,7 +1582,7 @@ function handleDragMove(e) {
       const snapY = centerR.y - 25;
       state.ghost.style.left = snapX + 'px';
       state.ghost.style.top = snapY + 'px';
-      state.ghost.style.transition = 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)';
+      state.ghost.style.transition = 'all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)';  // Transition plus douce
       rd.classList.add('drag-over');
       if(!state.magnetSnapped) {
         playTone(1100, 0.08, 0.15);
@@ -1637,14 +1617,19 @@ function handleDragEnd(e, ld, rd) {
   
   const coin = state.coins.find(x => x.id === state.dragId);
   
-  if(clientX >= rL.left && clientX <= rL.right && clientY >= rL.top && clientY <= rL.bottom) {
+  // Ajouter une marge de tolérance de 40px pour faciliter le drop
+  const TOLERANCE = 40;
+  
+  if(clientX >= (rL.left - TOLERANCE) && clientX <= (rL.right + TOLERANCE) && 
+     clientY >= (rL.top - TOLERANCE) && clientY <= (rL.bottom + TOLERANCE)) {
     area = 'left';
     coin.justDropped = true;
     vibrate(30);
     playTone(900, 0.1, 0.2);
     playMetallic();
   }
-  else if(clientX >= rR.left && clientX <= rR.right && clientY >= rR.top && clientY <= rR.bottom) {
+  else if(clientX >= (rR.left - TOLERANCE) && clientX <= (rR.right + TOLERANCE) && 
+          clientY >= (rR.top - TOLERANCE) && clientY <= (rR.bottom + TOLERANCE)) {
     area = 'right';
     coin.justDropped = true;
     vibrate(30);
@@ -1812,6 +1797,16 @@ function resetBalanceUI() {
 function openResultModal() {
   state.selectedCoin = null;
   state.selectedType = null;
+  
+  // Appliquer les traductions
+  const t = T[currentLang];
+  document.getElementById('resultTitle').textContent = t.resultTitle;
+  document.getElementById('resultInstruction').textContent = t.resultInst;
+  document.getElementById('typePromptPre').textContent = t.typePre;
+  document.getElementById('typePromptPost').textContent = t.typePost;
+  document.getElementById('heavyText').textContent = t.heavyBtn;
+  document.getElementById('lightText').textContent = t.lightBtn;
+  document.getElementById('cancelText').textContent = t.cancel;
   
   const grid = document.getElementById('resultCoinsGrid');
   grid.innerHTML = '';
@@ -2118,6 +2113,25 @@ if ('serviceWorker' in navigator) {
       .catch(error => console.log('❌ SW erreur:', error));
   });
 }
+
+// ========== AUDIO CONTEXT KEEP-ALIVE (iPhone 12 Pro Max) ==========
+// Réactiver l'AudioContext toutes les 5 secondes pour éviter suspension
+setInterval(() => {
+  if(audioCtx && audioCtx.state === 'suspended') {
+    console.log('Keep-alive: AudioContext suspended, reactivating...');
+    audioCtx.resume().then(() => {
+      console.log('Keep-alive: AudioContext reactivated');
+    });
+  }
+}, 5000); // Toutes les 5 secondes
+
+// Réactiver aussi sur visibilitychange (retour à l'app)
+document.addEventListener('visibilitychange', () => {
+  if(!document.hidden && audioCtx && audioCtx.state === 'suspended') {
+    console.log('Visibility change: Reactivating AudioContext');
+    audioCtx.resume();
+  }
+});
 
 // ========== PWA: iOS Installation Prompt ==========
 function isIOS() {
