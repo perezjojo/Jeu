@@ -970,6 +970,7 @@ const T = {
 let currentLang = 'fr';
 let currentMode = null;
 let challengeWins = 0;
+let recentBalance4v4 = []; // Tracker si P1 était équilibre (max 3 dernières parties)
 
 let state = { 
   coins:[], fakeId:0, fakeType:'', weighCount:0, history:[], status:{}, 
@@ -1361,6 +1362,7 @@ function startChallenge(mode) {
   
   currentMode = mode;
   challengeWins = 0;
+  recentBalance4v4 = []; // Réinitialiser le tracker d'équilibres
   newGame();
 }
 
@@ -1392,7 +1394,22 @@ function newGame() {
     }
   }
   
-  state.fakeId = Math.floor(Math.random()*12)+1; 
+  // RÈGLE CACHÉE : Dans 3 parties consécutives, maximum 1 équilibre en P1 (stratégie 4vs4)
+  // Vérifier combien d'équilibres dans les parties récentes
+  const countRecentBalances = recentBalance4v4.filter(x => x === true).length;
+  
+  // Si on a déjà eu 1 équilibre dans les parties récentes, forcer un déséquilibre
+  const forceImbalance = (countRecentBalances >= 1);
+  
+  // Générer la fausse pièce avec la contrainte
+  if(forceImbalance) {
+    // Forcer pièce 1-8 pour garantir déséquilibre en P1 [1,2,3,4] vs [5,6,7,8]
+    state.fakeId = Math.floor(Math.random()*8)+1; // Pièces 1 à 8
+  } else {
+    // Génération normale (peut tomber sur 9-12 = équilibre)
+    state.fakeId = Math.floor(Math.random()*12)+1; // Pièces 1 à 12
+  }
+  
   state.fakeType = Math.random()<0.5?'heavy':'light'; 
   
   document.getElementById('modeSelectOverlay').style.display='none';
@@ -1725,6 +1742,20 @@ function performWeigh() {
   state.weighCount++; 
   updateStatsDisplay();
   
+  // RÈGLE CACHÉE : Tracker si P1 était équilibre (pour éviter trop d'équilibres consécutifs)
+  if(state.weighCount === 1 && sym === '=') {
+    // P1 était équilibre, l'enregistrer
+    recentBalance4v4.push(true);
+  } else if(state.weighCount === 1) {
+    // P1 était déséquilibre
+    recentBalance4v4.push(false);
+  }
+  
+  // Garder seulement les 3 dernières parties
+  if(recentBalance4v4.length > 3) {
+    recentBalance4v4.shift(); // Enlever la plus ancienne
+  }
+  
   if(state.weighCount < 3) {
     const r = 3 - state.weighCount;
     document.getElementById('message').textContent = T[currentLang].weighed.replace('{n}', state.weighCount).replace('{r}', r);
@@ -2019,6 +2050,7 @@ document.getElementById('btnNextGame').addEventListener('click', () => newGame()
 document.getElementById('btnQuitChallenge').addEventListener('click', () => {
   currentMode = null;
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   document.getElementById('victoryOverlay').style.display = 'none';
   document.getElementById('modeSelectOverlay').style.display = 'flex';
 });
@@ -2029,24 +2061,28 @@ document.getElementById('btnTryExpert').addEventListener('click', () => {
 });
 document.getElementById('btnRestartChallenge').addEventListener('click', () => {
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   document.getElementById('championOverlay').style.display = 'none';
   newGame();
 });
 document.getElementById('btnBackMenu').addEventListener('click', () => {
   currentMode = null;
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   document.getElementById('championOverlay').style.display = 'none';
   document.getElementById('modeSelectOverlay').style.display = 'flex';
 });
 
 document.getElementById('btnRetryChallenge').addEventListener('click', () => {
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   document.getElementById('failedOverlay').style.display = 'none';
   newGame();
 });
 document.getElementById('btnBackMenu2').addEventListener('click', () => {
   currentMode = null;
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   document.getElementById('failedOverlay').style.display = 'none';
   document.getElementById('modeSelectOverlay').style.display = 'flex';
 });
@@ -2063,6 +2099,7 @@ document.getElementById('btnShowTutorial').onclick = function() {
 document.getElementById('btnNew2').addEventListener('click', () => {
   currentMode = null;
   challengeWins = 0;
+  recentBalance4v4 = []; // Reset tracker
   state.locked = true;
   updateStatsDisplay();
   document.getElementById('modeSelectOverlay').style.display = 'flex';
