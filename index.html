@@ -1184,6 +1184,68 @@ function playMetallicInternal() {
   setTimeout(() => playTone(360, 0.1, 0.05, 'square'), 200);
 }
 
+function playSuctionSound() {
+  // Son de succion : fréquence descendante rapide avec effet "woosh"
+  if(audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().then(() => {
+      playSuctionSoundInternal();
+    }).catch(() => {
+      playSuctionSoundInternal();
+    });
+  } else {
+    playSuctionSoundInternal();
+  }
+}
+
+function playSuctionSoundInternal() {
+  try {
+    const now = audioCtx.currentTime;
+    
+    // Oscillateur principal : descente rapide de fréquence
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(800, now); // Commence haut
+    osc.frequency.exponentialRampToValueAtTime(150, now + 0.3); // Descend rapidement
+    
+    // Envelope de volume : montée rapide puis descente
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.3, now + 0.05); // Attaque rapide
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3); // Déclin
+    
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+    
+    // Bruit blanc léger pour effet "air"
+    const bufferSize = audioCtx.sampleRate * 0.3;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.1; // Bruit doux
+    }
+    
+    const noise = audioCtx.createBufferSource();
+    const noiseGain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+    
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1200, now);
+    filter.frequency.exponentialRampToValueAtTime(300, now + 0.3);
+    
+    noiseGain.gain.setValueAtTime(0.15, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+    
+    noise.buffer = buffer;
+    noise.connect(filter).connect(noiseGain).connect(audioCtx.destination);
+    noise.start(now);
+    noise.stop(now + 0.3);
+  } catch(e) {
+    console.log('Suction sound error:', e);
+  }
+}
+
 function playTrumpetFanfare() {
   // Fanfare triomphante de trompette (4 secondes)
   // Utilise 'triangle' pour un son de trompette
@@ -1806,6 +1868,7 @@ function clearPlates() {
   resetBalanceUI(); 
   render(); 
   vibrate(30);
+  playSuctionSound(); // Son de succion quand on vide les plateaux
   document.getElementById('message').textContent = T[currentLang].cleared;
   setTimeout(() => {
     if(state.weighCount < 3) {
