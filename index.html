@@ -1201,29 +1201,47 @@ function playSuctionSoundInternal() {
   try {
     const now = audioCtx.currentTime;
     
-    // Oscillateur principal : descente rapide de fréquence
+    // Oscillateur principal : descente PLUS LONGUE et PLUS DRAMATIQUE
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, now); // Commence haut
-    osc.frequency.exponentialRampToValueAtTime(150, now + 0.3); // Descend rapidement
+    osc.frequency.setValueAtTime(1000, now); // Commence plus haut
+    osc.frequency.exponentialRampToValueAtTime(100, now + 0.6); // Descend plus longtemps
     
-    // Envelope de volume : montée rapide puis descente
+    // Envelope de volume : PLUS FORT
     gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.3, now + 0.05); // Attaque rapide
-    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3); // Déclin
+    gain.gain.linearRampToValueAtTime(0.5, now + 0.08); // Attaque forte
+    gain.gain.linearRampToValueAtTime(0.45, now + 0.4); // Sustain
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6); // Déclin
     
     osc.connect(gain).connect(audioCtx.destination);
     osc.start(now);
-    osc.stop(now + 0.3);
+    osc.stop(now + 0.6);
     
-    // Bruit blanc léger pour effet "air"
-    const bufferSize = audioCtx.sampleRate * 0.3;
+    // Deuxième oscillateur pour enrichir le son (octave inférieure)
+    const osc2 = audioCtx.createOscillator();
+    const gain2 = audioCtx.createGain();
+    
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(500, now); // Moitié de la fréquence
+    osc2.frequency.exponentialRampToValueAtTime(50, now + 0.6);
+    
+    gain2.gain.setValueAtTime(0, now);
+    gain2.gain.linearRampToValueAtTime(0.3, now + 0.08);
+    gain2.gain.linearRampToValueAtTime(0.25, now + 0.4);
+    gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+    
+    osc2.connect(gain2).connect(audioCtx.destination);
+    osc2.start(now);
+    osc2.stop(now + 0.6);
+    
+    // Bruit blanc PLUS PRÉSENT pour effet "air aspiré"
+    const bufferSize = audioCtx.sampleRate * 0.6;
     const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
     const data = buffer.getChannelData(0);
     for (let i = 0; i < bufferSize; i++) {
-      data[i] = (Math.random() * 2 - 1) * 0.1; // Bruit doux
+      data[i] = (Math.random() * 2 - 1) * 0.3; // Bruit plus fort
     }
     
     const noise = audioCtx.createBufferSource();
@@ -1231,16 +1249,35 @@ function playSuctionSoundInternal() {
     const filter = audioCtx.createBiquadFilter();
     
     filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(1200, now);
-    filter.frequency.exponentialRampToValueAtTime(300, now + 0.3);
+    filter.frequency.setValueAtTime(1500, now);
+    filter.frequency.exponentialRampToValueAtTime(200, now + 0.6);
     
-    noiseGain.gain.setValueAtTime(0.15, now);
-    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+    noiseGain.gain.setValueAtTime(0.3, now); // Plus fort
+    noiseGain.gain.linearRampToValueAtTime(0.35, now + 0.2);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
     
     noise.buffer = buffer;
     noise.connect(filter).connect(noiseGain).connect(audioCtx.destination);
     noise.start(now);
-    noise.stop(now + 0.3);
+    noise.stop(now + 0.6);
+    
+    // Oscillateur grave pour profondeur (rumble)
+    const oscBass = audioCtx.createOscillator();
+    const gainBass = audioCtx.createGain();
+    
+    oscBass.type = 'triangle';
+    oscBass.frequency.setValueAtTime(200, now);
+    oscBass.frequency.exponentialRampToValueAtTime(40, now + 0.6);
+    
+    gainBass.gain.setValueAtTime(0, now);
+    gainBass.gain.linearRampToValueAtTime(0.25, now + 0.1);
+    gainBass.gain.linearRampToValueAtTime(0.2, now + 0.4);
+    gainBass.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+    
+    oscBass.connect(gainBass).connect(audioCtx.destination);
+    oscBass.start(now);
+    oscBass.stop(now + 0.6);
+    
   } catch(e) {
     console.log('Suction sound error:', e);
   }
