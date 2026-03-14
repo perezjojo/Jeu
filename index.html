@@ -233,9 +233,9 @@
   }
   .mini-coin { width: 18px; height: 18px; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid white; color: #000000 !important; -webkit-text-fill-color: #000000 !important; font-weight: 900 !important; margin: 0px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
 
-  #message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); }
+  #message { text-align: center; font-weight: bold; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #94a3b8, #64748b) !important; border: 3px solid #475569; animation: slideDown 0.5s ease-out; color: #ffffff !important; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); white-space: nowrap; overflow: visible; }
   #message.clickable { animation: pulse 2s infinite; }
-  .blink-icon { display: inline-block; animation: blink 1s infinite; font-size: 1.2em; margin: 0 3px; color: #ef4444; text-shadow: 0 0 8px #ef4444, 0 0 12px #dc2626; }
+  .blink-icon { display: inline-block; animation: blink 1s infinite; font-size: 2.4em; margin: 0 5px; color: #ef4444; text-shadow: 0 0 8px #ef4444, 0 0 12px #dc2626; }
 
   .tutorial-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); display: flex; justify-content: center; align-items: center; z-index: 3000; animation: fadeIn 0.3s ease-out; }
   .tutorial-content { background: #1e293b !important; color: #f1f5f9 !important; padding: 40px; border-radius: 20px; max-width: 600px; max-height: 80vh; overflow-y: auto; border: 2px solid #3b82f6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8); }
@@ -831,7 +831,7 @@ const T = {
     rightHeavier: "Droite lourde",
     balanced: "Équilibre parfait",
     weighed: "⚖️ Pesée {n}/3 effectuée. Reste {r} pesée(s).",
-    clickChoose: "<span class='blink-icon'>🎯</span> Cliquez ici et indiquez la fausse pièce",
+    clickChoose: "Cliquez ici <span class='blink-icon'>🎯</span> et indiquez la fausse pièce",
     cleared: "🗑️ Plateaux vidés !",
     continue: "⚖️ Pesée {n}/3. Continuez !",
     victory: "🎉 BRAVO ! La pièce {id} était plus {type} !",
@@ -928,7 +928,7 @@ const T = {
     rightHeavier: "Right heavier",
     balanced: "Perfect balance",
     weighed: "⚖️ Weighing {n}/3 done. {r} remaining.",
-    clickChoose: "<span class='blink-icon'>🎯</span> Click here and indicate the fake coin",
+    clickChoose: "Click here <span class='blink-icon'>🎯</span> and indicate the fake coin",
     cleared: "🗑️ Scales cleared!",
     continue: "⚖️ Weighing {n}/3. Continue!",
     victory: "🎉 SUCCESS! Coin {id} was {type}!",
